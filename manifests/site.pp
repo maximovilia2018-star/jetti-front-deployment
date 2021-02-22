@@ -12,14 +12,14 @@ node 'default' {
       ensure  => 'present',
       replace => 'yes',
       content => '[Desktop Entry]
-                  Type=Application
-                  Encoding=UTF-8
-                  Name=CashDesk
-                  Comment=Cash Desk Sushi Master
-                  Exec=bit-cash-box
-                  Hidden=false
-                  NoDisplay=false
-                  Terminal=false',
+Type=Application
+Encoding=UTF-8
+Name=CashDesk
+Comment=Cash Desk Sushi Master
+Exec=bit-cash-box
+Hidden=false
+NoDisplay=false
+Terminal=false',
       mode    => '0644',
   }
 
