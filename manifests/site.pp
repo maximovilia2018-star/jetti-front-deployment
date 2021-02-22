@@ -8,6 +8,21 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { '/home/bit/.config/autostart/x100-front.desktop':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '[Desktop Entry]
+                  Type=Application
+                  Encoding=UTF-8
+                  Name=CashDesk
+                  Comment=Cash Desk Sushi Master
+                  Exec=bit-cash-box
+                  Hidden=false
+                  NoDisplay=false
+                  Terminal=false',
+      mode    => '0644',
+  }
+
   exec { 'apt-get-update':
     command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'",
     onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
