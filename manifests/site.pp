@@ -21,7 +21,6 @@ node 'default' {
   }
 
   package { 'bit-cash-box':
-    ensure => "1.2.57",
     ensure => 'purged',
     name => 'bit-cash-box',
   }
