@@ -1,6 +1,7 @@
 node 'default' {
 
   $version = '1.3.0~alpha.1'
+
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
@@ -38,7 +39,5 @@ Terminal=false',
     ensure => "$version",
     name => 'jetti-front',
   }
-
-
 
 }
