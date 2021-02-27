@@ -8,20 +8,6 @@ node 'default' {
       mode    => '0644',
   }
 
-  file { '/home/bit/.config/autostart/x100-front.desktop':
-      ensure  => 'present',
-      replace => 'yes',
-      content => '[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Name=CashDesk
-Comment=Cash Desk Sushi Master
-Exec=jetti-front
-Hidden=false
-NoDisplay=false
-Terminal=false',
-      mode    => '0644',
-  }
 
   exec { 'apt-get-update':
     command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'",
