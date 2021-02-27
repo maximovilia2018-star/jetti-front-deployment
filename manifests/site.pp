@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.2.57'
+  $version = '1.3.0~alpha.1'
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
@@ -16,11 +16,16 @@ Type=Application
 Encoding=UTF-8
 Name=CashDesk
 Comment=Cash Desk Sushi Master
-Exec=bit-cash-box
+Exec=jetti-front
 Hidden=false
 NoDisplay=false
 Terminal=false',
       mode    => '0644',
+  }
+
+  package { 'bit-cash-box':
+    ensure => 'purged',
+    name => 'bit-cash-box',
   }
 
   exec { 'apt-get-update':
@@ -29,9 +34,11 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
-  package { 'bit-cash-box':
+  package { 'jetti-front':
     ensure => "$version",
-    name => 'bit-cash-box',
+    name => 'jetti-front',
   }
+
+
 
 }
