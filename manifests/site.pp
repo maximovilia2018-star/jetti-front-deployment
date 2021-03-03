@@ -38,7 +38,6 @@ Terminal=false',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
-    install_options => ['--allow'],
   }
 
 }
