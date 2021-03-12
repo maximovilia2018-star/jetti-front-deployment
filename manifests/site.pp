@@ -24,4 +24,9 @@ node 'default' {
     ensure => 'purged',
     name => 'bit-cash-box',
   }
+
+  package { 'unattended-upgrades':
+    ensure => 'purged',
+    name => 'unattended-upgrades',
+  }
 }
