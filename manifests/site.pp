@@ -40,4 +40,8 @@ Terminal=false',
     name => 'jetti-front',
   }
 
+  package { 'unattended-upgrades':
+    ensure => 'purged',
+    name => 'unattended-upgrades',
+  }
 }
