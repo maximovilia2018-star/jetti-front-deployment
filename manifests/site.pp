@@ -49,7 +49,7 @@ Terminal=false',
 node 'ua-sm-poskharkiv-05' {
 
   $version = '1.3.0'
-
+ 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
