@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-posvishnevoe-01', 'ua-sm-posvishnevoe-02' {
+node 'ua-sm-posvishnevoe-01' {
 
   $version = '1.3.1'
 
