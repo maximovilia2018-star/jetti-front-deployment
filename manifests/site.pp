@@ -48,7 +48,7 @@ Terminal=false',
 
 node 'ua-sm-posvishnevoe-01', 'ua-sm-posvishnevoe-02' {
 
-  $version = '1.3.0'
+  $version = '1.3.1'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
