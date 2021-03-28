@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-poskharkiv-05', 'ua-sm-poskiev-04', 'ua-sm-poskiev-35' {
+node 'ua-sm-poskharkiv-05', 'ua-sm-poskiev-04', 'ua-sm-poskiev-35', 'ua-sm-poskiev-30a' {
 
   $version = '1.3.1'
 
