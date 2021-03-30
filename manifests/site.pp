@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-poskharkiv-05', 'ua-sm-poskiev-04', 'ua-sm-poskiev-35', 'ua-sm-poskiev-30a', 'ua-sm-poskiev-23', 'ua-sm-poskiev-26', 'ua-sm-poskiev-06', 'ua-sm-posyuzhnoukrainsk-01', 'ua-sm-poskropyvnytskyi-02' {
+node 'ua-sm-poskharkiv-05', 'ua-sm-poskiev-04', 'ua-sm-poskiev-35', 'ua-sm-poskiev-30a', 'ua-sm-poskiev-23', 'ua-sm-poskiev-26', 'ua-sm-poskiev-06', 'ua-sm-posyuzhnoukrainsk-01', 'ua-sm-poskropyvnytskyi-02', 'ua-sm-poskharkiv-06' {
 
   $version = '1.3.1'
 
