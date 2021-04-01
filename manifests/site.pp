@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-posvishnevoe-01','ua-sm-poskiev-05a', 'ua-sm-poskiev-12a', 'ua-sm-poskiev-28', 'ua-sm-poskiev-01a' {
+node 'ua-sm-posvishnevoe-01','ua-sm-poskiev-05a', 'ua-sm-poskiev-12a', 'ua-sm-poskiev-28', 'ua-sm-poskiev-01a', 'ua-sm-poskiev-11a' {
 
   $version = '1.3.1'
 
