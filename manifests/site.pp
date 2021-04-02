@@ -96,7 +96,7 @@ Terminal=false',
 
 node 'ua-sm-poskropyvnytskyi-02' {
 
-  $version = '1.3.2'
+  $version = '1.3.3'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
