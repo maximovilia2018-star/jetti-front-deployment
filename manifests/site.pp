@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-posvishnevoe-01','ua-sm-poskiev-05a', 'ua-sm-poskiev-12a', 'ua-sm-poskiev-28', 'ua-sm-poskiev-01a', 'ua-sm-poskiev-11a', 'ua-sm-poskiev-13', 'ua-sm-poskiev-20b', 'ua-sm-poskiev-29' {
+node 'ua-sm-posvishnevoe-01','ua-sm-poskiev-05a', 'ua-sm-poskiev-12a', 'ua-sm-poskiev-28', 'ua-sm-poskiev-01a', 'ua-sm-poskiev-11a', 'ua-sm-poskiev-13', 'ua-sm-poskiev-20b', 'ua-sm-poskiev-29', 'ua-sm-poskiev-25' {
 
   $version = '1.3.1'
 
