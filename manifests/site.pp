@@ -46,7 +46,7 @@ Terminal=false',
   }
 }
 
-node 'ua-sm-poskropyvnytskyi-02', 'ua-sm-posnikolaev-01', 'ua-sm-posnikolaev-02' {
+node 'ua-sm-poskropyvnytskyi-02', 'ua-sm-posnikolaev-01', 'ua-sm-posnikolaev-02', 'ua-sm-posyuzhnoukrainsk-01' {
 
   $version = '1.3.3'
 
