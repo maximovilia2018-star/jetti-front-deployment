@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.21'
+  $version = '1.3.22'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
