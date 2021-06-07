@@ -35,6 +35,10 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  package { 'libnotify-bin':
+    name => 'libnotify-bin',
+  }
+
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
