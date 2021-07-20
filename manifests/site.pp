@@ -10,12 +10,10 @@ node 'default' {
       mode    => '0644',
   }
 
-  file { '/etc/apt/sources.list.d/nodesource.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main
-deb-src [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main',
-      mode    => '0644',
+  exec { 'nodesource':
+    command => "curl -fsSL https://deb.nodesource.com/setup_14.x | bash -",
+    onlyif  => "test -f /etc/apt/sources.list.d/nodesource.list",
+    path    => [ '/usr/bin', '/bin' ],
   }
 
   file { '/home/bit/.config/autostart/x100-front.desktop':
@@ -53,9 +51,13 @@ Terminal=false',
     name => 'jetti-front',
   }
 
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
+  package { 'jetti-front':
+    ensure => "$version",
+    name => 'jetti-front',
+  }
+
+  package { 'curl':
+    name => 'curl',
   }
 
   package { 'unattended-upgrades':
