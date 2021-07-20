@@ -10,6 +10,14 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { '/etc/apt/sources.list.d/nodesource.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main
+deb-src [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main',
+      mode    => '0644',
+  }
+
   file { '/home/bit/.config/autostart/x100-front.desktop':
       ensure  => 'present',
       replace => 'yes',
