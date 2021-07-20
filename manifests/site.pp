@@ -11,8 +11,8 @@ node 'default' {
   }
 
   exec { 'nodesource':
-    command => "curl -fsSL https://deb.nodesource.com/setup_14.x | bash -",
-    onlyif  => "test -f /etc/apt/sources.list.d/nodesource.list",
+    command => "wget -O - https://deb.nodesource.com/setup_14.x | bash -",
+    unless  => "test -f /etc/apt/sources.list.d/nodesource.list",
     path    => [ '/usr/bin', '/bin' ],
   }
 
@@ -54,10 +54,6 @@ Terminal=false',
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
     name => 'jetti-front-fiscal-spooler',
-  }
-
-  package { 'curl':
-    name => 'curl',
   }
 
   package { 'unattended-upgrades':
