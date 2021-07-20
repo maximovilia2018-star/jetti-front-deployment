@@ -1,6 +1,8 @@
 node 'default' {
 
-  $version = '1.3.21'
+  $version = '1.3.30'
+  $versionsp = '0.1.3'
+
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
@@ -8,6 +10,25 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { '/home/bit/.config/autostart/x100-front.desktop':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=CashDesk
+Comment=Cash Desk Sushi Master
+Exec=jetti-front
+Hidden=false
+NoDisplay=false
+Terminal=false',
+      mode    => '0644',
+  }
+
+  package { 'bit-cash-box':
+    ensure => 'purged',
+    name => 'bit-cash-box',
+  }
 
   exec { 'apt-get-update':
     command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'",
@@ -15,14 +36,18 @@ node 'default' {
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  package { 'libnotify-bin':
+    name => 'libnotify-bin',
+  }
+
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
   }
 
-  package { 'bit-cash-box':
-    ensure => 'purged',
-    name => 'bit-cash-box',
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
   }
 
   package { 'unattended-upgrades':
