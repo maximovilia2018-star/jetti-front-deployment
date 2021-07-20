@@ -51,9 +51,9 @@ Terminal=false',
     name => 'jetti-front',
   }
 
-  package { 'jetti-front':
-    ensure => "$version",
-    name => 'jetti-front',
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
   }
 
   package { 'curl':
