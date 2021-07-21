@@ -17,6 +17,13 @@ node 'default' {
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  file { '/etc/apt/sources.list.d/focal-updates.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse',
+      mode    => '0644',
+  }
+
   exec { 'config':
     command => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml >>  /tmp/config.production.yaml",
     path    => [ '/usr/bin', '/bin' ],
