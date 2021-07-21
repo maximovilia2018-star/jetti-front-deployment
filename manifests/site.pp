@@ -27,6 +27,7 @@ node 'default' {
   service { 'jetti-front-fiscal-spooler':
     ensure  => 'running',
     enable  => true,
+    require => Package['jetti-front-fiscal-spooler'],
   }
 
   exec { 'config':
@@ -34,6 +35,7 @@ node 'default' {
     command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
     onlyif  => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
     path    => [ '/usr/bin', '/bin' ],
+    require => Package['jetti-front-fiscal-spooler'],
   }
 
   file { '/home/bit/.config/autostart/x100-front.desktop':
