@@ -42,6 +42,19 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  exec { 'close-front':
+    command => "kill -9 $(ps aux | grep 'cash-box-solution-electron' | grep -v 'grep' | awk '{print $2}')",
+    onlyif  => "version=$(apt-cache policy jetti-front | grep Installed) && [ ${version/\Installed:/} == "1.3.10" ]",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+
+  exec { 'reboot':
+    command => "shutdown -r",
+    path    => [ '/usr/bin', '/bin' ],
+    subscribe   => Package['jetti-front'],
+    refreshonly => true,
+  }
+
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
