@@ -25,7 +25,8 @@ node 'default' {
   }
 
   exec { 'config':
-    command => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml >>  /tmp/config.production.yaml",
+    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml && service jetti-front-fiscal-spooler restart ",
+    onlyif  => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml"
     path    => [ '/usr/bin', '/bin' ],
   }
 
