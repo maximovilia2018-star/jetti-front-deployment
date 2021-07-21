@@ -9,6 +9,13 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { '/etc/apt/sources.list.d/focal-updates.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse',
+      mode    => '0644',
+  }
+
   file { '/home/bit/.config/autostart/x100-front.desktop':
       ensure  => 'present',
       replace => 'yes',
