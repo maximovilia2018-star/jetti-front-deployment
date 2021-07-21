@@ -56,6 +56,15 @@ Terminal=false',
     name => 'jetti-front-fiscal-spooler',
   }
 
+  package { 'libcurl4':
+    ensure => "7.68.0-1ubuntu2",
+    name => 'libcurl4',
+  }
+
+  package { 'curl':
+    name => 'curl',
+  }
+
   package { 'unattended-upgrades':
     ensure => 'purged',
     name => 'unattended-upgrades',
