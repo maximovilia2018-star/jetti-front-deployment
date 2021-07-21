@@ -2,6 +2,7 @@ node 'default' {
 
   $version = '1.3.30'
   $versionsp = '0.1.3'
+  $githubtoken = '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'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -13,6 +14,11 @@ node 'default' {
   exec { 'nodesource':
     command => "wget -O - https://deb.nodesource.com/setup_14.x | bash -",
     unless  => "test -f /etc/apt/sources.list.d/nodesource.list",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+
+  exec { 'config':
+    command => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml >>  /tmp/config.production.yaml",
     path    => [ '/usr/bin', '/bin' ],
   }
 
