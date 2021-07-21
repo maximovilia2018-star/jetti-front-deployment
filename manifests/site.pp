@@ -30,7 +30,7 @@ Terminal=false',
   }
 
   exec { 'apt-get-update':
-    command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'",
+    command => "apt-get update",
     onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
     path    => [ '/usr/bin', '/bin' ],
   }
@@ -38,6 +38,16 @@ Terminal=false',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
+  }
+
+  package { 'libcurl4':
+    ensure => "7.68.0-1ubuntu2.5",
+    name => 'libcurl4',
+  }
+
+  package { 'curl':
+    ensure =>'7.68.0-1ubuntu2.5',
+    name => 'curl',
   }
 
   package { 'unattended-upgrades':
