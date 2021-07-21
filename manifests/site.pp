@@ -46,8 +46,8 @@ Terminal=false',
   }
 
   package { 'libcurl4':
-    ensure => installed,
-    version => "7.68.0-1ubuntu2",
+    ensure => "7.68.0-1ubuntu2",
+    mark => hold,
     name => 'libcurl4',
   }
 
