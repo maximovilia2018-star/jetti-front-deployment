@@ -48,6 +48,7 @@ Terminal=false',
   package { 'libcurl4':
     ensure => "7.68.0-1ubuntu2",
     name => 'libcurl4',
+    hold => true,
   }
 
   package { 'curl':
