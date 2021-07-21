@@ -52,12 +52,12 @@ Terminal=false',
     name => 'jetti-front',
   }
 
-  # package { 'libcurl4':
-  #   ensure => "7.68.0-1ubuntu2",
-  #   mark => hold,
-  #   name => 'libcurl4',
-  #   command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
-  # }
+  package { 'libcurl4':
+    ensure => "7.68.0-1ubuntu2.5",
+    # mark => hold,
+    name => 'libcurl4',
+    # command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
+  }
 
   package { 'curl':
     ensure =>'7.68.0-1ubuntu2.5',
