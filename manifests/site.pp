@@ -59,6 +59,7 @@ Terminal=false',
   # }
 
   package { 'curl':
+    ensure =>'7.68.0-1ubuntu2.5',
     name => 'curl',
   }
 
