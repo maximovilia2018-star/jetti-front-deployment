@@ -34,7 +34,7 @@ node 'default' {
   exec { 'config':
     notify  => Service['jetti-front-fiscal-spooler'],
     command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ ' if [[ $(curl -I https://$githubtoken.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/1config.production.yaml 2>/dev/null | head -n 1 | cut -d$\" \"  -f2) == \"200\" ]]; then exit 0 ; else exit 1; fi; ', 'curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml' ],
+    onlyif  => [ ' if [[ $(curl -I https://$githubtoken.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml 2>/dev/null | head -n 1 | cut -d$\" \"  -f2) == \"200\" ]]; then exit 0 ; else exit 1; fi; ', 'curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml' ],
    # onlyif  => "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/DevOps/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
     path    => [ '/usr/bin', '/bin' ],
     provider => 'shell',
