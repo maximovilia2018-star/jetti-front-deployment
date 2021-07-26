@@ -75,7 +75,7 @@ Terminal=false',
   }
 
   package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
+    ensure => 'purged',
     name => 'jetti-front-fiscal-spooler',
   }
 
