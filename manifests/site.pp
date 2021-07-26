@@ -1,7 +1,7 @@
 node 'default' {
   # command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
   $version = '1.3.31'
-  $versionsp = '0.1.3'
+  $versionsp = '0.1.5-alpha.1'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -72,6 +72,11 @@ Terminal=false',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
+  }
+
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
   }
 
   package { 'libcurl4':
