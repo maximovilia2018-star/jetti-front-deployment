@@ -26,7 +26,7 @@ node 'default' {
 
   service { 'jetti-front-fiscal-spooler':
     ensure  => 'stopped',
-    enable  => true,
+    enable  => false,
     require => Package['jetti-front-fiscal-spooler'],
   }
   #
