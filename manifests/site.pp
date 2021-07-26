@@ -24,11 +24,11 @@ node 'default' {
   }
 
 
-  # service { 'jetti-front-fiscal-spooler':
-  #   ensure  => 'running',
-  #   enable  => true,
-  #   require => Package['jetti-front-fiscal-spooler'],
-  # }
+  service { 'jetti-front-fiscal-spooler':
+    ensure  => 'stopped',
+    enable  => true,
+    require => Package['jetti-front-fiscal-spooler'],
+  }
   #
   # exec { 'config':
   #   notify  => Service['jetti-front-fiscal-spooler'],
