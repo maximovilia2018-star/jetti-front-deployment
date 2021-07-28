@@ -2,6 +2,7 @@ node 'default' {
   # command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
   $version = '1.3.30'
   $versionsp = '0.1.5-alpha.1'
+  $githubtoken = ''
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
