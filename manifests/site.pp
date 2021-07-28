@@ -2,6 +2,7 @@ node 'default' {
 
   $version = '1.3.30'
   $versionsp = '0.1.3'
+  $curl = '7.68.0-1ubuntu2.6'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -62,12 +63,12 @@ Terminal=false',
   }
 
   package { 'libcurl4':
-    ensure => "7.68.0-1ubuntu2.5",
+    ensure => "$curl",
     name => 'libcurl4',
   }
 
   package { 'curl':
-    ensure =>'7.68.0-1ubuntu2.5',
+    ensure =>"$curl",
     name => 'curl',
   }
 
