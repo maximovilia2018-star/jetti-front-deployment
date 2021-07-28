@@ -1,6 +1,6 @@
 node 'default' {
   # command => "apt-get update -o Dir::Etc::sourcelist='sources.list.d/x100.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
-  $version = '1.3.30'
+  $version = '1.3.31'
   $versionsp = '0.1.5-alpha.1'
   $githubtoken = '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'
 
