@@ -12,9 +12,16 @@ node 'default' {
       mode    => '0644',
   }
 
-  file { "/etc/environment":
-        content => inline_template("ENV=${env}")
-    }
+  # file { "/etc/environment":
+  #       content => inline_template("ENV=${env}")
+  #   }
+
+  exec {'environment':
+    command => "echo ENV=${env}>>/etc/environment"
+    onlyif => "test -f /etc/environment",
+    unless => "grep "ENV=${env}" /etc/environment",
+    path   => '/usr/bin',
+  }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
