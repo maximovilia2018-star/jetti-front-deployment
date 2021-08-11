@@ -19,7 +19,7 @@ node 'default' {
   exec {'environment':
     command => "echo ENV=${environment}>>/etc/environment"
     onlyif => "test -f /etc/environment",
-    unless => "grep "ENV=${environment}" /etc/environment",
+    unless => "grep \"ENV=${environment}\" /etc/environment",
     path   => '/usr/bin',
   }
 
