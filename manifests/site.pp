@@ -3,7 +3,7 @@ node 'default' {
   $version = '1.3.33'
   $versionsp = '0.1.3'
   $githubtoken = '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'
-  $env = 'development'
+  # $env = 'development'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -17,9 +17,9 @@ node 'default' {
   #   }
 
   exec {'environment':
-    command => "echo ENV=${env}>>/etc/environment"
+    command => "echo ENV=${environment}>>/etc/environment"
     onlyif => "test -f /etc/environment",
-    unless => "grep "ENV=${env}" /etc/environment",
+    unless => "grep "ENV=${environment}" /etc/environment",
     path   => '/usr/bin',
   }
 
