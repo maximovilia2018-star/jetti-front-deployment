@@ -3,6 +3,7 @@ node 'default' {
   $version = '1.3.33'
   $versionsp = '0.1.3'
   $githubtoken = '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'
+  $env = 'dev'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -10,6 +11,10 @@ node 'default' {
       content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
       mode    => '0644',
   }
+
+  file { "/etc/environment":
+        content => inline_template("ENV=${env}")
+    }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
