@@ -3,7 +3,7 @@ node 'default' {
   $version = '1.3.33'
   $versionsp = '0.1.3'
   $githubtoken = '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'
-  $env = 'dev'
+  $env = 'development'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
