@@ -16,16 +16,16 @@ node 'default' {
     ensure  => 'present',
     replace => 'yes',
     content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${env}\"",
+ENV=\"${environment}\"",
 
     }
 
-  exec {'environment':
-    command => "echo ENV=${environment}>>/etc/environment"
-    onlyif => "test -f /etc/environment",
-    unless => "grep \"ENV=${environment}\" /etc/environment",
-    path   => '/usr/bin',
-  }
+  # exec {'environment':
+  #   command => "echo ENV=${environment}>>/etc/environment"
+  #   onlyif => "test -f /etc/environment",
+  #   unless => "grep \"ENV=${environment}\" /etc/environment",
+  #   path   => '/usr/bin',
+  # }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
