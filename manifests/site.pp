@@ -12,9 +12,13 @@ node 'default' {
       mode    => '0644',
   }
 
-  # file { "/etc/environment":
-  #       content => inline_template("ENV=${env}")
-  #   }
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${env}\""
+
+    }
 
   exec {'environment':
     command => "echo ENV=${environment}>>/etc/environment"
