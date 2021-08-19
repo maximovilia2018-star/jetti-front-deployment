@@ -3,7 +3,6 @@ node 'default' {
   $version = '1.3.32'
   $versionsp = '0.1.6'
   $githubtoken = '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'
-  # $env = 'development'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -20,12 +19,6 @@ ENV=\"${environment}\"",
 
     }
 
-  # exec {'environment':
-  #   command => "echo ENV=${environment}>>/etc/environment"
-  #   onlyif => "test -f /etc/environment",
-  #   unless => "grep \"ENV=${environment}\" /etc/environment",
-  #   path   => '/usr/bin',
-  # }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
