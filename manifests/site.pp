@@ -1,7 +1,7 @@
 node 'default' {
 
   $version = '1.3.32'
-  $versionsp = '0.1.3'
+  $versionsp = '0.1.6'
   $githubtoken = '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'
   # $env = 'development'
 
