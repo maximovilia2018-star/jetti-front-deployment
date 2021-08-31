@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.33'
+  $version = '1.3.36'
   $versionsp = '0.1.6'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.6'
