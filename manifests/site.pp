@@ -70,6 +70,29 @@ Terminal=false',
       mode    => '0644',
   }
 
+  file { '/opt/precheck_before_update.sh':
+    ensure  => 'present',
+    replace => 'no',
+    content => '#!/bin/bash
+FILE=/home/bit/.config/jetti-front/config.json
+if test -f "$FILE"; then
+    echo "$FILE exists."
+    posid=$(jq -r '.posId' /home/bit/.config/jetti-front/config.json)
+    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=$ENV&posid=$posid" | jq -r ".readytoupdate")
+    echo $status
+    if $status == "true"; then
+      echo "We can update"
+    else
+      echo "We can t update"
+      exit 1
+    fi
+else
+    echo "$FILE does not exist."
+    curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=$ENV&posid=ZZZZXXXX-0000-1111-2222-QQQQWWWWEEEE"
+fi',
+    mode    => '0644',
+  }
+
   package { 'bit-cash-box':
     ensure => 'purged',
     name => 'bit-cash-box',
@@ -83,6 +106,8 @@ Terminal=false',
     ensure => "$version",
     name => 'jetti-front',
   }
+
+  https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=8ADEF3FF-D7F9-EB11-A961-8FAAB2A5632B
 
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
