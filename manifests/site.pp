@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.38'
+  $version = '1.3.36'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -76,7 +76,7 @@ Terminal=false',
 FILE=/home/bit/.config/jetti-front/config.json
 if test -f "$FILE"; then
     echo "$FILE exists."
-    posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config1.json)
+    posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid" | jq -r ".readytoupdate")
     if [ $status = "false" ]; then
       exit 0
@@ -90,23 +90,18 @@ exit 1',
     mode    => '0755',
   }
 
-  # exec { 'precheck_before_update':
-  #   command     => "/bin/bash -c /opt/precheck_before_update.sh ${environment}",
-  #   refreshonly => true,
-  #   require     => File['/opt/precheck_before_update.sh'],
-  # }
-
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
     unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
   }
-  # package { 'jetti-front':
-  #   ensure => "$version",
-  #   name => 'jetti-front',
-  #   notify => Exec['precheck_before_update'],
-  #   install_options => -d,
-  # }
+
+  package { 'jetti-front':
+    ensure => "$version",
+    name => 'jetti-front',
+    notify => Exec['precheck_before_update'],
+    noop => true,
+  }
 
   package { 'bit-cash-box':
     ensure => 'purged',
