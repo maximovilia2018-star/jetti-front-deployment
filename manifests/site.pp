@@ -93,12 +93,18 @@ fi',
     require     => File['/opt/precheck_before_update.sh'],
   }
 
-  package { 'jetti-front':
-    ensure => "$version",
-    name => 'jetti-front',
+  exec { "apt-get reinstall $package $your_options":
+    command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
+    user   => 'root',
     notify => Exec['precheck_before_update'],
-    install_options => -d,
+    onlyif => 'dpkg -s jetti-front | grep 'Version: $version''
   }
+  # package { 'jetti-front':
+  #   ensure => "$version",
+  #   name => 'jetti-front',
+  #   notify => Exec['precheck_before_update'],
+  #   install_options => -d,
+  # }
 
   package { 'bit-cash-box':
     ensure => 'purged',
