@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.36'
+  $version = '1.3.38'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -78,7 +78,7 @@ if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid" | jq -r ".readytoupdate")
-    if $status == "false"; then
+    if [ $status = "false" ]; then
       exit 0
     else
       echo "We can update"
