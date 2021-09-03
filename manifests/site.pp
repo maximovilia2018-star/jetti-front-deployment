@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.38'
+  $version = '1.3.36'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -73,7 +73,7 @@ Terminal=false',
     ensure  => 'present',
     replace => 'yes',
     content => '#!/bin/bash
-FILE=/home/bit/.config/jetti-front/config1.json
+FILE=/home/bit/.config/jetti-front/config.json
 if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
