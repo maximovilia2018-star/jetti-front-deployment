@@ -107,8 +107,6 @@ fi',
     name => 'jetti-front',
   }
 
-  https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=8ADEF3FF-D7F9-EB11-A961-8FAAB2A5632B
-
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
     name => 'jetti-front-fiscal-spooler',
