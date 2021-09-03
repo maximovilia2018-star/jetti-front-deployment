@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.36'
+  $version = '1.3.38'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -77,7 +77,7 @@ FILE=/home/bit/.config/jetti-front/config.json
 if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
-    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=$1&posid=$posid" | jq -r ".readytoupdate")
+    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid" | jq -r ".readytoupdate")
     if $status == "false"; then
       exit 1
     else
@@ -88,7 +88,7 @@ fi',
   }
 
   exec { 'precheck_before_update':
-    command     => "/bin/bash -c /opt/precheck_before_update.sh $environment",
+    command     => "/bin/bash -c /opt/precheck_before_update.sh ${environment}",
     refreshonly => true,
     require     => File['/opt/precheck_before_update.sh'],
   }
