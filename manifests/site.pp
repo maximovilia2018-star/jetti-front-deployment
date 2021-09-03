@@ -71,24 +71,24 @@ Terminal=false',
 
   file { '/opt/precheck_before_update.sh':
     ensure  => 'present',
-    replace => 'yes',
-    content => "#!/bin/bash
+    replace => 'no',
+    content => '#!/bin/bash
 FILE=/home/bit/.config/jetti-front/config1.json
-if test -f \"$FILE\"; then
-    echo \"$FILE exists.\"
-    posid=$(jq -r \".posId\" /home/bit/.config/jetti-front/config.json)
-    status=$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=$posid\" | jq -r \".readytoupdate\")
-    if $status == \"false\"; then
+if test -f "$FILE"; then
+    echo "$FILE exists."
+    posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
+    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=$1&posid=$posid" | jq -r ".readytoupdate")
+    if $status == "false"; then
       exit 1
     else
-      echo \"We can update\"
+      echo "We can update"
     fi
-fi",
+fi',
     mode    => '0755',
   }
 
   exec { 'precheck_before_update':
-    command     => '/bin/bash -c /opt/precheck_before_update.sh',
+    command     => "/bin/bash -c /opt/precheck_before_update.sh $environment",
     refreshonly => true,
     require     => File['/opt/precheck_before_update.sh'],
   }
