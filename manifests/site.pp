@@ -80,10 +80,10 @@ if test -f "$FILE"; then
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=$ENV&posid=$posid" | jq -r ".readytoupdate")
     echo $status
-    if $status == "true"; then
-      echo "We can update"
-    else
+    if $status == "false"; then
       exit 1
+    else
+      echo "We can update"
     fi
 fi',
     mode    => '0755',
@@ -101,6 +101,7 @@ fi',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
+    onlyif  => "/opt/precheck_before_update.sh",
   }
 
   package { 'jetti-front-fiscal-spooler':
