@@ -71,7 +71,7 @@ Terminal=false',
 
   file { '/opt/precheck_before_update.sh':
     ensure  => 'present',
-    replace => 'no',
+    replace => 'yes',
     content => '#!/bin/bash
 FILE=/home/bit/.config/jetti-front/config1.json
 if test -f "$FILE"; then
