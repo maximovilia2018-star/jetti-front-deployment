@@ -88,7 +88,7 @@ fi',
   }
 
   exec { 'precheck_before_update':
-    command     => '/opt/precheck_before_update.sh',
+    command     => '/bin/bash -c /opt/precheck_before_update.sh',
     refreshonly => true,
     require     => File['/opt/precheck_before_update.sh'],
   }
