@@ -73,7 +73,7 @@ Terminal=false',
     ensure  => 'present',
     replace => 'no',
     content => '#!/bin/bash
-FILE=/home/bit/.config/jetti-front/config.json
+FILE=/home/bit/.config/jetti-front/config1.json
 if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
