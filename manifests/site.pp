@@ -87,17 +87,17 @@ fi',
     mode    => '0755',
   }
 
-  exec { 'precheck_before_update':
-    command     => "/bin/bash -c /opt/precheck_before_update.sh ${environment}",
-    refreshonly => true,
-    require     => File['/opt/precheck_before_update.sh'],
-  }
+  # exec { 'precheck_before_update':
+  #   command     => "/bin/bash -c /opt/precheck_before_update.sh ${environment}",
+  #   refreshonly => true,
+  #   require     => File['/opt/precheck_before_update.sh'],
+  # }
 
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
     unless  => "/bin/dpkg -s jetti-front | grep \'Version: $version\'",
-    onlyif  => Exec['precheck_before_update'],
+    onlyif  => "/bin/bash -c /opt/precheck_before_update.sh ${environment}",
   }
   # package { 'jetti-front':
   #   ensure => "$version",
