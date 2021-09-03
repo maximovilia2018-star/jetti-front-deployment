@@ -86,7 +86,7 @@ if test -f "$FILE"; then
       exit 1
     fi
 fi',
-    mode    => '0644',
+    mode    => '0755',
   }
 
   package { 'bit-cash-box':
