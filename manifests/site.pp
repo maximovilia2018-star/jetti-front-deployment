@@ -99,7 +99,6 @@ exit 1',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
-    notify => Exec['precheck_before_update'],
     noop => true,
   }
 
