@@ -88,6 +88,12 @@ fi',
     mode    => '0755',
   }
 
+  exec { 'precheck_before_update':
+    command     => '/opt/precheck_before_update.sh',
+    refreshonly => true,
+    require     => File['/opt/precheck_before_update.sh'],
+  }
+
   package { 'bit-cash-box':
     ensure => 'purged',
     name => 'bit-cash-box',
@@ -100,7 +106,7 @@ fi',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
-    unless => "/bin/bash -c /opt/precheck_before_update.sh",
+    notify => Exec['precheck_before_update'],
   }
 
   package { 'jetti-front-fiscal-spooler':
