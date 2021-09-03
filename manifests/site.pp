@@ -100,7 +100,7 @@ fi',
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
-    onlyif  => "/opt/precheck_before_update.sh",
+    onlyif  => "/bin/bash -c /opt/precheck_before_update.sh",
   }
 
   package { 'jetti-front-fiscal-spooler':
