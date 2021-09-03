@@ -97,7 +97,7 @@ fi',
     ensure => "$version",
     name => 'jetti-front',
     notify => Exec['precheck_before_update'],
-    install_options => ' --dry-run',
+    install_options => ' -d',
   }
 
   package { 'bit-cash-box':
