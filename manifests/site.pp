@@ -94,6 +94,12 @@ fi',
     require     => File['/opt/precheck_before_update.sh'],
   }
 
+  package { 'jetti-front':
+    ensure => "$version",
+    name => 'jetti-front',
+    notify => Exec['precheck_before_update'],
+  }
+
   package { 'bit-cash-box':
     ensure => 'purged',
     name => 'bit-cash-box',
@@ -101,12 +107,6 @@ fi',
 
   package { 'libnotify-bin':
     name => 'libnotify-bin',
-  }
-
-  package { 'jetti-front':
-    ensure => "$version",
-    name => 'jetti-front',
-    notify => Exec['precheck_before_update'],
   }
 
   package { 'jetti-front-fiscal-spooler':
