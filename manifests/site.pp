@@ -93,7 +93,7 @@ fi',
     require     => File['/opt/precheck_before_update.sh'],
   }
 
-  exec { "apt-get reinstall $package $your_options":
+  exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user   => 'root',
     notify => Exec['precheck_before_update'],
