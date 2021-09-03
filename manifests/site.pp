@@ -97,7 +97,7 @@ fi',
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user   => 'root',
     notify => Exec['precheck_before_update'],
-    onlyif => "dpkg -s jetti-front | grep \'Version: $version\'"
+    onlyif => "/bin/dpkg -s jetti-front | grep \'Version: $version\'"
   }
   # package { 'jetti-front':
   #   ensure => "$version",
