@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.38'
+  $version = '1.3.36'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -97,6 +97,7 @@ fi',
     ensure => "$version",
     name => 'jetti-front',
     notify => Exec['precheck_before_update'],
+    noop => true,
   }
 
   package { 'bit-cash-box':
