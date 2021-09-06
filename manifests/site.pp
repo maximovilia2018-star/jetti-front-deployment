@@ -71,9 +71,37 @@ Terminal=false',
     name => 'libnotify-bin',
   }
 
+  file { '/opt/precheck_before_update.sh':
+    ensure  => 'present',
+    replace => 'yes',
+    content => '#!/bin/bash
+FILE=/home/bit/.config/jetti-front/config.json
+if test -f "$FILE"; then
+    echo "$FILE exists."
+    posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
+    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=staging&posid=$posid" | jq -r ".readytoupdate")
+    if [ $status = "false" ]; then
+      exit 0
+    else
+      echo "We can update"
+      exit 1
+    fi
+    exit 1
+fi
+exit 1',
+    mode    => '0755',
+  }
+
+  exec { "jetti-front":
+    command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
+  }
+
   package { 'jetti-front':
     ensure => "$version",
     name => 'jetti-front',
+    noop => true,
   }
 
   package { 'jetti-front-fiscal-spooler':
