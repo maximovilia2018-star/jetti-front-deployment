@@ -12,6 +12,13 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"",
+  }
+
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
       replace => 'no',
