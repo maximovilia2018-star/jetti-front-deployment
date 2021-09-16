@@ -122,6 +122,10 @@ Terminal=false',
     name => 'curl',
   }
 
+  package { 'jq':
+   name => 'jq',
+  }
+
   package { 'unattended-upgrades':
     ensure => 'purged',
     name => 'unattended-upgrades',
