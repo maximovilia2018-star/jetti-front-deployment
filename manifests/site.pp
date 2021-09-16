@@ -12,6 +12,13 @@ node 'default' {
       mode    => '0644',
   }
 
+  file { "/etc/environment":
+   ensure  => 'present',
+   replace => 'yes',
+   content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"",
+   }
+
   file { '/etc/apt/sources.list.d/focal-updates.list':
       ensure  => 'present',
       replace => 'no',
@@ -66,23 +73,39 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
-  # exec { 'close-front':
-  #   command => "kill -9 $(ps aux | grep 'cash-box-solution-electron' | grep -v 'grep' | awk '{print $2}')",
-  #   onlyif  => "version=$(apt-cache policy jetti-front | grep Installed) && [ ${version/\Installed:/} == "1.3.10" ]",
-  #   path    => [ '/usr/bin', '/bin' ],
-  # }
+  file { '/opt/precheck_before_update.sh':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '#!/bin/bash
+  FILE=/home/bit/.config/jetti-front/config.json
+  if test -f "$FILE"; then
+      echo "$FILE exists."
+      posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
+      psname=$(hostname)
+      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=production&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
+      if [ $status = "false" ]; then
+        exit 0
+      else
+        echo "We can update"
+        exit 1
+      fi
+      exit 1
+  fi
+  exit 1',
+      mode    => '0755',
+    }
 
-  # exec { 'reboot':
-  #   command => "shutdown -r",
-  #   path    => [ '/usr/bin', '/bin' ],
-  #   subscribe   => Package['jetti-front'],
-  #   refreshonly => true,
-  # }
+    exec { "jetti-front":
+      command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
+      user    => 'root',
+      unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
+    }
 
-  package { 'jetti-front':
-    ensure => "$version",
-    name => 'jetti-front',
-  }
+    package { 'jetti-front':
+      ensure => "$version",
+      name => 'jetti-front',
+      noop => true,
+    }
 
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
