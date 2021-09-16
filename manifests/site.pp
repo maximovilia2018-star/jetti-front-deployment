@@ -101,7 +101,7 @@ exit 1',
   }
 
   exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
     user    => 'root',
     unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
   }
