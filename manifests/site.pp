@@ -77,7 +77,8 @@ FILE=/home/bit/.config/jetti-front/config.json
 if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
-    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid" | jq -r ".readytoupdate")
+    psname=$(hostname)
+    status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
     if [ $status = "false" ]; then
       exit 0
     else
