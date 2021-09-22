@@ -95,7 +95,7 @@ exit 1',
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh $version"],
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh \"$version\""],
   }
 
   package { 'jetti-front':
