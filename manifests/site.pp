@@ -78,7 +78,7 @@ if test -f "$FILE"; then
     echo "$FILE exists."
     posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
     psname=$(hostname)
-    VER=$1
+    VER=$0
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
     if [ $status = "false" ]; then
       apt-get install --download-only jetti-front=$VER
