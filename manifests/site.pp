@@ -80,10 +80,10 @@ if test -f "$FILE"; then
     psname=$(hostname)
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
     if [ $status = "false" ]; then
+      apt-get install --download-only jetti-front=$1
       exit 0
     else
       echo "We can update"
-      apt-get install --download-only jetti-front=$1
       exit 1
     fi
     exit 1
