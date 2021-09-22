@@ -82,6 +82,7 @@ if test -f "$FILE"; then
       exit 0
     else
       echo "We can update"
+      apt-get install --download-only jetti-front=$1
       exit 1
     fi
     exit 1
@@ -93,7 +94,7 @@ exit 1',
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh $version"],
   }
 
   package { 'jetti-front':
@@ -117,12 +118,12 @@ exit 1',
   }
 
   package { 'libcurl4':
-    ensure => "7.68.0-1ubuntu2.5",
+    ensure => "7.68.0-1ubuntu2.7",
     name => 'libcurl4',
   }
 
   package { 'curl':
-    ensure =>'7.68.0-1ubuntu2.5',
+    ensure =>'7.68.0-1ubuntu2.7',
     name => 'curl',
   }
 
