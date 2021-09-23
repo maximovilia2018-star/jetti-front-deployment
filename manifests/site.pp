@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.42'
+  $version = '1.3.49'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
