@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.48'
+  $version = '1.3.50'
   $versionsp = '0.1.6'
   $githubtoken = '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'
 
@@ -81,7 +81,7 @@ if test -f "$FILE"; then
     VER=$0
     status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
     if [ $status = "false" ]; then
-      apt-get install --download-only jetti-front=$VER
+      apt-get install --download-only -y jetti-front=$VER
       exit 0
     else
       echo "We can update"
@@ -96,7 +96,7 @@ exit 1',
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh $version"],
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash /opt/precheck_before_update.sh $version"],
   }
 
   package { 'jetti-front':
