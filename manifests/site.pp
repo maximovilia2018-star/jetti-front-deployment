@@ -82,8 +82,10 @@ Terminal=false',
       echo "$FILE exists."
       posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
       psname=$(hostname)
+      VER=$1
       status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=production&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
       if [ $status = "false" ]; then
+        apt-get install --download-only -y jetti-front=$VER
         exit 0
       else
         echo "We can update"
@@ -98,7 +100,7 @@ Terminal=false',
     exec { "jetti-front":
       command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
       user    => 'root',
-      unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash -c /opt/precheck_before_update.sh"],
+      unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
     }
 
     package { 'jetti-front':
