@@ -16,7 +16,8 @@ node 'default' {
     ensure  => 'present',
     replace => 'yes',
     content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"",
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9",
   }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
@@ -114,9 +115,16 @@ exit 1',
     noop => true,
   }
 
+  exec { "jetti-front-fiscal-spooler":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front-fiscal-spooler=$versionsp" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front-fiscal-spooler | grep \'Version: $versionsp\'"],
+  }
+
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
     name => 'jetti-front-fiscal-spooler',
+    noop => true,
   }
 
   package { 'libcurl4':
