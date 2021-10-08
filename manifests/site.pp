@@ -15,7 +15,8 @@ node 'default' {
     ensure  => 'present',
     replace => 'yes',
     content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"",
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=35fd1bc1-4335-4fea-982c-de47128ca595",
     }
 # noop => true,
 
