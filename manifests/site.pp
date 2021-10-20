@@ -4,6 +4,7 @@ node 'default' {
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -17,7 +18,7 @@ node 'default' {
     replace => 'yes',
     content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
 ENV=\"${environment}\"
-INSTRUMENTATION_KEY=90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9",
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
   file { '/etc/apt/sources.list.d/focal-updates.list':
