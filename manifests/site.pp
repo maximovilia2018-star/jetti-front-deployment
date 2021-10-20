@@ -116,15 +116,15 @@ Terminal=false',
     name => 'jetti-front-fiscal-spooler',
   }
 
-  package { 'libcurl4':
-    ensure => "$curl",
-    name => 'libcurl4',
-  }
-
-  package { 'curl':
-    ensure =>"$curl",
-    name => 'curl',
-  }
+  # package { 'libcurl4':
+  #   ensure => "$curl",
+  #   name => 'libcurl4',
+  # }
+  #
+  # package { 'curl':
+  #   ensure =>"$curl",
+  #   name => 'curl',
+  # }
 
   package { 'jq':
    name => 'jq',
