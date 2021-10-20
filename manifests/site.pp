@@ -3,7 +3,7 @@ node 'default' {
   $version = '1.3.54'
   $versionsp = '0.1.12'
   $githubtoken = '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'
-  $curl = '7.68.0-1ubuntu2.6'
+  $curl = '7.68.0-1ubuntu2.7'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
