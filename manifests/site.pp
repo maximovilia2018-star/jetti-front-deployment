@@ -3,7 +3,7 @@ node 'default' {
   $version = '1.3.49'
   $versionsp = '0.1.6'
   $githubtoken = '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'
-  $zabbix = '5.4.5'
+  $zabbix = '1:5.4.6-1+debian10'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -139,16 +139,17 @@ exit 1',
     ensure => 'purged',
     name => 'unattended-upgrades',
   }
+
   ### zabbix
 
   exec { "install-zabbix-repository":
       command => "/usr/bin/wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian10_all.deb && dpkg -i zabbix-release_5.4-1+debian10_all.deb && apt update" ,
       user    => 'root',
-      unless  => ["/bin/dpkg -s zabbix_proxy | grep \'Version: $zabbix\'"],
+      unless  => ["/bin/dpkg -s zabbix-agent | grep \'Version: $zabbix\'"],
   }
 
-  package { 'zabbix_proxy':
-    name => 'zabbix_proxy',
+  package { 'zabbix-agent':
+    name => 'zabbix-agent',
     ensure => "$zabbix",
   }
 
@@ -167,19 +168,19 @@ TLSAccept=psk
 TLSPSKIdentity=PSK X100
 TLSPSKFile=/etc/zabbix/zabbix_x100.psk
 HostMetadata=x100_linux.autoreg",
-      require => Package['zabbix_proxy'],
+      require => Package['zabbix-agent'],
   }
 
   file { '/etc/zabbix/zabbix_x100.psk':
       ensure  => 'present',
       replace => 'yes',
       content => '39a21b2b196da15d9d4ee4b53fcf82b8f55b2a8074fff30fb181581ea93a6032',
-      require => Package['zabbix_proxy'],
+      require => Package['zabbix-agent'],
   }
 
   service { 'zabbix_proxy':
     ensure  => 'running',
     enable  => true,
-    require => Package['zabbix_proxy'],
+    require => Package['zabbix-agent'],
   }
 }
