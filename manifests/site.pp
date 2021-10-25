@@ -167,7 +167,8 @@ TLSConnect=psk
 TLSAccept=psk
 TLSPSKIdentity=PSK X100
 TLSPSKFile=/etc/zabbix/zabbix_x100.psk
-HostMetadata=x100_linux.autoreg",
+HostMetadata=x100_linux.autoreg"
+,
       require => Package['zabbix-agent'],
   }
 
