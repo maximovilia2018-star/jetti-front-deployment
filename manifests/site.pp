@@ -140,6 +140,13 @@ exit 1',
     name => 'unattended-upgrades',
   }
   ### zabbix
+
+  exec { "install-zabbix-repository":
+      command => "/usr/bin/wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian10_all.deb && dpkg -i zabbix-release_5.4-1+debian10_all.deb && apt update" ,
+      user    => 'root',
+      unless  => ["/bin/dpkg -s zabbix_proxy | grep \'Version: $zabbix\'"],
+  }
+
   package { 'zabbix_proxy':
     name => 'zabbix_proxy',
     ensure => "$zabbix",
