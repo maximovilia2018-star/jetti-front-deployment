@@ -182,5 +182,6 @@ HostMetadata=x100_linux.autoreg",
     ensure  => 'running',
     enable  => true,
     require => Package['zabbix-agent'],
+    subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
 }
