@@ -178,7 +178,7 @@ HostMetadata=x100_linux.autoreg",
       require => Package['zabbix-agent'],
   }
 
-  service { 'zabbix_proxy':
+  service { 'zabbix-agent':
     ensure  => 'running',
     enable  => true,
     require => Package['zabbix-agent'],
