@@ -3,6 +3,7 @@ node 'default' {
   $version = '1.3.49'
   $versionsp = '0.1.6'
   $githubtoken = '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'
+  $zabbix = '5.4.5'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -137,5 +138,41 @@ exit 1',
   package { 'unattended-upgrades':
     ensure => 'purged',
     name => 'unattended-upgrades',
+  }
+  ### zabbix
+  package { 'zabbix_proxy':
+    name => 'zabbix_proxy',
+    ensure => "$zabbix",
+  }
+
+  file { '/etc/zabbix/zabbix_agentd.conf':
+      ensure  => 'present',
+      replace => 'yes',
+      content => "PidFile=/run/zabbix/zabbix_agentd.pid
+LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFileSize=0
+Server=127.0.0.1
+ServerActive=31.148.246.253:10049
+Hostname=$hostname
+Include=/etc/zabbix/zabbix_agentd.d/*.conf
+TLSConnect=psk
+TLSAccept=psk
+TLSPSKIdentity=PSK X100
+TLSPSKFile=/etc/zabbix/zabbix_x100.psk
+HostMetadata=x100_linux.autoreg",
+      require => Package['zabbix_proxy'],
+  }
+
+  file { '/etc/zabbix/zabbix_x100.psk':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '39a21b2b196da15d9d4ee4b53fcf82b8f55b2a8074fff30fb181581ea93a6032',
+      require => Package['zabbix_proxy'],
+  }
+
+  service { 'zabbix_proxy':
+    ensure  => 'running',
+    enable  => true,
+    require => Package['zabbix_proxy'],
   }
 }
