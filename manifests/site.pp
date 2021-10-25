@@ -158,7 +158,7 @@ exit 1',
       replace => 'yes',
       content => "PidFile=/run/zabbix/zabbix_agentd.pid
 LogFile=/var/log/zabbix/zabbix_agentd.log
-LogFileSize=0
+LogFileSize=100
 Server=127.0.0.1
 ServerActive=31.148.246.253:10049
 Hostname=$hostname
@@ -167,8 +167,7 @@ TLSConnect=psk
 TLSAccept=psk
 TLSPSKIdentity=PSK X100
 TLSPSKFile=/etc/zabbix/zabbix_x100.psk
-HostMetadata=x100_linux.autoreg"
-,
+HostMetadata=x100_linux.autoreg",
       require => Package['zabbix-agent'],
   }
 
