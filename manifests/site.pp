@@ -5,7 +5,7 @@ node 'default' {
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zabbix = '1:5.4.6-1+debian10'
+
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -146,7 +146,6 @@ Terminal=false',
 
   package { 'zabbix-agent':
     name => 'zabbix-agent',
-    ensure => "$zabbix",
   }
 
   file { '/etc/zabbix/zabbix_agentd.conf':
