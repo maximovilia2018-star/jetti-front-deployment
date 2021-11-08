@@ -186,7 +186,7 @@ HostMetadata=x100_linux.autoreg",
 }
 
 node 'pos115' {
-  $version = '1.3.71
+  $version = '1.3.71'
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
