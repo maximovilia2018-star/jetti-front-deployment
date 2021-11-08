@@ -1,6 +1,6 @@
 node 'default' {
 
-  $version = '1.3.49'
+  $version = '1.3.70'
   $versionsp = '0.1.6'
   $githubtoken = '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'
   $zabbix = '1:5.4.6-1+debian10'
@@ -186,7 +186,7 @@ HostMetadata=x100_linux.autoreg",
 }
 
 node 'pos115' {
-  $version = '1.3.49'
+  $version = '1.3.71
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
     user    => 'root',
