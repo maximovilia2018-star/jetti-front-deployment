@@ -184,3 +184,12 @@ HostMetadata=x100_linux.autoreg",
     subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
 }
+
+node 'pos115' {
+  $version = '1.3.49'
+  exec { "jetti-front":
+    command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
+  }
+}
