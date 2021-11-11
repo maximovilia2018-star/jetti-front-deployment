@@ -180,7 +180,8 @@ HostMetadata=x100_linux.autoreg",
   }
 }
 
-node /^ua-mp-*/{
+
+node /(?i)^ua-mp-*/{
   exec { 'uamp':
     command => "echo 'ua-mp'",
     path    => [ '/usr/bin', '/bin' ],
