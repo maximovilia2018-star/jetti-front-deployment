@@ -179,3 +179,10 @@ HostMetadata=x100_linux.autoreg",
     subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
 }
+
+node /^ua-mp-*/{
+  exec { 'uamp':
+    command => "echo 'ua-mp'",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+}
