@@ -157,7 +157,6 @@ exit 1',
 
   package { 'zabbix-agent':
     name => 'zabbix-agent',
-    ensure => "$zabbix",
   }
 
   file { '/etc/zabbix/zabbix_agentd.conf':
