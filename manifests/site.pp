@@ -187,3 +187,10 @@ node /(?i)^ua-mp-*/{
     path    => [ '/usr/bin', '/bin' ],
   }
 }
+
+node /(?i)^ua-sm-*/{
+  exec { 'uasm':
+    command => "echo 'ua-sm'",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+}
