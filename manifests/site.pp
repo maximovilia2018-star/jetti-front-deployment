@@ -194,3 +194,10 @@ node /(?i)^ua-sm-*/{
     path    => [ '/usr/bin', '/bin' ],
   }
 }
+
+node /(?i)^ru-gs-*/{
+  exec { 'rugs':
+    command => "echo 'ru-gs'",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+}
