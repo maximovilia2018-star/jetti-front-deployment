@@ -181,30 +181,30 @@ HostMetadata=x100_linux.autoreg",
 }
 
 
-node /(?i)^ua-mp-*/{
-  exec { 'uamp':
-    command => "echo 'ua-mp'",
-    path    => [ '/usr/bin', '/bin' ],
-  }
-}
-
-node /(?i)^ua-sm-*/{
-  exec { 'uasm':
-    command => "echo 'ua-sm'",
-    path    => [ '/usr/bin', '/bin' ],
-  }
-}
-
-node /(?i)^ua-fm-*/{
-  exec { 'uafm':
-    command => "echo 'ua-fm'",
-    path    => [ '/usr/bin', '/bin' ],
-  }
-}
-
-node /(?i)^ru-gs-*/{
-  exec { 'rugs':
-    command => "echo 'ru-gs'",
-    path    => [ '/usr/bin', '/bin' ],
-  }
-}
+# node /(?i)^ua-mp-*/{
+#   exec { 'uamp':
+#     command => "echo 'ua-mp'",
+#     path    => [ '/usr/bin', '/bin' ],
+#   }
+# }
+#
+# node /(?i)^ua-sm-*/{
+#   exec { 'uasm':
+#     command => "echo 'ua-sm'",
+#     path    => [ '/usr/bin', '/bin' ],
+#   }
+# }
+#
+# node /(?i)^ua-fm-*/{
+#   exec { 'uafm':
+#     command => "echo 'ua-fm'",
+#     path    => [ '/usr/bin', '/bin' ],
+#   }
+# }
+#
+# node /(?i)^ru-gs-*/{
+#   exec { 'rugs':
+#     command => "echo 'ru-gs'",
+#     path    => [ '/usr/bin', '/bin' ],
+#   }
+# }
