@@ -1,6 +1,7 @@
 node 'default' {
 
   $version = '1.3.70'
+  $ua_mp = '1.3.72'
   $versionsp = '0.1.6'
   $githubtoken = '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'
   $zabbix = '1:5.4.6-1+debian10'
