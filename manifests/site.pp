@@ -1,7 +1,7 @@
 node 'default' {
 
   $version = '1.3.70'
-  $ua_mp = '1.3.72'
+  $ua_mp = '1.3.73'
   $ua_sm = '1.3.71'
   $versionsp = '0.1.6'
   $githubtoken = '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'
