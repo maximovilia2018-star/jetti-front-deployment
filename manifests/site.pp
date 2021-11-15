@@ -224,7 +224,7 @@ node /(?i)^ru-gs-*/{
     &~',
   }
 
-  file { " /etc/logrotate.d/ATOL-fptr":
+  file { "/etc/logrotate.d/ATOL-fptr":
     ensure  => 'present',
     replace => 'yes',
     content => "/var/log/ATOL-fptr.log {
