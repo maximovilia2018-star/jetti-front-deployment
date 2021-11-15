@@ -202,13 +202,6 @@ node /(?i)^ua-sm-*/{
   }
 }
 
-# node /(?i)^ua-fm-*/{
-#   exec { 'uafm':
-#     command => "echo 'ua-fm'",
-#     path    => [ '/usr/bin', '/bin' ],
-#   }
-# }
-
 node /(?i)^ru-gs-*/{
   $ru_gs = '1.3.72'
 
