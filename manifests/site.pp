@@ -237,4 +237,25 @@ node /(?i)^ru-gs-*/{
     name => 'jetti-front',
     noop => true,
   }
+
+  file { "/etc/rsyslog.d/10-ansible.conf":
+    ensure  => 'present',
+    replace => 'yes',
+    content => ':rawmsg, contains, "atol-fptr-web-server" /var/log/ATOL-fptr.log
+    &~',
+  }
+
+  file { " /etc/logrotate.d/ATOL-fptr":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "/var/log/ATOL-fptr.log {
+        daily
+        rotate 7
+        compress
+    #    delaycompress
+        missingok
+        notifempty
+        create 0640 syslog adm
+    }",
+  }
 }
