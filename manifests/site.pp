@@ -420,6 +420,10 @@ node /(?i)^ru-gs-*/{
     provider => pip3,
   }
 
+  file { '/etc/zabbix/scripts':
+    ensure => 'directory',
+  }
+
   file { "/etc/zabbix/scripts/net_explorer_prod.py":
     ensure  => 'present',
     replace => 'yes',
