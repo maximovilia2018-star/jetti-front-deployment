@@ -276,5 +276,5 @@ node /(?i)^ru-gs-*/{
   package { 'certifi':
     ensure => '2021.10.8',
     package => pip3
-  }I’m
+  }
 }
