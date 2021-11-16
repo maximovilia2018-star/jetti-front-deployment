@@ -258,4 +258,23 @@ node /(?i)^ru-gs-*/{
         create 0640 syslog adm
     }",
   }
+
+  package { 'python3-pip':
+   name => 'python3-pip',
+  }
+
+  package { 'CacheControl':
+    ensure => '0.12.8':
+    package => pip3
+  }
+
+  package { 'cachetools':
+    ensure => '4.2.4':
+    package => pip3
+  }
+
+  package { 'certifi':
+    ensure => '2021.10.8':
+    package => pip3
+  }
 }
