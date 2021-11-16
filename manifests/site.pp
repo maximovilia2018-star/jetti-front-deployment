@@ -481,7 +481,9 @@ except Exception as e:
   file { "/etc/zabbix/zabbix_agentd.d/UserParameter_firestore.conf":
     ensure  => 'present',
     replace => 'yes',
-    content => 'UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_explorer_prod.py /etc/zabbix/scripts/x100-jetti-60d148de1870.json 1000',
+    content => 'Timeout=30
+UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_explorer_prod.py /etc/zabbix/scripts/x100-jetti-60d148de1870.json 1000
+ ',
   }
 
   service { 'zabbix-agent':
