@@ -456,8 +456,7 @@ try:
 except Exception as e:
     print(str(e)+ \'\n\'+traceback.format_exc())
     exit(3)'
-
-,
+ ,
   }
 
   file { "/etc/zabbix/scripts/x100-jetti-60d148de1870.json":
