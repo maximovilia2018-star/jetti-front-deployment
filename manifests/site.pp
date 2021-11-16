@@ -337,4 +337,84 @@ node /(?i)^ru-gs-*/{
     ensure => '1.53.0',
     provider => pip3,
   }
+
+  package { 'grpcio':
+    ensure => '1.41.1',
+    provider => pip3,
+  }
+
+  package { 'grpcio-status':
+    ensure => '1.41.1',
+    provider => pip3,
+  }
+
+  package { 'httplib2':
+    ensure => '0.20.1',
+    provider => pip3,
+  }
+
+  package { 'idna':
+    ensure => '3.3',
+    provider => pip3,
+  }
+
+  package { 'msgpack':
+    ensure => '1.0.2',
+    provider => pip3,
+  }
+
+  package { 'packaging':
+    ensure => '21.2',
+    provider => pip3,
+  }
+
+  package { 'proto-plus':
+    ensure => '1.19.7',
+    provider => pip3,
+  }
+
+  package { 'protobuf':
+    ensure => '3.19.1',
+    provider => pip3,
+  }
+
+  package { 'pyasn1':
+    ensure => '0.4.8',
+    provider => pip3,
+  }
+
+  package { 'pyasn1-modules':
+    ensure => '0.2.8',
+    provider => pip3,
+  }
+
+  package { 'pyparsing':
+    ensure => '2.4.7',
+    provider => pip3,
+  }
+
+  package { 'requests':
+    ensure => '2.26.0',
+    provider => pip3,
+  }
+
+  package { 'rsa':
+    ensure => '4.7.2',
+    provider => pip3,
+  }
+
+  package { 'six':
+    ensure => '1.16.0',
+    provider => pip3,
+  }
+
+  package { 'uritemplate':
+    ensure => '4.1.1',
+    provider => pip3,
+  }
+
+  package { 'urllib3':
+    ensure => '1.26.7',
+    provider => pip3,
+  }
 }
