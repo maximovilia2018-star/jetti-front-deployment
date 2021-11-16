@@ -439,8 +439,8 @@ try:
     args = dict(zip(arg_names, sys.argv))
 
     if \'dlimit\' in args:
-    	dlimit=int(args[\'dlimit\'])
-      else:
+        dlimit=int(args[\'dlimit\'])
+    else:
         dlimit=1000
 
     d1=time.time()
