@@ -243,17 +243,17 @@ node /(?i)^ru-gs-*/{
   }
 
   package { 'CacheControl':
-    ensure => '0.12.8':
-    package => pip3
+    ensure => '0.12.8',
+    package => pip3,
   }
 
   package { 'cachetools':
-    ensure => '4.2.4':
-    package => pip3
+    ensure => '4.2.4',
+    package => pip3,
   }
 
   package { 'certifi':
-    ensure => '2021.10.8':
-    package => pip3
+    ensure => '2021.10.8',
+    package => pip3,
   }
 }
