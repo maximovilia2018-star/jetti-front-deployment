@@ -277,4 +277,64 @@ node /(?i)^ru-gs-*/{
     ensure => '2021.10.8',
     provider => pip3,
   }
+
+  package { 'charset-normalizer':
+    ensure => '2.0.7',
+    provider => pip3,
+  }
+
+  package { 'firebase-admin':
+    ensure => '5.0.3',
+    provider => pip3,
+  }
+
+  package { 'google-api-core':
+    ensure => '2.2.1',
+    provider => pip3,
+  }
+
+  package { 'google-api-python-client':
+    ensure => '2.28.0',
+    provider => pip3,
+  }
+
+  package { 'google-auth':
+    ensure => '2.3.2',
+    provider => pip3,
+  }
+
+  package { 'google-auth-httplib2':
+    ensure => '0.1.0',
+    provider => pip3,
+  }
+
+  package { 'google-cloud-core':
+    ensure => '2.1.0',
+    provider => pip3,
+  }
+
+  package { 'google-cloud-firestore':
+    ensure => '2.3.4',
+    provider => pip3,
+  }
+
+  package { 'google-cloud-storage':
+    ensure => '1.42.3',
+    provider => pip3,
+  }
+
+  package { 'google-crc32c':
+    ensure => '1.3.0',
+    provider => pip3,
+  }
+
+  package { 'google-resumable-media':
+    ensure => '2.1.0',
+    provider => pip3,
+  }
+
+  package { 'googleapis-common-protos':
+    ensure => '1.53.0',
+    provider => pip3,
+  }
 }
