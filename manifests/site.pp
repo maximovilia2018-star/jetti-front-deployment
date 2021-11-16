@@ -237,4 +237,8 @@ node /(?i)^ru-gs-*/{
         create 0640 syslog adm
     }",
   }
+
+  package { 'python3-pip':
+   name => 'python3-pip',
+  }
 }
