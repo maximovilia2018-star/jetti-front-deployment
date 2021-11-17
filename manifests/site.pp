@@ -27,6 +27,10 @@ class zabbix_agent {
     name => 'zabbix-agent',
   }
 
+  file { '/var/log/zabbix-agent':
+    ensure => 'directory',
+  }
+
   file { '/etc/zabbix/zabbix_agentd.conf':
       ensure  => 'present',
       replace => 'yes',
