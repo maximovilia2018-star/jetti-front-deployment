@@ -4,7 +4,7 @@ node 'default' {
 }
 
 node /(?i)^ua-mp-*/{
-  $ua_mp = 'v.1.3.73'
+  $ua_mp = '1.3.73'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -90,7 +90,7 @@ Terminal=false',
 }
 
 node /(?i)^ua-sm-*/{
-  $ua_sm = 'v.1.3.73'
+  $ua_sm = '1.3.73'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -182,7 +182,7 @@ Terminal=false',
 }
 
 node /(?i)^ru-gs-*/{
-  $ru_gs = 'v.1.3.73'
+  $ru_gs = '1.3.73'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
@@ -524,7 +524,7 @@ Terminal=false',
 }
 
 node /(?i)^ru-sm-*/{
-  $ru_sm = 'v.1.3.73'
+  $ru_sm = '1.3.73'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
