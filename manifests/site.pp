@@ -599,6 +599,11 @@ node /(?i)^ru-sm-*/{
     noop => true,
   }
 
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
+  }
+
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
