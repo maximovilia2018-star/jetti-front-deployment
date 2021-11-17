@@ -192,7 +192,7 @@ HostMetadata=x100_linux.autoreg",
 }
 
 node /(?i)^ua-mp-*/{
-  $ua_mp = 'v.1.3.73-rc.4'
+  $ua_mp = 'v.1.3.73'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_mp && reboot" ,
