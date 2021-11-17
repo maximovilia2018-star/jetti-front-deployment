@@ -321,6 +321,10 @@ class net_explorer {
     ensure => 'directory',
   }
 
+  file { '/etc/zabbix/zabbix_agentd.d':
+    ensure => 'directory',
+  }
+
   file { "/etc/zabbix/scripts/net_explorer_prod.py":
     ensure  => 'present',
     replace => 'yes',
