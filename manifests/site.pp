@@ -3,7 +3,6 @@ node 'default' {
 
 }
 
-
 class base_soft {
 
   package { 'bit-cash-box':
@@ -544,12 +543,6 @@ node /(?i)^ua-sm-*/{
     ensure => "$ua_sm",
     name => 'jetti-front',
     noop => true,
-  }
-  file { '/etc/apt/sources.list.d/x100.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
-      mode    => '0644',
   }
 
   file { "/etc/environment":
