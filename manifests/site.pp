@@ -27,7 +27,7 @@ class zabbix_agent {
     name => 'zabbix-agent',
   }
 
-  file { '/var/log/zabbix-agent':
+  file { '/var/log/zabbix':
     ensure => 'directory',
   }
 
