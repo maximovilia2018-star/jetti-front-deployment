@@ -182,6 +182,10 @@ Terminal=false',
 }
 
 node /(?i)^ru-gs-*/{
+  include net_explorer
+  include jetti_front
+  include jetti_front_fiscal_spooler
+  include zabbix_agent
   $ru_gs = '1.3.73'
   $versionsp = '0.1.12'
   $githubtoken = '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'
@@ -200,14 +204,6 @@ node /(?i)^ru-gs-*/{
     noop => true,
   }
 
-
-  file { '/etc/apt/sources.list.d/x100.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
-      mode    => '0644',
-  }
-
   file { "/etc/environment":
     ensure  => 'present',
     replace => 'yes',
@@ -216,57 +212,15 @@ ENV=\"${environment}\"
 INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
-  file { '/etc/apt/sources.list.d/focal-updates.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse',
-      mode    => '0644',
-  }
-
-  file { '/home/bit/.config/autostart/x100-front.desktop':
-      ensure  => 'present',
-      replace => 'yes',
-      content => '[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Name=CashDesk
-Comment=Cash Desk Sushi Master
-Exec=jetti-front
-Hidden=false
-NoDisplay=false
-Terminal=false',
-      mode    => '0644',
-  }
-
-  exec { 'apt-get-update':
-    command => "apt-get install ca-certificates && apt-get update || true",
-    onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
+  exec { 'config':
+    notify  => Service['jetti-front-fiscal-spooler'],
+    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
+    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
     path    => [ '/usr/bin', '/bin' ],
+    provider => 'shell',
+    require => Package['jetti-front-fiscal-spooler'],
   }
 
-  file { '/opt/precheck_before_update.sh':
-      ensure  => 'present',
-      replace => 'yes',
-      content => '#!/bin/bash
-  FILE=/home/bit/.config/jetti-front/config.json
-  if test -f "$FILE"; then
-      echo "$FILE exists."
-      posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
-      psname=$(hostname)
-      VER=$1
-      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=production&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
-      if [ $status = "false" ]; then
-        apt-get install --download-only -y jetti-front=$VER
-        exit 0
-      else
-        echo "We can update"
-        exit 1
-      fi
-      exit 1
-  fi
-  exit 1',
-      mode    => '0755',
-  }
 }
 
 node /(?i)^ru-sm-*/{
