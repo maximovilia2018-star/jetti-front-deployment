@@ -554,7 +554,8 @@ UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_
  ',
   }
 
-  service { 'zabbix-agent':
+  service { 'zabbix-agent-explorer':
+    name => 'zabbix-agent',
     ensure  => 'running',
     enable  => true,
     hasrestart => true,
