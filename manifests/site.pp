@@ -181,6 +181,9 @@ Terminal=false',
 
 }
 
+class base_soft {
+
+}
 
 class zabbix_agent {
   exec { "install-zabbix-repository":
@@ -649,6 +652,5 @@ node /(?i)^ru-sm-*/{
 ENV=\"${environment}\"
 INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
-
 
 }
