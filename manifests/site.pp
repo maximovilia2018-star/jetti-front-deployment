@@ -5,7 +5,6 @@ node 'default' {
 
 node /(?i)^ua-mp-*/{
   $ua_mp = 'v.1.3.73'
-  $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -59,11 +58,6 @@ Terminal=false',
       mode    => '0644',
   }
 
-  package { 'bit-cash-box':
-    ensure => 'purged',
-    name => 'bit-cash-box',
-  }
-
   exec { 'apt-get-update':
     command => "apt-get install ca-certificates && apt-get update || true",
     onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
@@ -97,7 +91,6 @@ Terminal=false',
 
 node /(?i)^ua-sm-*/{
   $ua_sm = 'v.1.3.73'
-  $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -581,5 +574,72 @@ HostMetadata=x100_linux.autoreg",
     hasrestart => true,
     subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
+
+  file { '/etc/apt/sources.list.d/x100.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
+      mode    => '0644',
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
+  file { '/etc/apt/sources.list.d/focal-updates.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse',
+      mode    => '0644',
+  }
+
+  file { '/home/bit/.config/autostart/x100-front.desktop':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=CashDesk
+Comment=Cash Desk Sushi Master
+Exec=jetti-front
+Hidden=false
+NoDisplay=false
+Terminal=false',
+      mode    => '0644',
+  }
+
+  exec { 'apt-get-update':
+    command => "apt-get install ca-certificates && apt-get update || true",
+    onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+
+  file { '/opt/precheck_before_update.sh':
+      ensure  => 'present',
+      replace => 'yes',
+      content => '#!/bin/bash
+  FILE=/home/bit/.config/jetti-front/config.json
+  if test -f "$FILE"; then
+      echo "$FILE exists."
+      posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
+      psname=$(hostname)
+      VER=$1
+      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=production&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
+      if [ $status = "false" ]; then
+        apt-get install --download-only -y jetti-front=$VER
+        exit 0
+      else
+        echo "We can update"
+        exit 1
+      fi
+      exit 1
+  fi
+  exit 1',
+      mode    => '0755',
+    }
 
 }
