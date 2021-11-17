@@ -599,18 +599,6 @@ node /(?i)^ru-sm-*/{
     noop => true,
   }
 
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ru_sm",
-    name => 'jetti-front',
-    noop => true,
-  }
-
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
       replace => 'no',
