@@ -204,6 +204,11 @@ node /(?i)^ru-gs-*/{
     noop => true,
   }
 
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
+  }
+
   file { "/etc/environment":
     ensure  => 'present',
     replace => 'yes',
@@ -244,6 +249,11 @@ node /(?i)^ru-sm-*/{
     ensure => "$ru_sm",
     name => 'jetti-front',
     noop => true,
+  }
+
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
   }
 
   exec { 'config':
