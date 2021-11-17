@@ -475,6 +475,10 @@ UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_
 
 node /(?i)^ru-sm-*/{
   $ru_sm = '1.3.72'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
