@@ -701,12 +701,6 @@ node /(?i)^ru-sm-*/{
     subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
 
-  file { '/etc/apt/sources.list.d/x100.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
-      mode    => '0644',
-  }
 
 
   file { '/opt/precheck_before_update.sh':
