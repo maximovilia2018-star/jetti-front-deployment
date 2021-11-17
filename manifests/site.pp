@@ -181,100 +181,7 @@ Terminal=false',
 
 }
 
-node /(?i)^ru-gs-*/{
-  include net_explorer
-  include jetti_front
-  include jetti_front_fiscal_spooler
-  include zabbix_agent
-  $ru_gs = '1.3.73'
-  $versionsp = '0.1.12'
-  $githubtoken = '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'
-  $curl = '7.68.0-1ubuntu2.7'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_gs\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ru_gs",
-    name => 'jetti-front',
-    noop => true,
-  }
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
-  }
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
-
-}
-
-node /(?i)^ru-sm-*/{
-  include net_explorer
-  include jetti_front
-  include jetti_front_fiscal_spooler
-  include zabbix_agent
-  $ru_sm = '1.3.73'
-  $versionsp = '0.1.12'
-  $githubtoken = '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'
-  $curl = '7.68.0-1ubuntu2.7'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ru_sm",
-    name => 'jetti-front',
-    noop => true,
-  }
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
-  }
-
-
-}
 class zabbix_agent {
   exec { "install-zabbix-repository":
       command => "/usr/bin/wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian10_all.deb && dpkg -i zabbix-release_5.4-1+debian10_all.deb && apt update" ,
@@ -655,5 +562,101 @@ UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_
     hasrestart => true,
     subscribe => File["/etc/zabbix/scripts/net_explorer_prod.py","/etc/zabbix/scripts/x100-jetti-60d148de1870.json","/etc/zabbix/zabbix_agentd.d/UserParameter_firestore.conf"],
   }
+
+}
+
+
+node /(?i)^ru-gs-*/{
+  include net_explorer
+  include jetti_front
+  include jetti_front_fiscal_spooler
+  include zabbix_agent
+  $ru_gs = '1.3.73'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  exec { "jetti-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_gs\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
+  }
+
+  package { 'jetti-front':
+    ensure => "$ru_gs",
+    name => 'jetti-front',
+    noop => true,
+  }
+
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
+  exec { 'config':
+    notify  => Service['jetti-front-fiscal-spooler'],
+    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
+    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
+    path    => [ '/usr/bin', '/bin' ],
+    provider => 'shell',
+    require => Package['jetti-front-fiscal-spooler'],
+  }
+
+}
+
+node /(?i)^ru-sm-*/{
+  include net_explorer
+  include jetti_front
+  include jetti_front_fiscal_spooler
+  include zabbix_agent
+  $ru_sm = '1.3.73'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  exec { "jetti-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
+  }
+
+  package { 'jetti-front':
+    ensure => "$ru_sm",
+    name => 'jetti-front',
+    noop => true,
+  }
+
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$versionsp",
+    name => 'jetti-front-fiscal-spooler',
+  }
+
+  exec { 'config':
+    notify  => Service['jetti-front-fiscal-spooler'],
+    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
+    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
+    path    => [ '/usr/bin', '/bin' ],
+    provider => 'shell',
+    require => Package['jetti-front-fiscal-spooler'],
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
 
 }
