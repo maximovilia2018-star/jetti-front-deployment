@@ -74,6 +74,14 @@ class jetti_front_fiscal_spooler {
       mode    => '0644',
   }
 
+  package { 'libfptr10-gui':
+    name => 'libfptr10-gui',
+  }
+
+  package { 'fptr10-test-util':
+    name => 'fptr10-test-util',
+  }
+
 }
 
 
