@@ -208,7 +208,7 @@ node /(?i)^ua-mp-*/{
 }
 
 node /(?i)^ua-sm-*/{
-  $ua_sm = '1.3.72'
+  $ua_sm = 'v.1.3.73-rc.4'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_sm && reboot" ,
