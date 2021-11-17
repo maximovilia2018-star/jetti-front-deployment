@@ -701,8 +701,6 @@ node /(?i)^ru-sm-*/{
     subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
   }
 
-
-
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
       replace => 'yes',
