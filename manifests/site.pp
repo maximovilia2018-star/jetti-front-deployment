@@ -14,11 +14,6 @@ node 'default' {
       mode    => '0644',
   }
 
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
   file { "/etc/environment":
     ensure  => 'present',
     replace => 'yes',
