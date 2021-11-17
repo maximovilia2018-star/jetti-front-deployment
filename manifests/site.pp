@@ -216,14 +216,6 @@ HostMetadata=x100_linux.autoreg",
       content => '39a21b2b196da15d9d4ee4b53fcf82b8f55b2a8074fff30fb181581ea93a6032',
   }
 
-  service { 'zabbix-agent-main':
-    name => 'zabbix-agent',
-    ensure  => 'running',
-    enable  => true,
-    require => Package['zabbix-agent'],
-    hasrestart => true,
-    subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
-  }
 }
 
 
@@ -560,7 +552,7 @@ UserParameter=x100.jetti.firestore.check.python,python3 /etc/zabbix/scripts/net_
     ensure  => 'running',
     enable  => true,
     hasrestart => true,
-    subscribe => File["/etc/zabbix/scripts/net_explorer_prod.py","/etc/zabbix/scripts/x100-jetti-60d148de1870.json","/etc/zabbix/zabbix_agentd.d/UserParameter_firestore.conf"],
+    subscribe => File["/etc/zabbix/zabbix_agentd.conf", "/etc/zabbix/scripts/net_explorer_prod.py","/etc/zabbix/scripts/x100-jetti-60d148de1870.json","/etc/zabbix/zabbix_agentd.d/UserParameter_firestore.conf"],
   }
 
 }
