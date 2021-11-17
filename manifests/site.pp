@@ -1,11 +1,14 @@
 node 'default' {
 
 
-
 }
 
 node /(?i)^ua-mp-*/{
   $ua_mp = 'v.1.3.73'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_mp && reboot" ,
@@ -18,10 +21,36 @@ node /(?i)^ua-mp-*/{
     name => 'jetti-front',
     noop => true,
   }
+
+  file { '/etc/apt/sources.list.d/x100.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
+      mode    => '0644',
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
+  file { '/etc/apt/sources.list.d/focal-updates.list':
+      ensure  => 'present',
+      replace => 'no',
+      content => 'deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse',
+      mode    => '0644',
+  }
 }
 
 node /(?i)^ua-sm-*/{
   $ua_sm = 'v.1.3.73'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_sm && reboot" ,
@@ -38,6 +67,10 @@ node /(?i)^ua-sm-*/{
 
 node /(?i)^ru-gs-*/{
   $ru_gs = 'v.1.3.73'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $curl = '7.68.0-1ubuntu2.7'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
