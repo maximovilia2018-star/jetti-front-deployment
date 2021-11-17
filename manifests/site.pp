@@ -593,6 +593,12 @@ node /(?i)^ru-sm-*/{
     unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
   }
 
+  exec { 'apt-get-update':
+    command => "apt-get install ca-certificates && apt-get update || true",
+    onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
+    path    => [ '/usr/bin', '/bin' ],
+  }
+
   package { 'jetti-front':
     ensure => "$ru_sm",
     name => 'jetti-front',
