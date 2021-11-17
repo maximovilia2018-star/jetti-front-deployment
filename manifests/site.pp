@@ -1,8 +1,3 @@
-node 'default' {
-
-
-}
-
 class base_soft {
 
   package { 'bit-cash-box':
@@ -552,5 +547,10 @@ node /(?i)^ua-sm-*/{
 ENV=\"${environment}\"
 INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
+
+}
+
+node 'default' {
+
 
 }
