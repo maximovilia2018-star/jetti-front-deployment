@@ -29,6 +29,8 @@ class zabbix_agent {
 
   file { '/var/log/zabbix':
     ensure => 'directory',
+    owner => "zabbix",
+    group => "zabbix",
   }
 
   file { '/etc/zabbix/zabbix_agentd.conf':
