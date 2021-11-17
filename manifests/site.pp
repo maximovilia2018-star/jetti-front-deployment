@@ -331,8 +331,6 @@ class net_explorer {
  ,
   }
 
-  ### python3
-
   package { 'python3-pip':
    name => 'python3-pip',
   }
