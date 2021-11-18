@@ -464,7 +464,7 @@ node /(?i)^ru-sm-*/{
   include jetti_front_fiscal_spooler
   include zabbix_agent
   include base_soft
-  $ru_sm = '1.3.73'
+  $ru_sm = '1.3.74-rc.2'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
