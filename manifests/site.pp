@@ -507,7 +507,7 @@ node /(?i)^ua-mp-*/{
   include jetti_front
   include zabbix_agent
   include base_soft
-  $ua_mp = '1.3.73'
+  $ua_mp = '1.3.74-rc.2'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
