@@ -416,7 +416,7 @@ node /(?i)^ru-gs-*/{
   include jetti_front_fiscal_spooler
   include zabbix_agent
   include base_soft
-  $ru_gs = '1.3.74-rc.2'
+  $ru_gs = '1.3.74~rc.2'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
@@ -464,7 +464,7 @@ node /(?i)^ru-sm-*/{
   include jetti_front_fiscal_spooler
   include zabbix_agent
   include base_soft
-  $ru_sm = '1.3.74-rc.2'
+  $ru_sm = '1.3.74~rc.2'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
@@ -510,7 +510,7 @@ node /(?i)^ua-mp-*/{
   include jetti_front
   include zabbix_agent
   include base_soft
-  $ua_mp = '1.3.74-rc.2'
+  $ua_mp = '1.3.74~rc.2'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -541,7 +541,7 @@ node /(?i)^ua-sm-*/{
   include jetti_front
   include zabbix_agent
   include base_soft
-  $ua_sm = '1.3.74-rc.2'
+  $ua_sm = '1.3.74~rc.2'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
