@@ -467,7 +467,7 @@ node /(?i)^ru-gs-*/{
   include zabbix_agent
   include base_soft
   include splunk
-  $ru_gs = '1.3.74~rc.2'
+  $ru_gs = '1.3.74'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
