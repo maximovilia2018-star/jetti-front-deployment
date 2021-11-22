@@ -476,7 +476,7 @@ node /(?i)^ru-gs-*/{
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_gs\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ru_gs$\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
   }
 
   package { 'jetti-front':
@@ -524,7 +524,7 @@ node /(?i)^ru-sm-*/{
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ru_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ru_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
   }
 
   package { 'jetti-front':
@@ -569,7 +569,7 @@ node /(?i)^ua-mp-*/{
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_mp && reboot" ,
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ua_mp\'", "/bin/bash /opt/precheck_before_update.sh ${ua_mp}"],
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ua_mp$\'", "/bin/bash /opt/precheck_before_update.sh ${ua_mp}"],
   }
 
   package { 'jetti-front':
@@ -600,7 +600,7 @@ node /(?i)^ua-sm-*/{
   exec { "jetti-front":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_sm && reboot" ,
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $ua_sm\'", "/bin/bash /opt/precheck_before_update.sh ${ua_sm}"],
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ua_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${ua_sm}"],
   }
 
   package { 'jetti-front':
