@@ -1,3 +1,9 @@
+class splunk {
+  package { 'splunkforwarder':
+    name => 'splunkforwarder',
+  }
+}
+
 class base_soft {
 
   package { 'bit-cash-box':
