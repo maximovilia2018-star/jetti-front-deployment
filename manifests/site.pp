@@ -595,7 +595,7 @@ node /(?i)^ua-sm-*/{
   include zabbix_agent
   include base_soft
   include splunk
-  $ua_sm = '1.3.75-rc.9'
+  $ua_sm = '1.3.75~rc.9'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
