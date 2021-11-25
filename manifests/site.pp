@@ -100,7 +100,7 @@ node /(?i)^ua-mp-*/{
   include zabbix_agent
   include base_soft
   include splunk
-  $ua_mp = '1.3.74'
+  $ua_mp = '1.3.75'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
