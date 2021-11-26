@@ -4,6 +4,6 @@ class zabbix_config {
         source  => 'puppet:///modules/zabbix',
         recurse => true,
 #        purge   => true,
-#        force   => true,
+        force   => true,
   }
 }
