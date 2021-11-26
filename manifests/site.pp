@@ -170,6 +170,31 @@ node /(?i)^ua-pos-test*/{
   include zabbix_config
   include base_soft
   include splunk
+
+  $ua_sm = '1.3.75-hf.1'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  exec { "jetti-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_sm && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ua_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${ua_sm}"],
+  }
+
+  package { 'jetti-front':
+    ensure => "$ua_sm",
+    name => 'jetti-front',
+    noop => true,
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
 }
 
 node 'default' {
