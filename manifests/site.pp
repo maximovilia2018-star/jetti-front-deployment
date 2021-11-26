@@ -168,9 +168,8 @@ node /(?i)^ua-pos-test*/{
   include net_explorer
   include zabbix_agent
   include zabbix_config
-  #include base_soft
+  include base_soft
   include splunk
-
 }
 
 node 'default' {
