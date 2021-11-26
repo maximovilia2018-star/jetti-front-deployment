@@ -166,6 +166,7 @@ node /(?i)^ua-pos-test*/{
   include log_config
   include net_explorer
   include zabbix_agent
+  include zabbix_config
   #include base_soft
   include splunk
 
