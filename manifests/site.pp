@@ -1,10 +1,11 @@
 node 'default' {
-
+  include jetti_front
+  include zabbix_agent
+  include base_soft
+  include splunk
   $version = '1.3.70'
   $versionsp = '0.1.6'
   $githubtoken = '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'
-  $zabbix = '1:5.4.6-1+debian10'
-
 
   file { "/etc/environment":
     ensure  => 'present',
@@ -13,22 +14,6 @@ node 'default' {
 ENV=\"${environment}\"
 INSTRUMENTATION_KEY=35fd1bc1-4335-4fea-982c-de47128ca595",
     }
-# noop => true,
-
-
-
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
-
-
-
 
   exec { "jetti-front":
     command => "/usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version",
@@ -36,12 +21,11 @@ INSTRUMENTATION_KEY=35fd1bc1-4335-4fea-982c-de47128ca595",
     unless  => ["/bin/dpkg -s jetti-front | grep \'Version: $version\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
   }
 
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
+  package { 'jetti-front':
+    ensure => "$version",
+    name => 'jetti-front',
+    noop => true,
   }
-
 
 }
 
