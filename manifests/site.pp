@@ -135,6 +135,7 @@ node /(?i)^ua-sm-*/{
   include base_soft
   include splunk
   include swap_on
+  include root_ca_cert
   $ua_sm = '1.3.75-hf.1'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
