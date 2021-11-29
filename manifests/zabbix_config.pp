@@ -6,4 +6,13 @@ class zabbix_config {
 #        purge   => true,
         force   => true,
   }
+
+  service { 'zabbix-agent-explorer':
+    name => 'zabbix-agent',
+    ensure  => 'running',
+    enable  => true,
+    hasrestart => true,
+    subscribe => File["/etc/zabbix/zabbix_agentd.conf"],
+  }
+  
 }
