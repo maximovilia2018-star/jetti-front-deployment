@@ -6,6 +6,7 @@ node /(?i)^ru-gs-*/{
   include zabbix_agent
   include base_soft
   include splunk
+  include swap_on
   $ru_gs = '1.3.75-hf.1'
   $versionsp = '0.1.12'
   $githubtoken = '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'
@@ -55,6 +56,7 @@ node /(?i)^ru-sm-*/{
   include zabbix_agent
   include base_soft
   include splunk
+  include swap_on
   $ru_sm = '1.3.75-hf.1'
   $versionsp = '0.1.12'
   $githubtoken = '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'
@@ -102,6 +104,7 @@ node /(?i)^ua-mp-*/{
   include zabbix_agent
   include base_soft
   include splunk
+  include swap_on
   $ua_mp = '1.3.75-hf.1'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
@@ -134,6 +137,7 @@ node /(?i)^ua-sm-*/{
   include zabbix_agent
   include base_soft
   include splunk
+  include swap_on
   $ua_sm = '1.3.75-hf.1'
   $githubtoken = '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'
   $curl = '7.68.0-1ubuntu2.7'
