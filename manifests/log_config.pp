@@ -21,4 +21,14 @@ class log_config {
 }"
  ,
   }
+
+#  cron { 'logrotate':
+#    command => '/usr/sbin/logrotate',
+#    ensure  => 'absent', 
+#    ensure  => 'present', 
+#    user    => 'root',
+#    hour    => 1,
+#    minute  => 3,
+#  }
+
 }
