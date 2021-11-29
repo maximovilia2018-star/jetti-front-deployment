@@ -162,6 +162,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-pos-test*/{
+  include swap_on
   include jetti_front
   include pip_requirements
   include log_config
