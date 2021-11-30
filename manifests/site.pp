@@ -3,7 +3,7 @@ node /(?i)^ru-gs-*/{
   include net_explorer
   include jetti_front
   include jetti_front_fiscal_spooler
-  include zabbix_agent
+  include zabbix
   include base_soft
   include splunk
   include swap_on
@@ -54,7 +54,7 @@ node /(?i)^ru-sm-*/{
   include net_explorer
   include jetti_front
   include jetti_front_fiscal_spooler
-  include zabbix_agent
+  include zabbix
   include base_soft
   include splunk
   include swap_on
@@ -62,7 +62,7 @@ node /(?i)^ru-sm-*/{
   $ru_sm = '1.3.75-hf.1'
   $versionsp = '0.1.12'
   $githubtoken = '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'
-  $curl = '7.68.0-1ubuntu2.7'
+
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
@@ -103,14 +103,13 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 node /(?i)^ua-mp-*/{
   include jetti_front
-  include zabbix_agent
+  include zabbix
   include base_soft
   include splunk
   include swap_on
   include root_ca_cert
   $ua_mp = '1.3.75-hf.1'
   $githubtoken = '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'
-  $curl = '7.68.0-1ubuntu2.7'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   exec { "jetti-front":
@@ -137,7 +136,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 node /(?i)^ua-sm-*/{
   include jetti_front
-  include zabbix_agent
+  include zabbix
   include base_soft
   include splunk
   include swap_on
@@ -168,6 +167,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
 }
+
 
 node 'default' {
 

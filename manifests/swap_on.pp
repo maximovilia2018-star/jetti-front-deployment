@@ -10,13 +10,13 @@ class swap_on(
   exec { 'Attach swap file':
     command => "/sbin/mkswap ${swapfile} && /sbin/swapon ${swapfile}",
     require => Exec['Create swap file'],
-    unless  => "/sbin/swapon -s | grep ${swapfile}",
-  }
-
-  exec { 'Add swap in fstab':
+    unless  => "/sbin/swapon -s | grep ${swapfile}",     
+  }                                                      
+                                                         
+  exec { 'Add swap in fstab':                            
     command => "/usr/bin/echo ${swapfile}  none swap sw 0 0 >> /etc/fstab",
-    require => Exec['Create swap file'],
-    unless  => "/usr/bin/grep ${swapfile} /etc/fstab",
+    require => Exec['Create swap file'],                 
+    unless  => "/usr/bin/grep ${swapfile} /etc/fstab",   
   }
-
+  
 }
