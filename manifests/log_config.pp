@@ -22,6 +22,16 @@ class log_config {
  ,
   }
 
+  exec { 'Check fptr10 home properties':
+    command => "/usr/bin/sed -i \'s/INFO/ERROR/g\' /home/bit/.atol/drivers10/fptr10_log.properties",
+    onlyif  => "/usr/bin/grep INFO /home/bit/.atol/drivers10/fptr10_log.properties",
+  }
+
+  exec { 'Check fptr10 lib properties':
+    command => "/usr/bin/sed -i \'s/INFO/ERROR/g\' /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
+    onlyif  => "/usr/bin/grep INFO /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
+  }
+
 #  cron { 'logrotate':
 #    command => '/usr/sbin/logrotate',
 #    ensure  => 'absent', 

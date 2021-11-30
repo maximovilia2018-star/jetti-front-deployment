@@ -166,7 +166,6 @@ node /(?i)^ua-pos-test*/{
   include root_ca_cert
   include base_soft
   include pip_requirements
-#  include net_explorer
   include log_config
   include jetti_front
   include jetti_front_fiscal_spooler
