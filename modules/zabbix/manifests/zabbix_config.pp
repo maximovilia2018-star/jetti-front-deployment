@@ -1,4 +1,4 @@
-class zabbix_config {
+class zabbix::zabbix_config {
   file { '/etc/zabbix':
         ensure  => directory,
         source  => 'puppet:///modules/zabbix',

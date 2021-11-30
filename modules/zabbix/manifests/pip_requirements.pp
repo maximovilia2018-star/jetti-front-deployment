@@ -1,4 +1,4 @@
-class pip_requirements {
+class zabbix::pip_requirements {
   package { 'python3-pip':
    name => 'python3-pip',
   }
