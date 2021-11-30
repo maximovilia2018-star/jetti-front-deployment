@@ -1,9 +1,9 @@
 
 node /(?i)^ru-gs-*/{
-  include net_explorer
   include jetti_front
   include jetti_front_fiscal_spooler
   include zabbix
+  include log_config
   include base_soft
   include splunk
   include swap_on
@@ -51,10 +51,10 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ru-sm-*/{
-  include net_explorer
   include jetti_front
   include jetti_front_fiscal_spooler
   include zabbix
+  include log_config
   include base_soft
   include splunk
   include swap_on
@@ -104,6 +104,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 node /(?i)^ua-mp-*/{
   include jetti_front
   include zabbix
+  include log_config
   include base_soft
   include splunk
   include swap_on
@@ -137,6 +138,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 node /(?i)^ua-sm-*/{
   include jetti_front
   include zabbix
+  include log_config
   include base_soft
   include splunk
   include swap_on
