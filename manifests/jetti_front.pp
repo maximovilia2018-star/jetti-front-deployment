@@ -38,7 +38,11 @@ Terminal=false',
       posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
       psname=$(hostname)
       VER=$1
-      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=development&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
+<<<<<<< HEAD
+      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=staging&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
+=======
+      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=staging&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
+>>>>>>> 70654852a1c17900c4f3a72ea0ddbfb612e2b9cc
       if [ $status = "false" ]; then
         apt-get install --download-only -y jetti-front=$VER
         exit 0
