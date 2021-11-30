@@ -1,12 +1,10 @@
 
 node /(?i)^ru-gs-*/{
-#  include pip_requirements
   include base_soft
-  include log_config
-#  include net_explorer
+  include swap_on
+  include root_ca_cert
   include jetti_front
   include jetti_front_fiscal_spooler
-#  include zabbix_agent
   include zabbix
   include splunk
   $ru_gs = '1.3.75-hf.1'
@@ -52,12 +50,10 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 node /(?i)^ru-sm-*/{
   include base_soft
-  include log_config
-#  include pip_requirements
-#  include net_explorer
+  include swap_on
+  include root_ca_cert
   include jetti_front
   include jetti_front_fiscal_spooler
-#  include zabbix_agent
   include zabbix
   include splunk
   $ru_sm = '1.3.75-hf.1'
@@ -103,6 +99,8 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 node /(?i)^ua-mp-*/{
   include base_soft
+  include swap_on
+  include root_ca_cert
   include jetti_front
   include zabbix
   include splunk
@@ -133,9 +131,11 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-sm-*/{
+  include base_soft
+  include swap_on
+  include root_ca_cert
   include jetti_front
   include zabbix
-  include base_soft
   include splunk
   $ua_sm = '1.3.75-hf.1'
   $githubtoken = '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'
@@ -163,16 +163,14 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 }
 
+
 node /(?i)^ua-pos-test*/{
   include swap_on
-  include root_ca_cert
   include base_soft
-#  include pip_requirements
+  include root_ca_cert
   include log_config
   include jetti_front
   include jetti_front_fiscal_spooler
-#  include zabbix_agent
-#  include zabbix_config
   include zabbix
   include splunk
 
@@ -218,6 +216,5 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node 'default' {
-
 
 }
