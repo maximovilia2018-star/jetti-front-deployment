@@ -1,10 +1,11 @@
 
 node /(?i)^ru-gs-*/{
-  include base_soft
-  include swap_on
-  include root_ca_cert
   include jetti_front
   include jetti_front_fiscal_spooler
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
   include zabbix
   include splunk
   $ru_gs = '1.3.75-hf.1'
@@ -49,11 +50,12 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ru-sm-*/{
-  include base_soft
-  include swap_on
-  include root_ca_cert
   include jetti_front
   include jetti_front_fiscal_spooler
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
   include zabbix
   include splunk
   $ru_sm = '1.3.75-hf.1'
@@ -98,11 +100,11 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-mp-*/{
-  include log_config
-  include base_soft
-  include swap_on
-  include root_ca_cert
   include jetti_front
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
   include zabbix
   include splunk
   $ua_mp = '1.3.75-hf.1'
@@ -132,11 +134,11 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-sm-*/{
-  include log_config
-  include base_soft
-  include swap_on
-  include root_ca_cert
   include jetti_front
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
   include zabbix
   include splunk
   $ua_sm = '1.3.75-hf.1'
