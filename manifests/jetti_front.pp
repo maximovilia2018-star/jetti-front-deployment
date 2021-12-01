@@ -31,25 +31,25 @@ Terminal=false',
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
       replace => 'yes',
-      content => '#!/bin/bash
+      content => "#!/bin/bash
   FILE=/home/bit/.config/jetti-front/config.json
-  if test -f "$FILE"; then
-      echo "$FILE exists."
-      posid=$(jq -r ".posId" /home/bit/.config/jetti-front/config.json)
-      psname=$(hostname)
-      VER=$1
-      status=$(curl --location --request GET "https://version-provider.x100-apps.com/api/getversion?environment=staging&posid=$posid&psname=$psname" | jq -r ".readytoupdate")
-      if [ $status = "false" ]; then
-        apt-get install --download-only -y jetti-front=$VER
+  if test -f \"\$FILE\"; then
+      echo \"\$FILE exists.\"
+      posid=\$(jq -r \".posId\" /home/bit/.config/jetti-front/config.json)
+      psname=\$(hostname)
+      VER=\$1
+      status=\$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
+      if [ \$status = \"false\" ]; then
+        apt-get install --download-only -y jetti-front=\$VER
         exit 0
       else
-        echo "We can update"
+        echo \"We can update\"
         exit 1
       fi
       exit 1
   fi
-  exit 1',
+  exit 1",
       mode    => '0755',
-    }
+   }
 
 }
