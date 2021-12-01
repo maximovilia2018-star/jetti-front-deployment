@@ -18,5 +18,4 @@ class swap_on(
     require => Exec['Create swap file'],                 
     unless  => "/usr/bin/grep ${swapfile} /etc/fstab",   
   }
-  
 }

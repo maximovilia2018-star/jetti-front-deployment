@@ -98,6 +98,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-mp-*/{
+  include log_config
   include base_soft
   include swap_on
   include root_ca_cert
@@ -131,6 +132,7 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-sm-*/{
+  include log_config
   include base_soft
   include swap_on
   include root_ca_cert
