@@ -9,6 +9,12 @@ class zabbix::zabbix_agent {
     name => 'zabbix-agent',
   }
 
+  exec { 'remove zabbix-release.deb':
+    path    => [ '/usr/bin', '/bin' ],
+    command => "rm -f zabbix-release_5.4-1+debian10_all.*",
+    onlyif  => ["ls -l zabbix-release_5.4-1+debian10_all.*"],
+  }
+
   file { '/var/log/zabbix':
     ensure => 'directory',
     owner => "zabbix",
