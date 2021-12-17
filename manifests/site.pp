@@ -219,6 +219,40 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 }
 
+node /(?i)^by-sm-*/{
+  include jetti_front
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
+  include zabbix
+  include splunk
+  $by_sm = '1.3.76-hotfix.1'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  exec { "jetti-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_mp && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $by_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${by_sm}"],
+  }
+
+  package { 'jetti-front':
+    ensure => "$by_sm",
+    name => 'jetti-front',
+    noop => true,
+  }
+
+  file { "/etc/environment":
+    ensure  => 'present',
+    replace => 'yes',
+    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+ENV=\"${environment}\"
+INSTRUMENTATION_KEY=${$applicationinsightskey}",
+  }
+
+}
+
 node 'default' {
 
 }
