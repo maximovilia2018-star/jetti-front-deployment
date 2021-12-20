@@ -1,4 +1,21 @@
-class jetti_front_fiscal_spooler {
+class jetti_front_fiscal_spooler (
+    $version,
+    $githubtoken,
+) {
+
+  package { 'jetti-front-fiscal-spooler':
+    ensure => "$version",
+    name => 'jetti-front-fiscal-spooler',
+  }
+
+  exec { 'config':
+    notify  => Service['jetti-front-fiscal-spooler'],
+    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
+    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
+    path    => [ '/usr/bin', '/bin' ],
+    provider => 'shell',
+    require => Package['jetti-front-fiscal-spooler'],
+  }
 
   exec { 'nodesource':
     command => "wget -O - https://deb.nodesource.com/setup_14.x | bash -",
