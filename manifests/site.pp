@@ -84,14 +84,6 @@ node /(?i)^ua-mp-*/{
   include zabbix
   include splunk
 
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
-  }
-
 }
 
 node /(?i)^ua-sm-*/{
