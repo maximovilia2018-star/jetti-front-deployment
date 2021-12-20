@@ -1,4 +1,3 @@
-
 node /(?i)^ru-gs-*/{
   $ru_gs = '1.3.76~rc.9'
   $versionsp = '0.1.12'
