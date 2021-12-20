@@ -9,27 +9,16 @@ node /(?i)^ru-gs-*/{
     version => "$ru_gs",
     appinsightskey => "$applicationinsightskey",
   }
-  include jetti_front_fiscal_spooler
+  class {jetti_front_fiscal_spooler:
+    version => "$versionsp",
+    githubtoken => "$githubtoken",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
 
 }
 
@@ -43,28 +32,16 @@ node /(?i)^ru-sm-*/{
     version => "$ru_sm",
     appinsightskey => "$applicationinsightskey",
   }
-  include jetti_front_fiscal_spooler
+  class {jetti_front_fiscal_spooler:
+    version => "$versionsp",
+    githubtoken => "$githubtoken",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
 
 }
 
@@ -114,27 +91,16 @@ node /(?i)^ua-pos-test*/{
     version => "$ru_gs",
     appinsightskey => "$applicationinsightskey",
   }
+  class {jetti_front_fiscal_spooler:
+    version => "$versionsp",
+    githubtoken => "$githubtoken",
+  }
   include swap_on
   include base_soft
   include root_ca_cert
   include log_config
-  include jetti_front_fiscal_spooler
   include zabbix
   include splunk
-
-  package { 'jetti-front-fiscal-spooler':
-    ensure => "$versionsp",
-    name => 'jetti-front-fiscal-spooler',
-  }
-
-  exec { 'config':
-    notify  => Service['jetti-front-fiscal-spooler'],
-    command => "cp /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml",
-    onlyif  => [ "if [ $(curl -o /dev/null -s -w \"%{http_code}\n\" https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml) = \"200\" ]; then exit 0 ; else exit 1; fi; ", "curl -s https://$githubtoken@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/$hostname/config.production.yaml > /tmp/config.production.yaml && ! cmp -s /tmp/config.production.yaml /opt/jetti-front-fiscal-spooler/config.production.yaml" ],
-    path    => [ '/usr/bin', '/bin' ],
-    provider => 'shell',
-    require => Package['jetti-front-fiscal-spooler'],
-  }
 
 }
 
