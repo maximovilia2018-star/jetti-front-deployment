@@ -1,6 +1,13 @@
 
 node /(?i)^ru-gs-*/{
-  include jetti_front
+  $ru_gs = '1.3.77~rc.7'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  include {jetti_front:
+    version => "$ru_gs",
+  }
   include jetti_front_fiscal_spooler
   include base_soft
   include log_config
@@ -8,22 +15,6 @@ node /(?i)^ru-gs-*/{
   include swap_on
   include zabbix
   include splunk
-  $ru_gs = '1.3.77~rc.7'
-  $versionsp = '0.1.12'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ru_gs$\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ru_gs",
-    name => 'jetti-front',
-    noop => true,
-  }
 
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
@@ -50,7 +41,14 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ru-sm-*/{
-  include jetti_front
+  $ru_sm = '1.3.76~rc.9'
+  $versionsp = '0.1.12'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  include {jetti_front:
+    version => "$ru_sm",
+  }
   include jetti_front_fiscal_spooler
   include base_soft
   include log_config
@@ -58,22 +56,7 @@ node /(?i)^ru-sm-*/{
   include swap_on
   include zabbix
   include splunk
-  $ru_sm = '1.3.76~rc.9'
-  $versionsp = '0.1.12'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_sm && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ru_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${ru_sm}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ru_sm",
-    name => 'jetti-front',
-    noop => true,
-  }
 
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
@@ -100,28 +83,19 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-mp-*/{
-  include jetti_front
+  $ua_mp = '1.3.77~rc.7'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  include {jetti_front:
+    version => "$ua_mp",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  $ua_mp = '1.3.77~rc.7'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_mp && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ua_mp$\'", "/bin/bash /opt/precheck_before_update.sh ${ua_mp}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ua_mp",
-    name => 'jetti-front',
-    noop => true,
-  }
 
   file { "/etc/environment":
     ensure  => 'present',
@@ -134,28 +108,19 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^ua-sm-*/{
-  include jetti_front
+  $ua_sm = '1.3.76-hotfix.1'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  include {jetti_front:
+    version => "$ua_sm",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  $ua_sm = '1.3.76-hotfix.1'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ua_sm && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ua_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${ua_sm}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$ua_sm",
-    name => 'jetti-front',
-    noop => true,
-  }
 
   file { "/etc/environment":
     ensure  => 'present',
@@ -169,31 +134,21 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 
 
 node /(?i)^ua-pos-test*/{
-  include swap_on
-  include base_soft
-  include root_ca_cert
-  include log_config
-  include jetti_front
-  include jetti_front_fiscal_spooler
-  include zabbix
-  include splunk
-
   $ru_gs = '1.3.77~rc.7'
   $versionsp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$ru_gs && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $ru_gs$\'", "/bin/bash /opt/precheck_before_update.sh ${ru_gs}"],
+  include {jetti_front:
+    version => "$ru_gs",
   }
-
-  package { 'jetti-front':
-    ensure => "$ru_gs",
-    name => 'jetti-front',
-    noop => true,
-  }
+  include swap_on
+  include base_soft
+  include root_ca_cert
+  include log_config
+  include jetti_front_fiscal_spooler
+  include zabbix
+  include splunk
 
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
@@ -220,28 +175,19 @@ INSTRUMENTATION_KEY=${$applicationinsightskey}",
 }
 
 node /(?i)^by-sm-*/{
-  include jetti_front
+  $by_sm = '1.3.76-hotfix.1'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  include {jetti_front:
+    version => "$by_sm",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  $by_sm = '1.3.76-hotfix.1'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$by_sm && reboot" ,
-    user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $by_sm$\'", "/bin/bash /opt/precheck_before_update.sh ${by_sm}"],
-  }
-
-  package { 'jetti-front':
-    ensure => "$by_sm",
-    name => 'jetti-front',
-    noop => true,
-  }
 
   file { "/etc/environment":
     ensure  => 'present',

@@ -1,4 +1,16 @@
-class jetti_front {
+class jetti_front ($version){
+
+  exec { "jetti-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $version$\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
+  }
+
+  package { 'jetti-front':
+    ensure => "$version",
+    name => 'jetti-front',
+    noop => true,
+  }
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
