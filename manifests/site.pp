@@ -75,6 +75,7 @@ node /(?i)^ua-mp-*/{
 
   class {jetti_front:
     version => "$ua_mp",
+    appinsightskey => "$applicationinsightskey",
   }
   include base_soft
   include log_config
