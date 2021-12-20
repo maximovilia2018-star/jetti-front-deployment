@@ -20,8 +20,6 @@ node /(?i)^ru-gs-*/{
   include zabbix
   include splunk
 
-  }
-
 }
 
 node /(?i)^ru-sm-*/{
