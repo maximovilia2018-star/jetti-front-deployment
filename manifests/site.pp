@@ -7,6 +7,7 @@ node /(?i)^ru-gs-*/{
 
   class {jetti_front:
     version => "$ru_gs",
+    appinsightskey => "$applicationinsightskey",
   }
   include jetti_front_fiscal_spooler
   include base_soft
@@ -19,14 +20,6 @@ node /(?i)^ru-gs-*/{
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
     name => 'jetti-front-fiscal-spooler',
-  }
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
   exec { 'config':
@@ -48,6 +41,7 @@ node /(?i)^ru-sm-*/{
 
   class {jetti_front:
     version => "$ru_sm",
+    appinsightskey => "$applicationinsightskey",
   }
   include jetti_front_fiscal_spooler
   include base_soft
@@ -70,14 +64,6 @@ node /(?i)^ru-sm-*/{
     path    => [ '/usr/bin', '/bin' ],
     provider => 'shell',
     require => Package['jetti-front-fiscal-spooler'],
-  }
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
 }
@@ -114,6 +100,7 @@ node /(?i)^ua-sm-*/{
 
   class {jetti_front:
     version => "$ua_sm",
+    appinsightskey => "$applicationinsightskey",
   }
   include base_soft
   include log_config
@@ -121,14 +108,6 @@ node /(?i)^ua-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
-  }
 
 }
 
@@ -140,6 +119,7 @@ node /(?i)^ua-pos-test*/{
 
   class {jetti_front:
     version => "$ru_gs",
+    appinsightskey => "$applicationinsightskey",
   }
   include swap_on
   include base_soft
@@ -152,14 +132,6 @@ node /(?i)^ua-pos-test*/{
   package { 'jetti-front-fiscal-spooler':
     ensure => "$versionsp",
     name => 'jetti-front-fiscal-spooler',
-  }
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
   }
 
   exec { 'config':
@@ -180,6 +152,7 @@ node /(?i)^by-sm-*/{
 
   class {jetti_front:
     version => "$by_sm",
+    appinsightskey => "$applicationinsightskey",
   }
   include base_soft
   include log_config
@@ -187,14 +160,6 @@ node /(?i)^by-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$applicationinsightskey}",
-  }
 
 }
 
