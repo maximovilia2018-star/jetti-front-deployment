@@ -1,4 +1,3 @@
-
 node /(?i)^ru-gs-*/{
   $ru_gs_fr = '1.3.77~rc.7'
   $ru_gs_sp = '0.1.12'
