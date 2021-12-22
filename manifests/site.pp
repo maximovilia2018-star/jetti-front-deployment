@@ -1,16 +1,16 @@
 
 node /(?i)^ru-gs-*/{
-  $ru_gs = '1.3.77~rc.7'
-  $sp_ru_gs = '0.1.12'
+  $ru_gs_fr = '1.3.77~rc.7'
+  $ru_gs_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$ru_gs",
+    version => "$ru_gs_fr",
     appinsightskey => "$applicationinsightskey",
   }
   class {jetti_front_fiscal_spooler:
-    version => "$sp_ru_gs",
+    version => "$ru_gs_sp",
     githubtoken => "$githubtoken",
   }
   include base_soft
@@ -23,17 +23,17 @@ node /(?i)^ru-gs-*/{
 }
 
 node /(?i)^ru-sm-*/{
-  $ru_sm = '1.3.77~rc.7'
-  $sp_ru_sm = '0.1.12'
+  $ru_sm_fr = '1.3.77~rc.7'
+  $ru_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$ru_sm",
+    version => "$ru_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
   class {jetti_front_fiscal_spooler:
-    version => "$sp_ru_sm",
+    version => "$ru_sm_sp",
     githubtoken => "$githubtoken",
   }
   include base_soft
@@ -46,13 +46,13 @@ node /(?i)^ru-sm-*/{
 }
 
 node /(?i)^ua-mp-*/{
-  $ua_mp = '1.3.77~rc.7'
-  $sp_ua_mp = '0.1.12'
+  $ua_mp_fr = '1.3.77~rc.7'
+  $ua_mp_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$ua_mp",
+    version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
   include base_soft
@@ -65,13 +65,13 @@ node /(?i)^ua-mp-*/{
 }
 
 node /(?i)^ua-sm-*/{
-  $ua_sm = '1.3.77~rc.7'
-  $sp_ua_sm = '0.1.12'
+  $ua_sm_fr = '1.3.77~rc.7'
+  $ua_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$ua_sm",
+    version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
   include base_soft
@@ -84,17 +84,17 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
-  $ru_gs = '1.3.77~rc.7'
-  $sp_ru_gs = '0.1.12'
+  $ru_gs_fr = '1.3.77~rc.7'
+  $ru_gs_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$ru_gs",
+    version => "$ru_gs_fr",
     appinsightskey => "$applicationinsightskey",
   }
   class {jetti_front_fiscal_spooler:
-    version => "$sp_ru_gs",
+    version => "$ru_gs_sp",
     githubtoken => "$githubtoken",
   }
   include swap_on
@@ -107,13 +107,13 @@ node /(?i)^ua-pos-test*/{
 }
 
 node /(?i)^by-sm-*/{
-  $by_sm = '1.3.77~rc.7'
-  $sp_by_sm = '0.1.12'
+  $by_sm_fr = '1.3.77~rc.7'
+  $by_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
-    version => "$by_sm",
+    version => "$by_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
   include base_soft
