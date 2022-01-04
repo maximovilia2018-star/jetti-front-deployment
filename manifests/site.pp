@@ -143,6 +143,44 @@ node /(?i)^by-sm-*/{
 
 }
 
+node /(?i)^pl-sm-*/{
+  $pl_sm_fr = '1.3.76-hotfix.3'
+  $pl_sm_sp = '0.1.12'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  class {jetti_front:
+    version => "$pl_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
+  include zabbix
+  include splunk
+
+}
+
+node /(?i)^ae-sm-*/{
+  $ae_sm_fr = '1.3.76-hotfix.3'
+  $ae_sm_sp = '0.1.12'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  class {jetti_front:
+    version => "$ae_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
+  include zabbix
+  include splunk
+
+}
+
 node 'default' {
 
 }
