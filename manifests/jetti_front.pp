@@ -28,6 +28,17 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  file { '/opt/intall-front.sh':
+    ensure  => 'present',
+    mode    => '0755',
+    replace => 'yes',
+    content => "#!/bin/bash
+  VER=\$1
+  /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=\$VER && reboot
+    ",
+   }
+
+
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
       replace => 'yes',
