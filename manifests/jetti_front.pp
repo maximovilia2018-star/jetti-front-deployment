@@ -42,9 +42,9 @@ Terminal=false',
       config_file_replace => false,
    }
 
-   sudo::conf { 'joe':
+   sudo::conf { 'bit':
       priority => 60,
-      source   => 'puppet:///files/etc/sudoers.d/front/joe',
+      source   => 'puppet:///files/etc/sudoers.d/users/bit',
   }
 
    # sudo::conf { 'bit':
