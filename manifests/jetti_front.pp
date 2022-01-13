@@ -66,9 +66,7 @@ bit   ALL= NOPASSWD: /opt/intall-front.sh
 %admin ALL=(ALL) ALL
 
 # Allow members of group sudo to execute any command
-%sudo	ALL=(ALL:ALL) ALL
-
-     ',
+%sudo	ALL=(ALL:ALL) ALL',
     }
 
 
