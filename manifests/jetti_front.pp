@@ -47,11 +47,6 @@ Terminal=false',
        content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
   }
 
-   # sudo::conf { 'bit':
-   #    priority => 10,
-   #    content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
-   # }
-
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
       replace => 'yes',
