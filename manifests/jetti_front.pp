@@ -42,6 +42,11 @@ Terminal=false',
       config_file_replace => false,
    }
 
+   sudo::conf { 'joe':
+      priority => 60,
+      source   => 'puppet:///files/etc/sudoers.d/front/joe',
+  }
+
    # sudo::conf { 'bit':
    #    priority => 10,
    #    content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
