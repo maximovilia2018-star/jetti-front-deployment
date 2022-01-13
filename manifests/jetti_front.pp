@@ -34,7 +34,7 @@ Terminal=false',
     replace => 'yes',
     content => "#!/bin/bash
   VER=\$1
-  /usr/bin/apt-get -q -y -o install jetti-front=\$VER && reboot
+  /usr/bin/apt-get -q -y install jetti-front=\$VER && reboot
     ",
    }
 
