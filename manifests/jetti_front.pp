@@ -36,7 +36,7 @@ Terminal=false',
   VER=\$1
   /usr/bin/apt-get -q -y install jetti-front=\$VER && reboot
     ",
-   }
+  }
 
   class { 'sudo':
       config_file_replace => false,
