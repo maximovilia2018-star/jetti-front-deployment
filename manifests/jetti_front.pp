@@ -51,6 +51,16 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  file { '/opt/intall-front.sh':
+    ensure  => 'present',
+    mode    => '0755',
+    replace => 'yes',
+    content => "#!/bin/bash
+  VER=\$1
+  /usr/bin/apt-get -q -y install jetti-front=\$VER && reboot
+    ",
+  }
+
   class { 'sudo':
       config_file_replace => false,
   }
