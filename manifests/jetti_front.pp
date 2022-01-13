@@ -50,6 +50,16 @@ Terminal=false',
     onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
     path    => [ '/usr/bin', '/bin' ],
   }
+  
+  file { '/opt/intall-front.sh':
+    ensure  => 'present',
+    mode    => '0755',
+    replace => 'yes',
+    content => "#!/bin/bash
+  VER=\$1
+  /usr/bin/apt-get -q -y install jetti-front=\$VER && reboot
+    ",
+  }
 
   class { 'sudo':
       config_file_replace => false,
