@@ -38,11 +38,8 @@ Terminal=false',
     ",
    }
 
-   class { 'sudo':
-     purge               => false,
-     config_file_replace => false,
-   }
-
+   class { 'sudo': }
+   
    sudo::conf { 'bit':
       priority => 10,
       content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
