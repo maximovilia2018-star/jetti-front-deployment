@@ -38,12 +38,14 @@ Terminal=false',
     ",
    }
 
-   class { 'sudo': }
-   
-   sudo::conf { 'bit':
-      priority => 10,
-      content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
+   class { 'sudo':
+      config_file_replace => false,
    }
+
+   # sudo::conf { 'bit':
+   #    priority => 10,
+   #    content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
+   # }
 
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
