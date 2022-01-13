@@ -34,7 +34,7 @@ Terminal=false',
     replace => 'yes',
     content => "#!/bin/bash
   VER=\$1
-  /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=\$VER && reboot
+  /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold install jetti-front=\$VER && reboot
     ",
    }
 
