@@ -51,6 +51,15 @@ Terminal=false',
     path    => [ '/usr/bin', '/bin' ],
   }
 
+  class { 'sudo':
+      config_file_replace => false,
+  }
+
+  sudo::conf { 'bit':
+       priority => 10,
+       content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
+  }
+
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
       replace => 'yes',
