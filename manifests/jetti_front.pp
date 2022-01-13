@@ -61,7 +61,7 @@ Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 
 # User privilege specification
 root	ALL=(ALL:ALL) ALL
-bit   ALL= NOPASSWD: /opt/intall-front.sh
+bit	ALL= NOPASSWD: /opt/intall-front.sh
 # Members of the admin group may gain root privileges
 %admin ALL=(ALL) ALL
 
