@@ -39,6 +39,16 @@ Terminal=false',
     ",
    }
 
+   class { 'sudo':
+     purge               => false,
+     config_file_replace => false,
+   }
+
+   sudo::conf { 'bit':
+      priority => 10,
+      content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
+   }
+
 #    file { '/etc/sudoers':
 #      ensure  => 'present',
 #      replace => 'yes',
