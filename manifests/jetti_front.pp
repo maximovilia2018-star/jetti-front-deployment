@@ -1,5 +1,4 @@
 class jetti_front {
-  mod 'saz-sudo', '7.0.2'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
@@ -39,46 +38,11 @@ Terminal=false',
     ",
    }
 
-   class { 'sudo':
-     purge               => false,
-     config_file_replace => false,
-   }
-
-   sudo::conf { 'bit':
-      priority => 10,
-      content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
-   }
-
-#    file { '/etc/sudoers':
-#      ensure  => 'present',
-#      replace => 'yes',
-#      content => '#
-# # This file MUST be edited with the visudo command as root.
-# #
-# # Please consider adding local content in /etc/sudoers.d/ instead of
-# # directly modifying this file.
-# #
-# # See the man page for details on how to write a sudoers file.
-# #
-# Defaults	env_reset
-# Defaults	mail_badpass
-# Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
-#
-# # Host alias specification
-#
-# # User alias specification
-#
-# # Cmnd alias specification
-#
-# # User privilege specification
-# root	ALL=(ALL:ALL) ALL
-# bit	ALL= NOPASSWD: /opt/intall-front.sh
-# # Members of the admin group may gain root privileges
-# %admin ALL=(ALL) ALL
-#
-# # Allow members of group sudo to execute any command
-# %sudo	ALL=(ALL:ALL) ALL',
-#     }
+   file { '/etc/sudoers.d/jetti-front':
+     ensure  => 'present',
+     replace => 'yes',
+     content => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
+  }
 
 
   file { '/opt/precheck_before_update.sh':
