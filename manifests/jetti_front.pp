@@ -1,4 +1,5 @@
 class jetti_front {
+  mod 'saz-sudo', '7.0.2'
 
   file { '/etc/apt/sources.list.d/x100.list':
       ensure  => 'present',
