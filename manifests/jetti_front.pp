@@ -42,7 +42,7 @@ Terminal=false',
      ensure  => 'present',
      replace => 'yes',
      content => '#
-# This file MUST be edited with the 'visudo' command as root.
+# This file MUST be edited with the visudo command as root.
 #
 # Please consider adding local content in /etc/sudoers.d/ instead of
 # directly modifying this file.
