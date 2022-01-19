@@ -40,6 +40,10 @@ class jetti_front_fiscal_spooler (
     name => 'libfptr10-gui',
   }
 
+  package { 'libfptr10':
+    name => 'libfptr10',
+  }
+
   package { 'fptr10-test-util':
     name => 'fptr10-test-util',
   }
