@@ -60,7 +60,7 @@ node /(?i)^ua-mp-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include fiscal_ua
 }
 
 node /(?i)^ua-fm-*/{
@@ -79,7 +79,7 @@ node /(?i)^ua-fm-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include fiscal_ua
 }
 
 node /(?i)^ua-sm-*/{
@@ -98,7 +98,7 @@ node /(?i)^ua-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include fiscal_ua
 }
 
 node /(?i)^ua-pos-test*/{
