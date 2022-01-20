@@ -1,5 +1,5 @@
 node /(?i)^ru-gs-*/{
-  $ru_gs_fr = '1.3.78~rc.3'
+  $ru_gs_fr = '1.3.78~rc.8'
   $ru_gs_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -22,7 +22,7 @@ node /(?i)^ru-gs-*/{
 }
 
 node /(?i)^ru-sm-*/{
-  $ru_sm_fr = '1.3.78~rc.3'
+  $ru_sm_fr = '1.3.78~rc.8'
   $ru_sm_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -45,7 +45,7 @@ node /(?i)^ru-sm-*/{
 }
 
 node /(?i)^ua-mp-*/{
-  $ua_mp_fr = '1.3.78~rc.3'
+  $ua_mp_fr = '1.3.78~rc.8'
   $ua_mp_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -64,7 +64,7 @@ node /(?i)^ua-mp-*/{
 }
 
 node /(?i)^ua-fm-*/{
-  $ua_fm_fr = '1.3.78~rc.3'
+  $ua_fm_fr = '1.3.78~rc.8'
   $ua_fm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -83,7 +83,7 @@ node /(?i)^ua-fm-*/{
 }
 
 node /(?i)^ua-sm-*/{
-  $ua_sm_fr = '1.3.78~rc.3'
+  $ua_sm_fr = '1.3.78~rc.8'
   $ua_sm_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -102,7 +102,7 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
-  $ru_gs_fr = '1.3.78~rc.3'
+  $ru_gs_fr = '1.3.78~rc.8'
   $ru_gs_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -125,7 +125,7 @@ node /(?i)^ua-pos-test*/{
 }
 
 node /(?i)^by-sm-*/{
-  $by_sm_fr = '1.3.76-hotfix.3'
+  $by_sm_fr = '1.3.78~rc.8'
   $by_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -144,7 +144,7 @@ node /(?i)^by-sm-*/{
 }
 
 node /(?i)^pl-sm-*/{
-  $pl_sm_fr = '1.3.76-hotfix.3'
+  $pl_sm_fr = '1.3.78~rc.8'
   $pl_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -163,7 +163,7 @@ node /(?i)^pl-sm-*/{
 }
 
 node /(?i)^ae-sm-*/{
-  $ae_sm_fr = '1.3.76-hotfix.3'
+  $ae_sm_fr = '1.3.78~rc.8'
   $ae_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
