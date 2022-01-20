@@ -1,5 +1,5 @@
 node /(?i)^ru-gs-*/{
-  $ru_gs_fr = '1.3.78~rc.3'
+  $ru_gs_fr = '1.3.78~rc.8'
   $ru_gs_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -102,7 +102,7 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
-  $ru_gs_fr = '1.3.78~rc.3'
+  $ru_gs_fr = '1.3.78~rc.8'
   $ru_gs_sp = '0.1.13-alpha.6'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
