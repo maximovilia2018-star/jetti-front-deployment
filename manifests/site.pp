@@ -182,7 +182,7 @@ node /(?i)^by-gs-*/{
 }
 
 node /(?i)^pl-sm-*/{
-  $pl_sm_fr = '1.3.76-hotfix.3'
+  $pl_sm_fr = '1.3.78-hotfix.5'
   $pl_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
