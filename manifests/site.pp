@@ -64,7 +64,7 @@ node /(?i)^ua-mp-*/{
 }
 
 node /(?i)^ua-fm-*/{
-  $ua_fm_fr = '2.0.0~rc.7'
+  $ua_fm_fr = '2.0.0~rc.8'
   $ua_fm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
