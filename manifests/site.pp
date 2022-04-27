@@ -49,10 +49,14 @@ node /(?i)^ua-mp-*/{
   $ua_mp_sp = '0.1.13-rc.2'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  $checkbox = '1.1.35'
 
   class {jetti_front:
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
   }
   include base_soft
   include log_config
@@ -60,7 +64,6 @@ node /(?i)^ua-mp-*/{
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-fm-*/{
@@ -68,10 +71,14 @@ node /(?i)^ua-fm-*/{
   $ua_fm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  $checkbox = '1.1.35'
 
   class {jetti_front:
     version => "$ua_fm_fr",
     appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
   }
   include base_soft
   include log_config
@@ -79,7 +86,6 @@ node /(?i)^ua-fm-*/{
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-sm-*/{
@@ -87,10 +93,14 @@ node /(?i)^ua-sm-*/{
   $ua_sm_sp = '0.1.13-rc.2'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  $checkbox = '1.1.35'
 
   class {jetti_front:
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
   }
   include base_soft
   include log_config
@@ -98,7 +108,6 @@ node /(?i)^ua-sm-*/{
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-pos-test*/{

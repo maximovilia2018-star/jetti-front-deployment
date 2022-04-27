@@ -1,6 +1,8 @@
-class fiscal_ua {
+class fiscal_ua(
+    $versioncheckbox,
+) {
   package { 'checkbox-kasa':
-    ensure => "1.1.35",
+    ensure => "$versioncheckbox",
     name => 'checkbox-kasa',
   }
 
