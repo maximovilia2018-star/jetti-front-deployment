@@ -54,13 +54,15 @@ node /(?i)^ua-mp-*/{
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-fm-*/{
@@ -73,13 +75,15 @@ node /(?i)^ua-fm-*/{
     version => "$ua_fm_fr",
     appinsightskey => "$applicationinsightskey",
   }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-sm-*/{
@@ -92,13 +96,15 @@ node /(?i)^ua-sm-*/{
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include zabbix
   include splunk
-  include fiscal_ua
 }
 
 node /(?i)^ua-pos-test*/{
