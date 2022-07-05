@@ -228,6 +228,29 @@ node /(?i)^ae-sm-*/{
 
 }
 
+node /(?i)^kz-sm-*/{
+  $kz_sm_fr = '2.0.0-hotfix.8'
+  $kz_sm_sp = '0.1.13-rc.2'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
+  class {jetti_front:
+    version => "$kz_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {jetti_front_fiscal_spooler:
+    version => "$kz_sm_sp",
+    githubtoken => "$githubtoken",
+  }
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
+  include zabbix
+  include splunk
+
+}
+
 node 'default' {
 
 }
