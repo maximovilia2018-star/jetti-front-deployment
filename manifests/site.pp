@@ -112,7 +112,7 @@ node /(?i)^ua-pos-test*/{
 }
 
 node /(?i)^ae-bb-*/{
-  $ae_bb_fr = '2.0.1~rc.7'
+  $ae_bb_fr = '2.0.0-hotfix.27'
   $ae_bb_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
