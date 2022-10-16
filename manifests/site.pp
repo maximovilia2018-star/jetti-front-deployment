@@ -49,7 +49,7 @@ node /(?i)^ua-mp-*/{
   $ua_mp_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $checkbox = '1.1.40'
+  $checkbox = '1.1.50'
 
   class {jetti_front:
     version => "$ua_mp_fr",
