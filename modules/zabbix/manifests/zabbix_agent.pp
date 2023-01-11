@@ -28,7 +28,8 @@ class zabbix::zabbix_agent {
 LogFile=/var/log/zabbix/zabbix_agentd.log
 LogFileSize=100
 Server=127.0.0.1
-ServerActive=31.148.246.253:10049
+#ServerActive=31.148.246.253:10049
+ServerActive=zabbix5.x100group.com:10049
 Hostname=$hostname
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 TLSConnect=psk
