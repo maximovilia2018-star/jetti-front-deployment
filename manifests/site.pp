@@ -50,6 +50,7 @@ node /(?i)^ua-mp-*/{
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.1.40'
+  $tele_env = 'ua-mp'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -64,6 +65,7 @@ node /(?i)^ua-mp-*/{
   include swap_on
   include zabbix
   include splunk
+  include teleport
 }
 
 node /(?i)^ua-sm-*/{
