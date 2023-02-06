@@ -51,6 +51,7 @@ node /(?i)^ua-mp-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.1.40'
   $tele_env = 'ua-mp'
+  $tele_group = 'restoran'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -75,6 +76,7 @@ node /(?i)^ua-sm-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.1.40'
   $tele_env = 'ua-sm'
+  $tele_group = 'restoran'
 
   class {jetti_front:
     version => "$ua_sm_fr",
