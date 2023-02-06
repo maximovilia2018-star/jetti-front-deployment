@@ -49,6 +49,7 @@ ssh_service:
   enabled: \"yes\"
   labels:
     env: $tele_env
+    group: $tele_group
   commands:
   - name: hostname
     command: [hostname]
