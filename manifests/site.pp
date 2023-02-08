@@ -104,12 +104,11 @@ node /(?i)^ua-pos-test*/{
   $tele_group = 'tested'
 
   class {jetti_front:
-    version => "$ru_gs_fr",
+    version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
-    version => "$ru_gs_sp",
-    githubtoken => "$githubtoken",
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
   }
   include swap_on
   include base_soft
