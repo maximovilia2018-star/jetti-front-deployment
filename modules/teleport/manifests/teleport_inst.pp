@@ -9,14 +9,14 @@ class teleport::teleport_inst {
    file {'/etc/apt/sources.list.d/teleport.list':
       ensure => present,
       mode => '0640',
-      content => "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/ubuntu focal stable/v11\n",
+      content => "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/ubuntu focal stable/v12\n",
    }
 
   exec { "update-repository":
       path    => [ '/usr/bin', '/bin' ],
       command => "apt update || true" ,
       user    => 'root',
-      unless  => ["/bin/dpkg -s teleport | grep \'Version: \'"],
+      unless  => ["/bin/dpkg -s teleport | grep \'Version: 12\'"],
   }
 
   package { 'teleport':
