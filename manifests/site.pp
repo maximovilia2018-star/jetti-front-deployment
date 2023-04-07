@@ -191,6 +191,30 @@ node /(?i)^by-sm-*/{
 
 }
 
+node /(?i)^hu-sm-*/{
+  $hu_sm_fr = '2.0.0-hotfix.49'
+  $hu_sm_sp = '0.1.12'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  $zbx_srv = 'zabbix5.x100group.com:10049'
+
+  class {jetti_front:
+    version => "$hu_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {jetti_front_fiscal_spooler:
+    version => "$hu_sm_sp",
+    githubtoken => "$githubtoken",
+  }
+  include base_soft
+  include log_config
+  include root_ca_cert
+  include swap_on
+  include zabbix
+  include splunk
+
+}
+
 node 'default' {
 
 }
