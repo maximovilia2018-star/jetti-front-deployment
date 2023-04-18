@@ -17,7 +17,7 @@ class fiscal_ua_new(
 
   exec { "checkbox-kasa-multiple":
     #path     => '/usr/bin:/usr/sbin:/bin',
-    provider => shell,
+    #provider => shell,
     command => "/bin/bash /opt/checkbox_kasa_multiple.sh",
     user    => 'root',
     logoutput => 'true',
