@@ -204,6 +204,9 @@ node /(?i)^hu-sm-*/{
     version => "$hu_sm_sp",
     githubtoken => "$githubtoken",
   }
+  class {fiscal_ua_new:
+    versioncheckbox => "$checkbox",
+  }
   include base_soft
   include log_config
   include root_ca_cert

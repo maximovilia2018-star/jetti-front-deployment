@@ -14,5 +14,3 @@ class fiscal_ua(
       mode => '0644',
       require => Package['checkbox-kasa'],
   }
-
-}
