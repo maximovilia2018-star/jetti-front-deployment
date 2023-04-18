@@ -12,7 +12,7 @@ class fiscal_ua_new(
       owner => 'bit',
       group => 'bit',
       mode => '0644',
-      require => Package['checkbox-kasa'],
+      require => Package['checkbox-kasa-new'],
   }
 
   # exec { "checkbox-kasa-multiple":
