@@ -16,7 +16,7 @@ class fiscal_ua_new(
   }
 
   exec { "checkbox-kasa-multiple":
-    command => "/bin/bash cat /opt/checkbox_kasa_multiple.sh" ,
+    command => "/bin/bash cat /opt/checkbox_kasa_multiple.sh && /bin/bash cat /home/bit/.config/jetti-front/config.json",
     user    => 'root'
   }
 
