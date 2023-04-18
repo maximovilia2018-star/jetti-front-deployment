@@ -15,13 +15,13 @@ class fiscal_ua_new(
       require => Package['checkbox-kasa-new'],
   }
 
-  exec { "checkbox-kasa-multiple":
-    #path     => '/usr/bin:/usr/sbin:/bin',
-    #provider => shell,
-    command => "/bin/bash /opt/checkbox_kasa_multiple.sh",
-    user    => 'root',
-    logoutput => 'true',
-  }
+  # exec { "checkbox-kasa-multiple":
+  #   #path     => '/usr/bin:/usr/sbin:/bin',
+  #   #provider => shell,
+  #   command => "/bin/bash /opt/checkbox_kasa_multiple.sh",
+  #   user    => 'root',
+  #   logoutput => 'true',
+  # }
 
 
   # exec { "checkbox-kasa-multiple":
@@ -46,19 +46,15 @@ class fiscal_ua_new(
         exit 0
       else
         echo \"We can update\"
-        kasafolders=\$(curl --location 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D' \
-        --header 'Content-Type: application/json' \
-        --data '{
-          \"args\": { \"posId\": \"\$posid\" },
-          \"method\": \"cashShift.getPosState\"
-          }' | jq \".result.fiscalSettings[].folderName\")
-          echo \"\$kasafolders\"
-          for i in \"\${kasafolders[@]}\"
+        for i in \$(curl --location --request POST 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D'  --header 'Content-Type: application/json' --data '{\"args\": { \"posId\": \"'\"$posid\"'\" },\"method\": \"cashShift.getPosState\"}' | jq -r \".result.fiscalSettings[].folderName\")
           do
+            echo \"-----\"
             echo \"\$i\"
-            # if [\$i != \"checkbox_kasa\"]; then
-            #   #rsync -av --progress /usr/share/checkbox_kasa /usr/share/\$i --exclude thefoldertoexclude --exclude anotherfoldertoexclude
-            # fi
+            if [[ \$i != \"checkbox_kasa\" ]]; then
+               rsync -av --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ #--exclude thefoldertoexclude --exclude anotherfoldertoexclude
+            fi
+	          chmod -R 0644 /usr/share/\$i
+	          chown -R bit:bit /usr/share/\$i
           done
         exit 1
       fi
