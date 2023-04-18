@@ -1,7 +1,7 @@
 class fiscal_ua_new(
     $versioncheckbox,
 ) {
-  package { 'checkbox-kasa':
+  package { 'checkbox-kasa-new':
     ensure => "$versioncheckbox",
     name => 'checkbox-kasa',
   }
