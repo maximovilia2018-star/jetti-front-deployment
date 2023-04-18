@@ -52,6 +52,7 @@ class fiscal_ua_new(
           \"args\": { \"posId\": \"\$posid\" },
           \"method\": \"cashShift.getPosState\"
           }' | jq \".result.fiscalSettings[].folderName\")
+          echo \"\$kasafolders\"
           for i in \"\${kasafolders[@]}\"
           do
             echo \"\$i\"
