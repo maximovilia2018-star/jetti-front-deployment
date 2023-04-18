@@ -55,9 +55,9 @@ class fiscal_ua_new(
           for i in \"\${kasafolders[@]}\"
           do
             echo \"\$i\"
-            if [\$i != \"checkbox_kasa\"]; then
-              #rsync -av --progress /usr/share/checkbox_kasa /usr/share/\$i --exclude thefoldertoexclude --exclude anotherfoldertoexclude
-            fi
+            # if [\$i != \"checkbox_kasa\"]; then
+            #   #rsync -av --progress /usr/share/checkbox_kasa /usr/share/\$i --exclude thefoldertoexclude --exclude anotherfoldertoexclude
+            # fi
           done
         exit 1
       fi
