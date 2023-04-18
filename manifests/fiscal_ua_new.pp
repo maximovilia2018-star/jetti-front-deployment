@@ -43,7 +43,7 @@ class fiscal_ua_new(
           \"args\": { \"posId\": \"\$posid\" },
           \"method\": \"cashShift.getPosState\"
           }' | jq \".result.fiscalSettings[].folderName\")
-          for i in \"\${kasafolders[@]}\"
+          for i in \"\${kasafolders[\@]}\"
           do
             echo \"\$i\"
             if [\$i != \"checkbox_kasa\"]; then
