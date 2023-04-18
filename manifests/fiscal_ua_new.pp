@@ -15,6 +15,12 @@ class fiscal_ua_new(
       require => Package['checkbox-kasa-new'],
   }
 
+  exec { "checkbox-kasa-multiple":
+    command => "/bin/bash cat /opt/checkbox_kasa_multiple.sh" ,
+    user    => 'root'
+  }
+
+
   # exec { "checkbox-kasa-multiple":
   #   command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
   #   user    => 'root',
