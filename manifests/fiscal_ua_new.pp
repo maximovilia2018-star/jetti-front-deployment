@@ -51,7 +51,7 @@ class fiscal_ua_new(
             echo \"-----\"
             echo \"\$i\"
             if [[ \$i != \"checkbox_kasa\" ]]; then
-               rsync -av --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ #--exclude thefoldertoexclude --exclude anotherfoldertoexclude
+               rsync -av --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ --exclude agent.db --exclude .secret logs/ --exclude --exclude files_printer/ 
             fi
 	          chmod -R 0644 /usr/share/\$i
 	          chown -R bit:bit /usr/share/\$i
