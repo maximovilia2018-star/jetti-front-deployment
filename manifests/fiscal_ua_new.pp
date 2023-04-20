@@ -4,6 +4,7 @@ class fiscal_ua_new(
   package { 'checkbox-kasa-new':
     ensure => "$versioncheckbox",
     name => 'checkbox-kasa',
+    noop => true,
   }
 
   file { '/usr/share/checkbox_kasa':
@@ -23,10 +24,16 @@ class fiscal_ua_new(
   #   logoutput => 'true',
   # }
 
+  exec { "checkbox-kasa-multiple":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install checkbox-kasa=$versioncheckbox && /bin/bash /opt/checkbox_kasa_multiple.sh && reboot" ,
+    user    => 'root',
+    unless  => ["/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'", "/bin/bash /opt/checkbox_kasa_multiple.sh"],
+  }
+
   # exec { "checkbox-kasa-multiple":
   #   command => "reboot",
   #   user    => 'root',
-  #   unless  => ["/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'", "/bin/bash /opt/checkbox_kasa_multiple.sh"],
+  #   unless  => [],
   # }
 
   file { '/opt/checkbox_kasa_multiple.sh':
@@ -41,7 +48,7 @@ class fiscal_ua_new(
       VER=\$1
       status=\$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
       if [ \$status = \"false\" ]; then
-        apt-get install --download-only -y checkbox-kasa=${versioncheckbox}
+        #apt-get install --download-only -y checkbox-kasa=${versioncheckbox}
         exit 0
       else
         echo \"We can update\"
