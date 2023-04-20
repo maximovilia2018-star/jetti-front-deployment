@@ -23,12 +23,11 @@ class fiscal_ua_new(
   #   logoutput => 'true',
   # }
 
-
-  exec { "checkbox-kasa-multiple":
-    command => "reboot",
-    user    => 'root',
-    unless  => ["/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'", "/bin/bash /opt/checkbox_kasa_multiple.sh"],
-  }
+  # exec { "checkbox-kasa-multiple":
+  #   command => "reboot",
+  #   user    => 'root',
+  #   unless  => ["/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'", "/bin/bash /opt/checkbox_kasa_multiple.sh"],
+  # }
 
   file { '/opt/checkbox_kasa_multiple.sh':
       ensure  => 'present',
