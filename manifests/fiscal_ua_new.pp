@@ -41,12 +41,12 @@ class fiscal_ua_new(
         echo \"We can update\"
         for i in \$(curl --location --request POST 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D'  --header 'Content-Type: application/json' --data '{\"args\": { \"posId\": \"'\"\$posid\"'\" },\"method\": \"cashShift.getPosState\"}' | jq -r \".result.fiscalSettings[].folderName\")
           do
-            echo \"-----\"
-            echo \"\$i\"
             if [[ \$i != \"checkbox_kasa\" ]]; then
-               rsync -av --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ --exclude 'agent.db' --exclude '.secret' --exclude 'logs/' --exclude 'files_printer/'
-               chmod -R 0644 /usr/share/\$i
-   	           chown -R bit:bit /usr/share/\$i
+              echo \"-----\"
+              echo \"\$i\"
+              rsync -av --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ --exclude 'agent.db' --exclude '.secret' --exclude 'logs/' --exclude 'files_printer/'
+              chmod -R 0644 /usr/share/\$i
+   	          chown -R bit:bit /usr/share/\$i
             fi
           done
         exit 1
