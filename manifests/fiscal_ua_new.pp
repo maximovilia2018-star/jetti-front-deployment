@@ -16,26 +16,12 @@ class fiscal_ua_new(
       require => Package['checkbox-kasa-new'],
   }
 
-  # exec { "checkbox-kasa-multiple":
-  #   #path     => '/usr/bin:/usr/sbin:/bin',
-  #   #provider => shell,
-  #   command => "/bin/bash /opt/checkbox_kasa_multiple.sh",
-  #   user    => 'root',
-  #   logoutput => 'true',
-  # }
-
   exec { "checkbox-kasa-multiple":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install checkbox-kasa=$versioncheckbox && /bin/bash /opt/checkbox_kasa_multiple.sh && reboot" ,
     user    => 'root',
     logoutput => 'true',
     unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
   }
-
-  # exec { "checkbox-kasa-multiple":
-  #   command => "reboot",
-  #   user    => 'root',
-  #   unless  => [],
-  # }
 
   file { '/opt/checkbox_kasa_multiple.sh':
       ensure  => 'present',
@@ -62,7 +48,6 @@ class fiscal_ua_new(
                chmod -R 0644 /usr/share/\$i
    	           chown -R bit:bit /usr/share/\$i
             fi
-
           done
         exit 1
       fi
