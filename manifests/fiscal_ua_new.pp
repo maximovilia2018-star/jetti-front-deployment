@@ -1,6 +1,6 @@
 class fiscal_ua_new(
     $versioncheckbox,
-) {
+){
   package { 'checkbox-kasa-new':
     ensure => "$versioncheckbox",
     name => 'checkbox-kasa',
@@ -49,7 +49,7 @@ class fiscal_ua_new(
   fi
   exit 1",
       mode    => '0755',
-   }
+  }
 
   exec { "checkbox-kasa-multiple":
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install checkbox-kasa=$versioncheckbox && /bin/bash /opt/checkbox_kasa_multiple.sh && reboot" ,
