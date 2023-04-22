@@ -16,13 +16,6 @@ class fiscal_ua_new(
       require => Package['checkbox-kasa-new'],
   }
 
-  exec { "checkbox-kasa-multiple":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install checkbox-kasa=$versioncheckbox && /bin/bash /opt/checkbox_kasa_multiple.sh && reboot" ,
-    user    => 'root',
-    logoutput => 'true',
-    unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
-  }
-
   file { '/opt/checkbox_kasa_multiple.sh':
       ensure  => 'present',
       replace => 'yes',
@@ -56,5 +49,12 @@ class fiscal_ua_new(
   exit 1",
       mode    => '0755',
    }
+
+  exec { "checkbox-kasa-multiple":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install checkbox-kasa=$versioncheckbox && /bin/bash /opt/checkbox_kasa_multiple.sh && reboot" ,
+    user    => 'root',
+    logoutput => 'true',
+    unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
+  }
 
 }
