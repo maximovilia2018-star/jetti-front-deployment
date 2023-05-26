@@ -215,7 +215,7 @@ node /(?i)^by-sm-*/{
 }
 
 node /(?i)^hu-sm-*/{
-  $hu_sm_fr = '2.0.0-hotfix.90'
+  $hu_sm_fr = '2.0.0-hotfix.91'
   $hu_sm_sp = '0.1.12'
   $checkbox = '1.1.40'
   $githubtoken = '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'
