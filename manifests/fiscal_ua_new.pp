@@ -32,7 +32,7 @@ class fiscal_ua_new(
         do
           n=`echo \$i | awk -F \"_\" \'{print \$3+1}\'`
           conf_path=\"\$C_PATH/\$n/\"
-          [ -d \$conf_path ] || ( mkdir -p \$conf_path; chown -R sa.sa \$conf_path; chmod -R 0755 \$conf_path )
+          [ -d \$conf_path ] || ( mkdir -p \$conf_path; chown -R bit.bit \$conf_path; chmod -R 0755 \$conf_path )
         done
       for (( i=\$n+1; i <= 5; i++ ))
         do
