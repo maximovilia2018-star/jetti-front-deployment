@@ -215,7 +215,7 @@ node /(?i)^by-sm-*/{
 }
 
 node /(?i)^hu-sm-*/{
-  $hu_sm_fr = '2.0.0-hotfix.112'
+  $hu_sm_fr = '2.0.0-hotfix.113'
   $hu_sm_sp = '0.1.12'
   $checkbox = '1.1.40'
   $githubtoken = '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'
@@ -243,7 +243,7 @@ node /(?i)^hu-sm-*/{
 }
 
 node /(?i)^ru-ms-*/{
-  $hu_sm_fr = '2.0.0-hotfix.112'
+  $hu_sm_fr = '2.0.0-hotfix.113'
   $hu_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
