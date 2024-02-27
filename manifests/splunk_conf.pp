@@ -6,7 +6,7 @@ class splunk_conf {
     owner => 'splunk',
     group => 'splunk',
     content => "[monitor:///var/log]
-blacklist = journal|AtolFptrWebServer|teamviewer15|installer|zabbix|\.(?:old|1|gz)$
+blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
 "
