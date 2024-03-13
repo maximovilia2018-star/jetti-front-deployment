@@ -28,17 +28,20 @@ class fiscal_ua_new(
       VER=\$1
 #--------------------------------------------------------------------------------
       C_PATH='/etc/checkbox_kasa'
-        for i in \$(curl -s --location --request POST 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D'  --header 'Content-Type: application/json' --data '{\"args\": { \"posId\": \"'\"\$posid\"'\" },\"method\": \"cashShift.getPosState\"}' | jq -r \".result.fiscalSettings[].folderName\")
+        List=\$(curl -s --location --request POST 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D'  --header 'Content-Type: application/json' --data '{\"args\": { \"posId\": \"'\"\$posid\"'\" },\"method\": \"cashShift.getPosState\"}' | jq -r \".result.fiscalSettings[].folderName\")
+        for i in \$List
         do
           n=`echo \$i | awk -F \"_\" \'{print \$3+1}\'`
           conf_path=\"\$C_PATH/\$n/\"
           [ -d \$conf_path ] || ( mkdir -p \$conf_path; chown -R bit.bit \$conf_path; chmod -R 0755 \$conf_path )
         done
-      for (( i=\$n+1; i <= 5; i++ ))
-        do
-          conf_path=\"\$C_PATH/\$i/\"
-          [ -d \$conf_path ] && ( rm -r \$conf_path )
-        done
+        if [[ \$List != \"\" ]]; then
+          for (( i=\$n+1; i <= 5; i++ ))
+            do
+              conf_path=\"\$C_PATH/\$i/\"
+              [ -d \$conf_path ] && ( rm -r \$conf_path )
+            done
+        fi
 #--------------------------------------------------------------------------------
       status=\$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
       if [ \$status = \"false\" ]; then
