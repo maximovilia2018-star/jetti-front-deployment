@@ -163,7 +163,7 @@ node /(?i)^ae-ck-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include vnc_soft
 }
 
 node /(?i)^kz-sm-*/{
