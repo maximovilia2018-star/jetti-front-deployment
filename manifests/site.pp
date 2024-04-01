@@ -19,6 +19,7 @@ node /(?i)^ru-gs-*/{
   include swap_on
   include zabbix
   include splunk
+  include vnc_soft
 
 }
 
@@ -43,6 +44,7 @@ node /(?i)^ru-sm-*/{
   include swap_on
   include zabbix
   include splunk
+  include vnc_soft
 
 }
 
