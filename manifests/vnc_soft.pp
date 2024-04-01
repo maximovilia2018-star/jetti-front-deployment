@@ -22,7 +22,8 @@ RestartSec=1
 ExecStop=/usr/bin/killall x11vnc
 
 [Install]
-WantedBy=multi-user.target",
+WantedBy=multi-user.target
+",
   }
 
   file { "/root/x11vnc.md5":
