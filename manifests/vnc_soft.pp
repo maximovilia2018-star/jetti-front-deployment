@@ -35,6 +35,7 @@ WantedBy=multi-user.target",
   exec { "set-vnc-passwd":
     command => "/usr/bin/x11vnc -storepasswd \"SushiMasterIt\" /etc/x11vnc.passwd" ,
     user    => 'root',
+    path    => [ '/usr/bin', '/bin' ],
     unless  => ["test -f /etc/x11vnc.passwd", "/usr/bin/md5sum -c --quiet /root/x11vnc.md5"],
   }
 
