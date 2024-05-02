@@ -78,7 +78,7 @@ node /(?i)^ua-mp-*/{
 }
 
 node /(?i)^ua-sm-*/{
-  $ua_sm_fr = '2.0.0-hotfix.146'
+  $ua_sm_fr = '2.0.0-hotfix.149'
   $ua_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -107,7 +107,7 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
-  $ua_sm_fr = '2.0.0-hotfix.146'
+  $ua_sm_fr = '2.0.0-hotfix.149'
   $ua_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
