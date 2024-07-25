@@ -203,7 +203,7 @@ node /(?i)^by-sm-*/{
 
 node /(?i)^hu-sm-*/{
   $hu_sm_fr = '2.0.0-hotfix.160'
-  $hu_sm_sp = '0.1.12'
+#  $hu_sm_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $zbx_srv = 'zabbix5.x100group.com:10049'
