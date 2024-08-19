@@ -42,7 +42,7 @@ class fiscal_ua_new(
               [ -d \$conf_path ] && ( rm -r \$conf_path )
             done
         fi
-#--------------------------------------------------------------------------------      
+#--------------------------------------------------------------------------------
       status=\$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
       if [ \$status = \"false\" ]; then
         #apt-get install --download-only -y checkbox-kasa=${versioncheckbox}
@@ -55,7 +55,7 @@ class fiscal_ua_new(
               echo \"------------------------\"
               echo \"\$i\"
               echo \"------------------------\"
-              rsync -av -p --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ --exclude 'config.json' --exclude '*.db' --exclude '.secret.key' --exclude 'logs/' --exclude 'files_printer/'
+              #rsync -av -p --progress /usr/share/checkbox_kasa/ /usr/share/\$i/ --exclude 'config.json' --exclude '*.db' --exclude '.secret.key' --exclude 'logs/' --exclude 'files_printer/'
               #chmod -R 0755 /usr/share/\$i
    	          #chown -R bit:bit /usr/share/\$i
             fi
