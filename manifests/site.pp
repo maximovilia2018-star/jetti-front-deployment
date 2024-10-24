@@ -227,7 +227,7 @@ node /(?i)^by-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include ru_pw_change
 }
 
 node /(?i)^hu-sm-*/{
