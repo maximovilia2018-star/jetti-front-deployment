@@ -98,33 +98,9 @@ node /(?i)^ua-mp-*/{
   include zabbix
   include splunk
   include teleport
+  include teamviwer
   include ua_pw_change
 }
-
-# node 'ua-sm-poskiev-21' {
-#   $ua_sm_fr = '2.0.0-hotfix.168'
-#   $ua_sm_sp = '0.1.14-alpha.31'
-#   $githubtoken = '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'
-#   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#   $checkbox = '1.1.40'
-#   $tele_env = 'ua-sm'
-#   $tele_group = 'restoran'
-#   $zbx_srv = 'zabbix6active.x100group.com:10051'
-#   class {jetti_front:
-#     version => "$ua_sm_fr",
-#     appinsightskey => "$applicationinsightskey",
-#   }
-#   class {fiscal_ua_new:
-#     versioncheckbox => "$checkbox",
-#   }
-#   include base_soft
-#   include log_config
-#   include root_ca_cert
-#   include swap_on
-#   include zabbix
-#   include splunk
-#   include teleport
-# }
 
 node /(?i)^ua-sm-*/{
   $ua_sm_fr = '2.0.0-hotfix.168'
@@ -149,6 +125,7 @@ node /(?i)^ua-sm-*/{
   include zabbix
   include splunk
   include teleport
+  include teamviwer
   include ua_pw_change
 }
 
@@ -176,6 +153,7 @@ node /(?i)^ua-pos-test*/{
   include zabbix
   include splunk
   include teleport
+  include teamviwer
   include ua_pw_change
 }
 
