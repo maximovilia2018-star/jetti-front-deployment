@@ -70,6 +70,7 @@ node /(?i)^ua-mp-*/{
   include zabbix
   include splunk
   include teleport
+  include ua_pw_change
 }
 
 # node 'ua-sm-poskiev-21' {
@@ -120,6 +121,7 @@ node /(?i)^ua-sm-*/{
   include zabbix
   include splunk
   include teleport
+  include ua_pw_change
 }
 
 node /(?i)^ua-pos-test*/{
@@ -145,6 +147,8 @@ node /(?i)^ua-pos-test*/{
   include log_config
   include zabbix
   include splunk
+  include teleport
+  include ua_pw_change
 }
 
 node /(?i)^ae-ck-*/{
