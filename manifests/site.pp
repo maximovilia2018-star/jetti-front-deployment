@@ -1,28 +1,3 @@
-#node /(?i)^ru-gs-postumen-22*/{
-#  $ru_gs_fr = '2.0.0-hotfix.166'
-#  $ru_gs_sp = '0.1.14-alpha.43'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
-
-#  class {jetti_front:
-#    version => "$ru_gs_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$ru_gs_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include base_soft
-#  include log_config
-#  include root_ca_cert
-#  include swap_on
-#  include zabbix
-#  include splunk
-#  include vnc_soft
-#  include ru_pw_change
-#}
-
 node /(?i)^ru-gs-*/{
   $ru_gs_fr = '2.0.0-hotfix.166'
   $ru_gs_sp = '0.1.14-alpha.43'
@@ -100,6 +75,7 @@ node /(?i)^ua-mp-*/{
   include splunk
   include splunk_conf
   include teleport
+  include teamviwer
   include ua_pw_change
 }
 
@@ -130,6 +106,7 @@ node /(?i)^ua-sm-*/{
   include splunk
   include splunk_conf
   include teleport
+  include teamviwer
   include ua_pw_change
 }
 
@@ -159,6 +136,7 @@ node /(?i)^ua-pos-test*/{
   include zabbix
   include splunk
   include teleport
+  include teamviwer
   include ua_pw_change
 }
 
