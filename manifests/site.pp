@@ -71,7 +71,7 @@ node /(?i)^ua-mp-poskiev-02*/{
   include splunk
   include teleport
   include ua_pw_change
-  include teamviewer
+  include teamviwer
 }
 
 node /(?i)^ua-mp-*/{
