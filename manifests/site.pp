@@ -215,7 +215,7 @@ node /(?i)^by-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include ru_pw_change
 }
 
 node /(?i)^hu-sm-*/{
@@ -243,7 +243,6 @@ node /(?i)^hu-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
 }
 
 node /(?i)^ru-ms-*/{
@@ -267,7 +266,6 @@ node /(?i)^ru-ms-*/{
   include swap_on
   include zabbix
   include splunk
-
 }
 
 node 'default' {
