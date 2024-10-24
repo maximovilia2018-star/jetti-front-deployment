@@ -100,6 +100,7 @@ node /(?i)^ua-mp-*/{
   include splunk
   include splunk_conf
   include teleport
+  include ua_pw_change
 }
 
 node /(?i)^ua-sm-*/{
@@ -129,6 +130,7 @@ node /(?i)^ua-sm-*/{
   include splunk
   include splunk_conf
   include teleport
+  include ua_pw_change
 }
 
 node /(?i)^ua-pos-test*/{
@@ -156,6 +158,8 @@ node /(?i)^ua-pos-test*/{
   include log_config
   include zabbix
   include splunk
+  include teleport
+  include ua_pw_change
 }
 
 node /(?i)^ae-ck-*/{
@@ -271,7 +275,7 @@ node /(?i)^ru-ms-*/{
   include swap_on
   include zabbix
   include splunk
-
+  include ru_pw_change
 }
 
 node 'default' {
