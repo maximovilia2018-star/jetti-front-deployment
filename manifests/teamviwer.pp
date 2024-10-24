@@ -15,3 +15,4 @@ class teamviwer {
     name => 'teamviewer',
     ensure => 'latest',
   }
+}
