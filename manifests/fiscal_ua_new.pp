@@ -25,7 +25,6 @@ class fiscal_ua_new(
       echo \"\$FILE exists.\"
       posid=\$(jq -r \".posId\" /home/bit/.config/jetti-front/config.json)
       psname=\$(hostname)
-      VER=\$1
 #--------------------------------------------------------------------------------
       C_PATH='/etc/checkbox_kasa'
         List=\$(curl -s --location --request POST 'https://jetti-front-fn.azurewebsites.net/api/http-executor?code=MlpyWn8wsRS7tWqdhYq8S1aluLAm1xkUQY07ps6Buihpo2Dil0mXmA%3D%3D'  --header 'Content-Type: application/json' --data '{\"args\": { \"posId\": \"'\"\$posid\"'\" },\"method\": \"cashShift.getPosState\"}' | jq -r \".result.fiscalSettings[].folderName\")
@@ -60,11 +59,9 @@ class fiscal_ua_new(
    	          #chown -R bit:bit /usr/share/\$i
             fi
           done
-        exit 1
       fi
-      exit 1
   fi
-  exit 1",
+  exit 0",
       mode    => '0755',
   }
 
