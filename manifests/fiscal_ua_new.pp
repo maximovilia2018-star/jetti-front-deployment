@@ -59,9 +59,11 @@ class fiscal_ua_new(
    	          #chown -R bit:bit /usr/share/\$i
             fi
           done
+        exit 1
       fi
+      exit 1
   fi
-  exit 0",
+  exit 1",
       mode    => '0755',
   }
 
