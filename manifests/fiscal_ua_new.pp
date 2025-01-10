@@ -22,7 +22,6 @@ class fiscal_ua_new(
       content => "#!/bin/bash
   FILE=/home/bit/.config/jetti-front/config.json
   if test -f \"\$FILE\"; then
-      #echo \"\$FILE exists.\"
       posid=\$(jq -r \".posId\" \$FILE)
       psname=\$(hostname)
 # --------  Проверка количества и создание/удаление каталогов для касс -----------
@@ -53,7 +52,7 @@ class fiscal_ua_new(
         reboot
       fi
       if [[ \"\$installed_version\" != \"${versioncheckbox}\" && \"\$status\" != \"true\" ]]; then
-        echo \"Версии не совпадают! Установка не разрешена...\"
+        #echo \"Версии не совпадают! Установка не разрешена...\"
         exit 1
       fi
   fi
