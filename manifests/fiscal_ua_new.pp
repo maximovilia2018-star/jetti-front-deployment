@@ -50,8 +50,8 @@ class fiscal_ua_new(
       #--- Установка новой версии, если требуется ---
       if [[ \"\$installed_version\" != \"${versioncheckbox}\" && \"\$status\" == \"true\" ]]; then
         echo \"Устанавливается новая версия checkbox-kasa \$versioncheckbox\"
-    #    /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold -y install checkbox-kasa=\"\$versioncheckbox\"
-    #    reboot
+        /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold -y --allow-downgrades install checkbox-kasa=\"\$versioncheckbox\"
+        reboot
       fi
   fi
 ",
