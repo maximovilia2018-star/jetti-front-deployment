@@ -63,7 +63,6 @@ class fiscal_ua_new(
     user    => 'root',
     logoutput => 'true',
     unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
-    #refreshonly => false,  # Скрипт выполняется при каждом применении манифеста
   }
 
 }
