@@ -52,6 +52,10 @@ class fiscal_ua_new(
         /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold -y --allow-downgrades install checkbox-kasa=\"${versioncheckbox}\"
         reboot
       fi
+      if [[ \"\$installed_version\" != \"${versioncheckbox}\" && \"\$status\" != \"true\" ]]; then
+        #echo \"Версии не совпадают! Установка пока не разрешена..."
+        exit 1
+      fi
   fi
 ",
       mode    => '0755',
@@ -62,7 +66,8 @@ class fiscal_ua_new(
     command => '/bin/bash /opt/checkbox_kasa_multiple.sh',
     user    => 'root',
     logoutput => 'true',
-    refreshonly => false,  # Скрипт выполняется при каждом применении манифеста
+    unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
+    #refreshonly => false,  # Скрипт выполняется при каждом применении манифеста
   }
 
 }
