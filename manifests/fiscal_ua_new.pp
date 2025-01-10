@@ -22,8 +22,7 @@ class fiscal_ua_new(
       content => "#!/bin/bash
   FILE=/home/bit/.config/jetti-front/config.json
   if test -f \"\$FILE\"; then
-      echo \"\$FILE exists.\"
-#      posid=\$(jq -r \".posId\" /home/bit/.config/jetti-front/config.json)
+      #echo \"\$FILE exists.\"
       posid=\$(jq -r \".posId\" \$FILE)
       psname=\$(hostname)
 # --------  Проверка количества и создание/удаление каталогов для касс -----------
@@ -44,12 +43,12 @@ class fiscal_ua_new(
       fi
 # ------------- Проверка версии и получение разрешения на обновление -------------
       installed_version=\$(dpkg-query -W -f=\'\${Version}\' checkbox-kasa 2>/dev/null || echo \"not_installed\")
-      echo \"Текущая версия: \$installed_version\"
+      #echo \"Текущая версия: \$installed_version\"
 
-      status=\$(curl --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
+      status=\$(curl -s --location --request GET \"https://version-provider.x100-apps.com/api/getversion?environment=${environment}&posid=\$posid&psname=\$psname\" | jq -r \".readytoupdate\")
       #--- Установка новой версии, если требуется ---
       if [[ \"\$installed_version\" != \"${versioncheckbox}\" && \"\$status\" == \"true\" ]]; then
-        echo \"Устанавливается новая версия checkbox-kasa \$versioncheckbox\"
+        #echo \"Устанавливается новая версия checkbox-kasa \$versioncheckbox\"
         /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold -y --allow-downgrades install checkbox-kasa=\"\$versioncheckbox\"
         reboot
       fi
