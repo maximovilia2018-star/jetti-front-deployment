@@ -52,10 +52,6 @@ class fiscal_ua_new(
         /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold -y --allow-downgrades install checkbox-kasa=\"${versioncheckbox}\"
         reboot
       fi
-      if [[ \"\$installed_version\" != \"${versioncheckbox}\" && \"\$status\" != \"true\" ]]; then
-        #echo \"Версии не совпадают! Установка новой версии не разрешена..."
-        exit 1
-      fi
   fi
 ",
       mode    => '0755',
