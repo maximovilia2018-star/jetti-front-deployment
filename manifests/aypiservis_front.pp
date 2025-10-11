@@ -1,12 +1,12 @@
-class jetti_front (
+class aypiservis_front (
     $version,
     $appinsightskey,
 ) {
 
-  exec { "jetti-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
+  exec { "aypiservis-front":
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install aypiservis-front=$version && reboot" ,
     user    => 'root',
-    unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $version$\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
+    unless  => ["/bin/dpkg -s aypiservis-front | grep -oP \'Version: $version$\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
   }
 
   file { "/etc/environment":
@@ -17,9 +17,9 @@ ENV=\"${environment}\"
 INSTRUMENTATION_KEY=${$appinsightskey}",
   }
 
-  package { 'jetti-front':
+  package { 'aypiservis-front':
     ensure => "$version",
-    name => 'jetti-front',
+    name => 'aypiservis-front',
     noop => true,
   }
 
@@ -57,7 +57,7 @@ Terminal=false',
     replace => 'yes',
     content => "#!/bin/bash
   VER=\$1
-  /usr/bin/apt-get -q -y install jetti-front=\$VER && reboot
+  /usr/bin/apt-get -q -y install aypiservis-front=\$VER && reboot
     ",
   }
 
