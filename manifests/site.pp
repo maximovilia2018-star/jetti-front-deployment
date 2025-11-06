@@ -1,4 +1,4 @@
-node /(?i)^ru-gs-*/{
+node /(?i)^hru-gs-*/{
   $ru_gs_fr = '2.0.0-hotfix.244'
   $ru_gs_sp = '0.1.14-alpha.91'
   $githubtoken = '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'
@@ -22,7 +22,7 @@ node /(?i)^ru-gs-*/{
   include ru_pw_change
 }
 
-node /(?i)^ru-sm-*/{
+node /(?i)^hru-sm-*/{
   $ru_sm_fr = '2.0.0-hotfix.244'
   $ru_sm_sp = '0.1.14-alpha.91'
   $githubtoken = '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'
@@ -46,7 +46,7 @@ node /(?i)^ru-sm-*/{
   include ru_pw_change
 }
   
-node /(?i)^ru-ms-*/{
+node /(?i)^hru-ms-*/{
   $hu_sm_fr = '2.0.0-hotfix.231'
   $hu_sm_sp = '0.1.12'
   $githubtoken = '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'
