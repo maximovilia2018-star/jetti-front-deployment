@@ -9,7 +9,7 @@ class teleport::teleport_inst {
    file {'/etc/apt/sources.list.d/teleport.list':
       ensure => present,
       mode => '0640',
-      content => "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/ubuntu focal stable/v13\n",
+      content => "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/ubuntu focal stable/v14\n",
    }
 
   exec { "update-repository":
