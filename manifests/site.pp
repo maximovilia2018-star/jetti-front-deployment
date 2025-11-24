@@ -253,7 +253,7 @@ node /(?i)^us-sm-*/{
   $tele_env = 'us-sm'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix5.x100group.com:10049'
+  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$us_sm_fr",
