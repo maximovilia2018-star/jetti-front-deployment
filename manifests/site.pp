@@ -258,7 +258,7 @@ node /(?i)^ru-ms-*/{
 
 node /(?i)^us-sm-*/{
   $us_sm_fr = '2.0.0-hotfix.248'
-  $uS_sm_sp = '0.1.14-alpha.31'
+  $us_sm_sp = '0.1.14-alpha.31'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $zbx_srv = 'zabbix5.x100group.com:10049'
