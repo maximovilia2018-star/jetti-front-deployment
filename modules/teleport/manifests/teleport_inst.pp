@@ -16,7 +16,7 @@ class teleport::teleport_inst {
       path    => [ '/usr/bin', '/bin' ],
       command => "apt update || true" ,
       user    => 'root',
-      unless  => ["/bin/dpkg -s teleport | grep \'Version: 13\'"],
+      unless  => ["/bin/dpkg -s teleport | grep \'Version: 14\'"],
   }
 
   package { 'teleport':
