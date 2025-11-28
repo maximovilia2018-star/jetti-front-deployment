@@ -1,4 +1,4 @@
-class teleport::one_time_fix {
+class teleport::teleport_one_time_fix {
   file { '/usr/local/bin/teleport-one-time-fix.sh':
     ensure => present,
     owner  => 'root',
