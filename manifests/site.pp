@@ -30,14 +30,7 @@ node 'ua-mp-poskiev-09' {
   include ua_pw_change
 }
 
-node 'ua-sm-posdemo-02',
-     'ua-sm-posdnepr-03',
-     'ua-sm-poskharkiv-04',
-     'ua-sm-poslutsk-01',
-     'ua-sm-poslutsk-02',
-     'ua-sm-posuzhhorod-02',
-     'ua-sm-poszhitomir-01',
-     'ua-sm-poszhitomir-02' {
+node 'ua-sm-poslutsk-01' {
   $ua_sm_fr = '2.0.0-hotfix.248'
   $ua_sm_sp = '0.1.14-alpha.31'
   $githubtoken = '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'
