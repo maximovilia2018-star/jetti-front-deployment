@@ -130,7 +130,7 @@ node /(?i)^ua-pos-test*/{
 }
 
 node /(?i)^ae-ck-*/{
-  $ae_ck_fr = '2.0.0-hotfix.250'
+  $ae_ck_fr = '2.0.0-hotfix.253'
   $ae_ck_sp = '0.1.12'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
