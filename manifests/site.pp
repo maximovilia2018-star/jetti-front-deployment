@@ -252,7 +252,7 @@ node /(?i)^ru-ms-*/{
 }
 
 node /(?i)^us-sm-*/{
-  $us_sm_fr = '2.0.0-hotfix.255'
+  $us_sm_fr = '2.0.0-hotfix.256'
   $us_sm_sp = '0.1.14-alpha.31'
   $checkbox = '0.1.12'
   $tele_env = 'us-sm'
