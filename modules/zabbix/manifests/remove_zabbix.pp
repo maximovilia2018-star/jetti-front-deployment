@@ -15,6 +15,7 @@ class zabbix::remove_zabbix {
   # Удаляем репозиторий
   exec { 'remove-zabbix-repository':
     command => '/usr/bin/rm -f /etc/apt/sources.list.d/zabbix.list',
+    path    => ['/usr/bin', '/bin', '/usr/sbin'],
     onlyif  => '/usr/bin/test -f /etc/apt/sources.list.d/zabbix.list',
     require => Package['zabbix-agent'],
   }
