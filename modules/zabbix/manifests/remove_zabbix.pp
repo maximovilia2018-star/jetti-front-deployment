@@ -37,9 +37,9 @@ exec { 'remove-zabbix-gpg-key':
   }
 
   # ОБНОВЛЯЕМ APT после удаления репозитория
-  exec { 'apt-update-after-removal':
-    command     => '/usr/bin/apt-get update',
-    refreshonly => true,
-    subscribe   => [Exec['remove-zabbix-repository'], Exec['remove-zabbix-gpg-key']],
-  }
+#  exec { 'apt-update-after-removal':
+#    command     => '/usr/bin/apt-get update',
+#    refreshonly => true,
+#    subscribe   => [Exec['remove-zabbix-repository'], Exec['remove-zabbix-gpg-key']],
+#  }
 }
