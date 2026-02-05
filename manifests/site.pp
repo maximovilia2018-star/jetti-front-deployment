@@ -19,7 +19,7 @@ node /(?i)^ru-gs-*/{
   include swap_on
   #include zabbix
   include zabbix::remove_zabbix
-  include splunk
+  #include splunk
   include ru_pw_change
 }
 
@@ -44,7 +44,7 @@ node /(?i)^ru-sm-*/{
   include swap_on
   #include zabbix
   include zabbix::remove_zabbix
-  include splunk
+  #include splunk
   include ru_pw_change
 }
   
@@ -69,7 +69,7 @@ node /(?i)^ru-ms-*/{
   include swap_on
   #include zabbix
   include zabbix::remove_zabbix
-  include splunk
+  #include splunk
 }
 
 node 'default' {
