@@ -9,9 +9,9 @@ class base_soft {
     name => 'jq',
   }
 
-  package { 'curl':
-    name => 'curl',
-  }
+  #package { 'curl':
+  #  name => 'curl',
+  #}
 
   package { 'unattended-upgrades':
     ensure => 'purged',
