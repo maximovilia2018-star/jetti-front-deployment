@@ -21,10 +21,11 @@ class zabbix::remove_zabbix {
   }
 
   # Удаляем GPG ключ
-  exec { 'remove-zabbix-gpg-key':
-    command => '/usr/bin/rm -f /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null || true',
-    onlyif  => 'ls /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null | grep -q .',
-    require => Package['zabbix-agent'],
+exec { 'remove-zabbix-gpg-key':
+   command => '/usr/bin/rm -f /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null || true',
+   path    => ['/usr/bin', '/bin', '/usr/sbin'],  # Путь должен быть здесь тоже
+   onlyif  => '/usr/bin/ls /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null | /usr/bin/grep -q .',
+   require => Package['zabbix-agent'],
   }
 
   # Удаляем директории логов
