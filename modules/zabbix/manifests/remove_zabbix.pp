@@ -44,7 +44,7 @@ exec { 'remove-zabbix-gpg-key':
 #  }
 
 # Удаляем репозиторий TeamViewer
- exec { 'remove-zabbix-repository':
+ exec { 'remove-teamviewer-repository':
    command => '/usr/bin/rm -f /etc/apt/sources.list.d/teamviewer.list',
    path    => ['/usr/bin', '/bin', '/usr/sbin'],
    onlyif  => '/usr/bin/test -f /etc/apt/sources.list.d/teamviewer.list',
