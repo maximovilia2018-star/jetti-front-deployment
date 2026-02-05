@@ -1,4 +1,4 @@
-class remove_zabbix {
+class zabbix::remove_zabbix {
   # Останавливаем сервис перед удалением
   service { 'zabbix-agent':
     ensure => 'stopped',
@@ -15,15 +15,17 @@ class remove_zabbix {
   # Удаляем репозиторий
   exec { 'remove-zabbix-repository':
     command => '/usr/bin/rm -f /etc/apt/sources.list.d/zabbix.list',
+    path    => ['/usr/bin', '/bin', '/usr/sbin'],
     onlyif  => '/usr/bin/test -f /etc/apt/sources.list.d/zabbix.list',
     require => Package['zabbix-agent'],
   }
 
   # Удаляем GPG ключ
-  exec { 'remove-zabbix-gpg-key':
-    command => '/usr/bin/rm -f /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null || true',
-    onlyif  => 'ls /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null | grep -q .',
-    require => Package['zabbix-agent'],
+exec { 'remove-zabbix-gpg-key':
+   command => '/usr/bin/rm -f /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null || true',
+   path    => ['/usr/bin', '/bin', '/usr/sbin'],  # Путь должен быть здесь тоже
+   onlyif  => '/usr/bin/ls /etc/apt/trusted.gpg.d/zabbix*.gpg* /usr/share/keyrings/zabbix*.gpg 2>/dev/null | /usr/bin/grep -q .',
+   require => Package['zabbix-agent'],
   }
 
   # Удаляем директории логов
@@ -34,10 +36,10 @@ class remove_zabbix {
     require => Package['zabbix-agent'],
   }
 
-  # ОБНОВЛЯЕМ APT после удаления репозитория
-  exec { 'apt-update-after-removal':
-    command     => '/usr/bin/apt-get update',
-    refreshonly => true,
-    subscribe   => [Exec['remove-zabbix-repository'], Exec['remove-zabbix-gpg-key']],
+# Удаляем репозиторий TeamViewer
+ exec { 'remove-teamviewer-repository':
+   command => '/usr/bin/rm -f /etc/apt/sources.list.d/teamviewer.list',
+   path    => ['/usr/bin', '/bin', '/usr/sbin'],
+   onlyif  => '/usr/bin/test -f /etc/apt/sources.list.d/teamviewer.list',
   }
 }
