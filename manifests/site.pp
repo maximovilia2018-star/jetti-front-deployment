@@ -17,8 +17,9 @@ node /(?i)^ru-gs-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
-  include splunk
+  #include zabbix
+  include zabbix::remove_zabbix
+  #include splunk
   include ru_pw_change
 }
 
@@ -41,8 +42,9 @@ node /(?i)^ru-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
-  include splunk
+  #include zabbix
+  include zabbix::remove_zabbix
+  #include splunk
   include ru_pw_change
 }
   
@@ -65,8 +67,9 @@ node /(?i)^ru-ms-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
-  include splunk
+  #include zabbix
+  include zabbix::remove_zabbix
+  #include splunk
 }
 
 node 'default' {
