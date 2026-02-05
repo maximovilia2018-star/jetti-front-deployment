@@ -1,4 +1,4 @@
-class zabbix::remove_zabbix
+class zabbix::remove_zabbix {
   # Останавливаем сервис перед удалением
   service { 'zabbix-agent':
     ensure => 'stopped',
