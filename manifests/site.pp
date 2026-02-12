@@ -122,8 +122,8 @@ node /(?i)^ua-pos-test*/{
   include base_soft
   include root_ca_cert
   include log_config
-  include zabbix
-  include splunk
+  #include zabbix
+  #include splunk
   include teleport
   include teamviwer_new
   include ua_pw_change
