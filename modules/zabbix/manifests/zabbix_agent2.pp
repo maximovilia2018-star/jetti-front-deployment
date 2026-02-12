@@ -7,7 +7,8 @@ class zabbix::zabbix_agent2 {
         unless  => '/bin/dpkg -s zabbix-agent | grep -q "Version: "',
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
       }
-      $repo_require = Exec['install-zabbix-repository']
+      
+      $repo_require = 'Exec[install-zabbix-repository]'
       $deps_require = []
     }
     
@@ -29,24 +30,50 @@ class zabbix::zabbix_agent2 {
           require => Exec['enable-universe-repo'],
           path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
         }
-        $ssl_require = Exec['install-libssl1.1']
+        $ssl_require = 'Exec[install-libssl1.1]'
         
         # Для Ubuntu 24.04 - libldap2, а не libldap-2.5-0!
-        package { ['libldap2', 'libldap-common', 'libssl3']:
+        package { 'libldap2':
           ensure  => 'present',
           require => Exec['enable-universe-repo'],
           before  => Package['zabbix-agent'],
         }
-        $ldap_packages = ['libldap2', 'libldap-common', 'libssl3']
+        
+        package { 'libldap-common':
+          ensure  => 'present',
+          require => Exec['enable-universe-repo'],
+          before  => Package['zabbix-agent'],
+        }
+        
+        package { 'libssl3':
+          ensure  => 'present',
+          require => Exec['enable-universe-repo'],
+          before  => Package['zabbix-agent'],
+        }
+        
+        $deps_require = ['Package[libldap2]', 'Package[libldap-common]', 'Package[libssl3]']
       } else {
         $ssl_require = []
         # Для Ubuntu 22.04
-        package { ['libldap-2.5-0', 'libldap-common', 'libssl3']:
+        package { 'libldap-2.5-0':
           ensure  => 'present',
           require => Exec['enable-universe-repo'],
           before  => Package['zabbix-agent'],
         }
-        $ldap_packages = ['libldap-2.5-0', 'libldap-common', 'libssl3']
+        
+        package { 'libldap-common':
+          ensure  => 'present',
+          require => Exec['enable-universe-repo'],
+          before  => Package['zabbix-agent'],
+        }
+        
+        package { 'libssl3':
+          ensure  => 'present',
+          require => Exec['enable-universe-repo'],
+          before  => Package['zabbix-agent'],
+        }
+        
+        $deps_require = ['Package[libldap-2.5-0]', 'Package[libldap-common]', 'Package[libssl3]']
       }
       
       # 3. Удаляем старый репозиторий
@@ -54,7 +81,10 @@ class zabbix::zabbix_agent2 {
         command => 'dpkg --remove --force-remove-reinstreq zabbix-release 2>/dev/null || true && rm -f /etc/apt/sources.list.d/zabbix.list',
         onlyif  => 'test -f /etc/apt/sources.list.d/zabbix.list || dpkg -l zabbix-release 2>/dev/null | grep -q ^i',
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-        require => [Exec['enable-universe-repo'], $ssl_require].flatten(),
+        require => $facts['os']['release']['major'] ? {
+          '24.04' => [Exec['enable-universe-repo'], Exec['install-libssl1.1']],
+          default => Exec['enable-universe-repo'],
+        },
       }
 
       # 4. Устанавливаем репозиторий Zabbix
@@ -65,8 +95,7 @@ class zabbix::zabbix_agent2 {
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
       }
       
-      $repo_require = Exec['install-zabbix-repository-64']
-      $deps_require = $ldap_packages
+      $repo_require = 'Exec[install-zabbix-repository-64]'
     }
     
     default: {
