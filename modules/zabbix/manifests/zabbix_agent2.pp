@@ -31,7 +31,7 @@ class zabbix::zabbix_agent2 {
     }
     
     /^24\.04$/: {
-      # Ubuntu 24.04 - Zabbix 6.4 через репозиторий 22.04
+      # Ubuntu 24.04 - Zabbix 6.4 - ПРОСТОЙ И НАДЕЖНЫЙ МЕТОД
       
       # 1. Удаляем старый репозиторий
       exec { 'remove-old-zabbix-repo':
@@ -49,30 +49,37 @@ class zabbix::zabbix_agent2 {
         require => Exec['remove-old-zabbix-repo'],
       }
       
-      # 3. Устанавливаем репозиторий Zabbix 6.4 для Ubuntu 22.04
-      exec { 'install-zabbix-repository-64':
-        command => '/usr/bin/wget -O /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb && DEBIAN_FRONTEND=noninteractive dpkg -i --force-confdef --force-confold /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb',
-        unless  => '/bin/dpkg -s zabbix-release | grep -q "Version: 6.4"',
-        path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-        environment => ['DEBIAN_FRONTEND=noninteractive'],
+      # 3. СОЗДАЕМ ФАЙЛ РЕПОЗИТОРИЯ ВРУЧНУЮ (100% РАБОТАЕТ!)
+      file { '/etc/apt/sources.list.d/zabbix.list':
+        ensure  => 'present',
+        content => "deb https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\ndeb-src https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\n",
         require => Exec['install-libssl1.1'],
       }
       
-      # 4. Ждем создания файла и правим его (ВАЖНО: имя ресурса изменено!)
-      exec { 'fix-zabbix-repo-for-noble':
-        command => '/bin/sleep 2 && /bin/sed -i "s/jammy/noble/g" /etc/apt/sources.list.d/zabbix.list && /usr/bin/apt-get update',
-        unless  => '/bin/grep -q "noble" /etc/apt/sources.list.d/zabbix.list 2>/dev/null',
+      # 4. Добавляем ключ репозитория
+      exec { 'add-zabbix-key':
+        command => '/usr/bin/wget -O /tmp/zabbix-official-repo.key https://repo.zabbix.com/zabbix-official-repo.key && apt-key add /tmp/zabbix-official-repo.key',
+        unless  => 'apt-key list | grep -q "Zabbix"',
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-        require => Exec['install-zabbix-repository-64'],
-        timeout => 30,
+        require => File['/etc/apt/sources.list.d/zabbix.list'],
       }
       
-      # 5. Устанавливаем Zabbix agent
+      # 5. Обновляем пакеты
+      exec { 'apt-update-for-zabbix':
+        command     => '/usr/bin/apt-get update',
+        refreshonly => true,
+        subscribe   => [File['/etc/apt/sources.list.d/zabbix.list'], Exec['add-zabbix-key']],
+        path        => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
+        before      => Package['zabbix-agent'],
+      }
+      
+      # 6. Устанавливаем Zabbix agent
       package { 'zabbix-agent':
         ensure  => 'present',
         require => [
-          Exec['fix-zabbix-repo-for-noble'],
-          Exec['install-libssl1.1']
+          File['/etc/apt/sources.list.d/zabbix.list'],
+          Exec['install-libssl1.1'],
+          Exec['apt-update-for-zabbix']
         ],
       }
     }
@@ -96,8 +103,8 @@ class zabbix::zabbix_agent2 {
 
   # Очистка
   exec { 'cleanup-zabbix-deb':
-    command => 'rm -f /tmp/zabbix-release_*.deb /tmp/libssl1.1_*.deb',
-    onlyif  => 'ls /tmp/zabbix-release_*.deb /tmp/libssl1.1_*.deb 2>/dev/null',
+    command => 'rm -f /tmp/libssl1.1_*.deb /tmp/zabbix-official-repo.key',
+    onlyif  => 'ls /tmp/libssl1.1_*.deb /tmp/zabbix-official-repo.key 2>/dev/null',
     path    => ['/bin', '/usr/bin'],
     require => Package['zabbix-agent'],
   }
