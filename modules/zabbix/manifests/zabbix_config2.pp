@@ -1,4 +1,13 @@
 class zabbix::zabbix_config2 {
+  file { '/etc/zabbix':
+        ensure  => directory,
+        source  => 'puppet:///modules/zabbix',
+        recurse => true,
+        force   => true,
+        require => Package['zabbix-agent'],
+        notify  => Service['zabbix-agent']
+  }
+
   # Разный конфиг для разных версий Zabbix
   case $facts['os']['release']['major'] {
     /^(18|20)\.04$/: {
