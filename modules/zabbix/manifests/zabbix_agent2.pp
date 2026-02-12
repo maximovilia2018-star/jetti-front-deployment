@@ -31,7 +31,7 @@ class zabbix::zabbix_agent2 {
     }
     
     /^24\.04$/: {
-      # Ubuntu 24.04 - Zabbix 6.4 - ПРОСТОЙ И НАДЕЖНЫЙ МЕТОД
+      # Ubuntu 24.04 - Zabbix 6.4
       
       # 1. Удаляем старый репозиторий
       exec { 'remove-old-zabbix-repo':
@@ -49,26 +49,26 @@ class zabbix::zabbix_agent2 {
         require => Exec['remove-old-zabbix-repo'],
       }
       
-      # 3. СОЗДАЕМ ФАЙЛ РЕПОЗИТОРИЯ ВРУЧНУЮ (100% РАБОТАЕТ!)
-      file { '/etc/apt/sources.list.d/zabbix.list':
-        ensure  => 'present',
-        content => "deb https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\ndeb-src https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\n",
+      # 3. Добавляем GPG ключ Zabbix (КРИТИЧЕСКИ ВАЖНО!)
+      exec { 'add-zabbix-gpg-key':
+        command => '/usr/bin/wget -O /tmp/zabbix-official-repo.key https://repo.zabbix.com/zabbix-official-repo.key && gpg --dearmor -o /usr/share/keyrings/zabbix-archive-keyring.gpg < /tmp/zabbix-official-repo.key',
+        unless  => 'test -f /usr/share/keyrings/zabbix-archive-keyring.gpg',
+        path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
         require => Exec['install-libssl1.1'],
       }
       
-      # 4. Добавляем ключ репозитория
-      exec { 'add-zabbix-key':
-        command => '/usr/bin/wget -O /tmp/zabbix-official-repo.key https://repo.zabbix.com/zabbix-official-repo.key && apt-key add /tmp/zabbix-official-repo.key',
-        unless  => 'apt-key list | grep -q "Zabbix"',
-        path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-        require => File['/etc/apt/sources.list.d/zabbix.list'],
+      # 4. СОЗДАЕМ ФАЙЛ РЕПОЗИТОРИЯ С УКАЗАНИЕМ КЛЮЧА
+      file { '/etc/apt/sources.list.d/zabbix.list':
+        ensure  => 'present',
+        content => "deb [signed-by=/usr/share/keyrings/zabbix-archive-keyring.gpg] https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\ndeb-src [signed-by=/usr/share/keyrings/zabbix-archive-keyring.gpg] https://repo.zabbix.com/zabbix/6.4/ubuntu noble main\n",
+        require => Exec['add-zabbix-gpg-key'],
       }
       
       # 5. Обновляем пакеты
       exec { 'apt-update-for-zabbix':
         command     => '/usr/bin/apt-get update',
         refreshonly => true,
-        subscribe   => [File['/etc/apt/sources.list.d/zabbix.list'], Exec['add-zabbix-key']],
+        subscribe   => File['/etc/apt/sources.list.d/zabbix.list'],
         path        => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
         before      => Package['zabbix-agent'],
       }
