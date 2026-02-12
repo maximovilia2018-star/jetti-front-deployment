@@ -1,51 +1,27 @@
 class teamviewer_new {
-  package { ['wget', 'ca-certificates']:
+  package { ['wget', 'gpg']:
     ensure => installed,
   }
 
-  file { '/usr/share/keyrings':
-    ensure => directory,
-    mode   => '0755',
-  }
-
-  exec { 'download-teamviewer-key':
-    command => '/usr/bin/wget -qO- https://download.teamviewer.com/download/linux/teamviewer.pub | /usr/bin/gpg --dearmor > /usr/share/keyrings/teamviewer-keyring.gpg',
-    creates => '/usr/share/keyrings/teamviewer-keyring.gpg',
+  exec { 'download-teamviewer':
+    command => '/usr/bin/wget -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb',
+    creates => '/tmp/teamviewer.deb',
     path    => ['/usr/bin', '/bin'],
-    require => [Package['wget'], File['/usr/share/keyrings']],
-  }
-
-  file { '/etc/apt/sources.list.d/teamviewer.list':
-    ensure  => file,
-    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main',
-    mode    => '0644',
-    require => Exec['download-teamviewer-key'],
-  }
-
-  exec { 'apt-update-teamviewer':
-    command     => '/usr/bin/apt-get update',
-    subscribe   => File['/etc/apt/sources.list.d/teamviewer.list'],
-    refreshonly => true,
+    require => Package['wget'],
   }
 
   package { 'teamviewer':
-    ensure  => 'latest',
-    require => [File['/etc/apt/sources.list.d/teamviewer.list'], Exec['apt-update-teamviewer']],
+    provider => 'dpkg',
+    source   => '/tmp/teamviewer.deb',
+    require  => Exec['download-teamviewer'],
   }
 
-  file { '/home/bit/.config':
+  # Автозапуск для користувача bit
+  file { ['/home/bit/.config', '/home/bit/.config/autostart']:
     ensure => directory,
     owner  => 'bit',
     group  => 'bit',
     mode   => '0755',
-  }
-
-  file { '/home/bit/.config/autostart':
-    ensure  => directory,
-    owner   => 'bit',
-    group   => 'bit',
-    mode    => '0755',
-    require => File['/home/bit/.config'],
   }
 
   file { '/home/bit/.config/autostart/TeamViewer.desktop':
