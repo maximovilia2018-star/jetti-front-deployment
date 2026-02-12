@@ -50,7 +50,7 @@ class zabbix::zabbix_agent2 {
       }
       
       # 3. Устанавливаем репозиторий Zabbix 6.4 для Ubuntu 22.04
-      exec { 'install-zabbix-repository':
+      exec { 'install-zabbix-repository-64':
         command => '/usr/bin/wget -O /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb && DEBIAN_FRONTEND=noninteractive dpkg -i --force-confdef --force-confold /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb',
         unless  => '/bin/dpkg -s zabbix-release | grep -q "Version: 6.4"',
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
@@ -58,12 +58,12 @@ class zabbix::zabbix_agent2 {
         require => Exec['install-libssl1.1'],
       }
       
-      # 4. Ждем создания файла и правим его
-      exec { 'wait-and-fix-zabbix-repo':
+      # 4. Ждем создания файла и правим его (ВАЖНО: имя ресурса изменено!)
+      exec { 'fix-zabbix-repo-for-noble':
         command => '/bin/sleep 2 && /bin/sed -i "s/jammy/noble/g" /etc/apt/sources.list.d/zabbix.list && /usr/bin/apt-get update',
         unless  => '/bin/grep -q "noble" /etc/apt/sources.list.d/zabbix.list 2>/dev/null',
         path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-        require => Exec['install-zabbix-repository'],
+        require => Exec['install-zabbix-repository-64'],
         timeout => 30,
       }
       
@@ -71,7 +71,7 @@ class zabbix::zabbix_agent2 {
       package { 'zabbix-agent':
         ensure  => 'present',
         require => [
-          Exec['wait-and-fix-zabbix-repo'],
+          Exec['fix-zabbix-repo-for-noble'],
           Exec['install-libssl1.1']
         ],
       }
