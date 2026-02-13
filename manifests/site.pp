@@ -122,9 +122,9 @@ node /(?i)^ua-pos-test*/{
   include base_soft
   include root_ca_cert
   include log_config
-  #include zabbix
-  include zabbix::zabbix_agent2
-  include zabbix::zabbix_config2
+  include zabbix
+  #include zabbix::zabbix_agent2
+  #include zabbix::zabbix_config2
   #include splunk
   include teleport
   include teamviewer_new
