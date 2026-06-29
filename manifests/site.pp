@@ -263,7 +263,7 @@ node /(?i)^ru-ms-*/{
 }
 
 node /(?i)^us-sm-*/{
-  $us_sm_fr = '2.0.0-hotfix.261'
+  $us_sm_fr = '2.0.0-hotfix.271'
   $us_sm_sp = '0.1.14-alpha.31'
   $tele_env = 'us-sm'
   $tele_group = 'restoran'
