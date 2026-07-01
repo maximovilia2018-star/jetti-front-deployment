@@ -112,10 +112,15 @@ node /(?i)^ua-sm-*/{
 
 node /(?i)^ua-pos-test*/{
   $ua_sm_fr = '2.0.0-hotfix.271'
-  $ua_sm_sp = '0.1.12'
+  $ua_sm_sp = '0.1.14-alpha.31'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $checkbox = '1.4.22'
+  $checkbox = '1.7.5'
+  $tele_env = 'ua-sm'
+  $tele_group = 'restoran'
+  $zbx_srv = 'zabbix6active.x100group.com:10051'
+  $splunk_srv = 'splunk.x100group.com'
+  $splunk_inx = 'jetti_ua'
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
