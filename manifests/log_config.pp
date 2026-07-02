@@ -34,27 +34,16 @@ class log_config {
     }
   }
 
-  $user_atol_properties = '/home/bit/.atol/drivers10/fptr10_log.properties'
-  $lib_atol_properties  = '/var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties'
-
-  file_line { 'Atol home log level':
-    path  => $user_atol_properties,
-    line  => 'logger.file.level=ERROR',
-    match => '^logger\.file\.level\s*=',
-    onlyif => "test -f ${user_atol_properties}",
+  exec { 'Change to ERROR level fptr10 home properties':
+    command => "/usr/bin/sed -i 's/INFO/ERROR/g' /home/bit/.atol/drivers10/fptr10_log.properties",
+    onlyif  => "test -f /home/bit/.atol/drivers10/fptr10_log.properties && /usr/bin/grep -q INFO /home/bit/.atol/drivers10/fptr10_log.properties",
   }
-
-  file_line { 'Atol home log rotation days':
-    path  => $user_atol_properties,
-    line  => 'logger.file.period=2',
-    match => '^logger\.file\.period\s*=',
-    onlyif => "test -f ${user_atol_properties}",
+  exec { 'Change two days log fptr10 home properties':
+    command => "/usr/bin/sed -i 's/=14/=2/g' /home/bit/.atol/drivers10/fptr10_log.properties",
+    onlyif  => "test -f /home/bit/.atol/drivers10/fptr10_log.properties && /usr/bin/grep -q '=14' /home/bit/.atol/drivers10/fptr10_log.properties",
   }
-
-  file_line { 'Atol lib log level':
-    path   => $lib_atol_properties,
-    line   => 'logger.file.level=ERROR',
-    match  => '^logger\.file\.level\s*=',
-    onlyif => "test -f ${lib_atol_properties}",
+  exec { 'Change to ERROR level fptr10 lib properties':
+    command => "/usr/bin/sed -i 's/INFO/ERROR/g' /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
+    onlyif  => "test -f /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties && /usr/bin/grep -q INFO /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
   }
 }
