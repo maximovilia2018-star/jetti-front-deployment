@@ -1,49 +1,60 @@
 class log_config {
-  file { "/etc/rsyslog.d/15-atol-fptr.conf":
+  file { '/etc/rsyslog.d/15-atol-fptr.conf':
     ensure  => 'present',
     replace => 'yes',
-    content => ':rawmsg, contains, "atol-fptr-web-server" /var/log/ATOL-fptr.log
-&~'
- ,
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    content => ":rawmsg, contains, \"atol-fptr-web-server\" /var/log/ATOL-fptr.log\n&~",
+    # Пинаем службу rsyslog
+    notify  => Service['rsyslog'],
   }
 
-  file { "/etc/logrotate.d/ATOL-fptr":
+  file { '/etc/logrotate.d/ATOL-fptr':
     ensure  => 'present',
     replace => 'yes',
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
     content => "/var/log/ATOL-fptr.log {
     daily
     rotate 7
     compress
-    #delaycompress
     missingok
     notifempty
     create 0640 syslog adm
-}"
- ,
+}",
   }
 
-  exec { 'Change to ERROR level fptr10 home properties':
-    command => "/usr/bin/sed -i \'s/INFO/ERROR/g\' /home/bit/.atol/drivers10/fptr10_log.properties",
-    onlyif  => "/usr/bin/grep INFO /home/bit/.atol/drivers10/fptr10_log.properties",
+  if ! defined(Service['rsyslog']) {
+    service { 'rsyslog':
+      ensure     => 'running',
+      enable     => true,
+      hasrestart => true,
+    }
   }
 
-  exec { 'Change two days log fptr10 home properties':
-    command => "/usr/bin/sed -i \'s/=14/=2/g\' /home/bit/.atol/drivers10/fptr10_log.properties",
-    onlyif  => "/usr/bin/grep 14 /home/bit/.atol/drivers10/fptr10_log.properties",
+  $user_atol_properties = '/home/bit/.atol/drivers10/fptr10_log.properties'
+  $lib_atol_properties  = '/var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties'
+
+  file_line { 'Atol home log level':
+    path  => $user_atol_properties,
+    line  => 'logger.file.level=ERROR',
+    match => '^logger\.file\.level\s*=',
+    onlyif => "test -f ${user_atol_properties}",
   }
 
-  exec { 'Change to ERROR level  fptr10 lib properties':
-    command => "/usr/bin/sed -i \'s/INFO/ERROR/g\' /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
-    onlyif  => "/usr/bin/grep INFO /var/lib/AtolFptrWebServer/drivers10/fptr10_log.properties",
+  file_line { 'Atol home log rotation days':
+    path  => $user_atol_properties,
+    line  => 'logger.file.period=2',
+    match => '^logger\.file\.period\s*=',
+    onlyif => "test -f ${user_atol_properties}",
   }
 
-#  cron { 'logrotate':
-#    command => '/usr/sbin/logrotate',
-#    ensure  => 'absent', 
-#    ensure  => 'present', 
-#    user    => 'root',
-#    hour    => 1,
-#    minute  => 3,
-#  }
-
+  file_line { 'Atol lib log level':
+    path   => $lib_atol_properties,
+    line   => 'logger.file.level=ERROR',
+    match  => '^logger\.file\.level\s*=',
+    onlyif => "test -f ${lib_atol_properties}",
+  }
 }
