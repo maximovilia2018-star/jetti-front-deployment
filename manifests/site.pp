@@ -127,7 +127,7 @@ node /(?i)^ua-pos-test*/{
   include zabbix
   include splunk
   include teleport
-  include teamviwer
+  include teamviewer
   include ua_pw_change
 }
 
