@@ -102,33 +102,38 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
-  $ua_sm_fr = '2.0.0-hotfix.271'
-  $ua_sm_sp = '0.1.14-alpha.31'
-  $githubtoken = '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'
+  $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $checkbox = '1.7.5'
-  $tele_env = 'ua-pos'
-  $tele_group = 'tested'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
-  $splunk_srv = 'splunk.x100group.com'
-  $splunk_inx = 'jetti_ua'
+  $checkbox               = '1.7.5'
+  $zbx_srv                = 'zabbix6active.x100group.com:10051'
+  $splunk_srv             = 'splunk.x100group.com'
+  $splunk_inx             = 'jetti_ua'
+  $tele_env               = 'ua-pos'
+  $tele_group             = 'tested'
 
-  #class {jetti_front:
-  #  version => "$ua_sm_fr",
-  #  appinsightskey => "$applicationinsightskey",
+  $ua_sm_fr               = '2.0.0-hotfix.271'
+  $ua_sm_sp               = '0.1.14-alpha.31'
+
+  #class { 'jetti_front':.
+  #  version        => $ua_sm_fr,.
+  #  appinsightskey => $applicationinsightskey,
   #}
-  #class {fiscal_ua_new:
-  #  versioncheckbox => "$checkbox",
+  #class { 'fiscal_ua_new':.
+  #  versioncheckbox => $checkbox,
   #}
-  include swap_on
+  #class { 'teleport':
+  #  version => '15.0.0', # Или 'latest'
+  #}
+  #class { 'zabbix':
+  #  zabbix_version => '6.4',
+  #}
   include base_soft
-  include root_ca_cert
-  include log_config
-  include zabbix
-  include splunk
-  include teleport
-  include teamviewer
+  include swap_on
+  #include splunk
   include ua_pw_change
+  include teamviewer
+  include log_config
+  include root_ca_cert
 }
 
 node /(?i)^ae-ck-*/{
