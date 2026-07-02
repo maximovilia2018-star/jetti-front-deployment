@@ -38,12 +38,11 @@ class teamviewer {
     hasrestart => true,
   }
 
-  file { '/home/bit/.config/autostart':
-    ensure   => 'directory',
-    owner    => 'bit',
-    group    => 'bit',
-    mode     => '0755',
-    makepath => true,
+  file { [ '/home/bit/.config', '/home/bit/.config/autostart' ]:
+    ensure => 'directory',
+    owner  => 'bit',
+    group  => 'bit',
+    mode   => '0755',
   }
 
   file { '/home/bit/.config/autostart/TeamViewer.desktop':
