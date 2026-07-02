@@ -113,13 +113,13 @@ node /(?i)^ua-pos-test*/{
   $splunk_srv = 'splunk.x100group.com'
   $splunk_inx = 'jetti_ua'
 
-  class {jetti_front:
-    version => "$ua_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {fiscal_ua_new:
-    versioncheckbox => "$checkbox",
-  }
+  #class {jetti_front:
+  #  version => "$ua_sm_fr",
+  #  appinsightskey => "$applicationinsightskey",
+  #}
+  #class {fiscal_ua_new:
+  #  versioncheckbox => "$checkbox",
+  #}
   include swap_on
   include base_soft
   include root_ca_cert
@@ -128,7 +128,6 @@ node /(?i)^ua-pos-test*/{
   include splunk
   include teleport
   include teamviwer
-  #include teamviewer_new
   include ua_pw_change
 }
 
