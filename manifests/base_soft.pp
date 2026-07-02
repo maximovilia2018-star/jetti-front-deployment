@@ -1,21 +1,17 @@
 class base_soft {
+  package { 'unattended-upgrades':
+    ensure => 'purged',
+  }
 
   package { 'bit-cash-box':
     ensure => 'purged',
-    name => 'bit-cash-box',
   }
 
-  package { 'jq':
-    name => 'jq',
-  }
+  $required_tools = [ 'jq', 'curl', 'wget', 'mc', 'htop' ]
 
-  package { 'curl':
-    name => 'curl',
-  }
-
-  package { 'unattended-upgrades':
-    ensure => 'purged',
-    name => 'unattended-upgrades',
+  package { $required_tools:
+    ensure  => 'present',
+    require => Package['unattended-upgrades'],
   }
 
 }
