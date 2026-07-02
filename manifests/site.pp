@@ -70,7 +70,7 @@ node /(?i)^ua-mp-*/{
   include zabbix
   include splunk
   include teleport
-  include teamviwer
+  include teamviewer
   include ua_pw_change
 }
 
@@ -97,7 +97,7 @@ node /(?i)^ua-sm-*/{
   include zabbix
   include splunk
   include teleport
-  include teamviwer
+  include teamviewer
   include ua_pw_change
 }
 
@@ -174,7 +174,6 @@ node /(?i)^kz-sm-*/{
   include swap_on
   include zabbix
   include splunk
-
 }
 
 node /(?i)^by-sm-*/{
