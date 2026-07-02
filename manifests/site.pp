@@ -114,11 +114,11 @@ node /(?i)^ua-pos-test*/{
   $ua_sm_fr               = '2.0.0-hotfix.271'
   $ua_sm_sp               = '0.1.14-alpha.31'
 
-  class { 'jetti_front':.
-    version        => $ua_sm_fr,.
+  class { 'jetti_front':
+    version        => $ua_sm_fr,
     appinsightskey => $applicationinsightskey,
   }
-  #class { 'fiscal_ua_new':.
+  #class { 'fiscal_ua_new':
   #  versioncheckbox => $checkbox,
   #}
   #class { 'teleport':
