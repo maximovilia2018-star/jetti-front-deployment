@@ -25,7 +25,7 @@ class teamviewer2 (
   }
 
   # =========================================================================
-  # Добавление репозитория TeamViewer (исправленный URL)
+  # Добавление репозитория TeamViewer (правильный URL)
   # =========================================================================
 
   file { '/etc/apt/sources.list.d/teamviewer.list':
@@ -34,19 +34,21 @@ class teamviewer2 (
     group   => 'root',
     mode    => '0644',
     content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main',
+    replace => true,
     require => Exec['teamviewer_key_download'],
     notify  => Exec['teamviewer_apt_update'],
   }
 
   # =========================================================================
-  # Обновление APT-кэша
+  # Обновление APT-кэша ТОЛЬКО если пакет не установлен
   # =========================================================================
 
   exec { 'teamviewer_apt_update':
-    path        => ['/usr/bin', '/bin'],
-    command     => 'apt-get update',
-    refreshonly => true,
-    require     => File['/etc/apt/sources.list.d/teamviewer.list'],
+    path    => ['/usr/bin', '/bin'],
+    command => 'apt-get update',
+    unless  => 'dpkg -l teamviewer 2>/dev/null | grep -q "^ii"',
+    timeout => 120,
+    require => File['/etc/apt/sources.list.d/teamviewer.list'],
   }
 
   # =========================================================================
