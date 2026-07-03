@@ -49,7 +49,12 @@ if [ -z "$CURRENT_MAJOR" ] || ! systemctl is-active "$TELEPORT_SERVICE" >/dev/nu
     rm -rf /etc/systemd/system/teleport.service.wants
     rm -f /etc/systemd/system/teleport*
     rm -f /usr/local/bin/teleport
-
+    rm -f /usr/local/bin/teleport-update
+    rm -f /usr/local/bin/tctl
+    rm -f /usr/local/bin/tsh
+    rm -f /usr/local/bin/tbot
+    rm -f /usr/local/bin/fdpass-teleport
+    
     systemctl daemon-reload
 
     # Полностью очищаем старый deb-пакет, чтобы Puppet поставил чистую базу
