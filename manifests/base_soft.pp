@@ -4,6 +4,7 @@ class base_soft {
   }
 
   $required_tools = [
+    'apt-transport-https',
     'ca-certificates',
     'curl',
     'gnupg',
