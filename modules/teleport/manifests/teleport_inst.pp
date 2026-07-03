@@ -25,8 +25,16 @@ class teleport::teleport_inst (
   }
 
   package { 'teleport':
-    ensure  => "${install_version}",
+    ensure  => 'present',
     require => [ File['/etc/apt/sources.list.d/teleport.list'], Exec['update-teleport-repository'] ],
   }
-}
 
+  exec { 'force-reinstall-teleport-after-recovery':
+    path        => [ '/usr/bin', '/bin' ],
+    command     => 'apt-get install -y --reinstall teleport',
+    user        => 'root',
+    refreshonly => true,
+    subscribe   => Exec['run-teleport-recovery'],
+    before      => Package['teleport'],
+  }
+}
