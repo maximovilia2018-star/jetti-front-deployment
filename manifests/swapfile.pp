@@ -60,7 +60,7 @@ class swapfile (
   file_line { 'Add swap in fstab':
     ensure  => 'present',
     path    => '/etc/fstab',
-    line    => "${swapfile} none swap sw 0 0",
+    line    => "${swapfile}    none    swap    sw    0 0",
     match   => "^${swapfile}\\s",
     require => Exec['Attach swap file'],
   }
