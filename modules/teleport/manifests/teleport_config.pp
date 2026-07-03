@@ -63,7 +63,7 @@ proxy_service:
 
   exec { 'enable-teleport-managed-updates':
     path    => [ '/usr/bin', '/bin', '/usr/local/bin', '/opt/teleport/system/bin' ],
-    command => 'bash -c "/opt/teleport/system/bin/teleport-update enable"',
+    command => 'teleport-update enable',
     user    => 'root',
     require => Service['teleport'],
     onlyif  => 'test -f /opt/teleport/system/bin/teleport-update',
