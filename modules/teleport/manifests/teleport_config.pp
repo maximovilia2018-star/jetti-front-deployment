@@ -7,7 +7,6 @@ class teleport::teleport_config {
   }
 
   file { "/etc/logrotate.d/teleport":
-    notify  => Service['syslog'],
     ensure  => 'present',
     replace => 'yes',
     content => "/var/log/teleport.log {\n  rotate 7\n  daily\n  missingok\n  notifempty\n  compress\n  size 5M\n}",
