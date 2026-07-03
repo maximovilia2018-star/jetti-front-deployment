@@ -110,6 +110,7 @@ node /(?i)^ua-pos-test*/{
   $zbx_srv                = 'zabbix6active.x100group.com:10051'
   $splunk_srv             = 'splunk.x100group.com'
   $splunk_inx             = 'jetti_ua'
+  $teleport_version       = '16'
   $tele_env               = 'ua-pos'
   $tele_group             = 'tested'
 
@@ -120,15 +121,13 @@ node /(?i)^ua-pos-test*/{
   #class { 'fiscal_ua_new':
   #  versioncheckbox => $checkbox,
   #}
-  #class { 'teleport':
-  #  version => '15.0.0', # Или 'latest'
-  #}
   #class { 'zabbix':
   #  zabbix_version => '6.4',
   #}
   include base_soft
   #include swap_on
   include swapfile
+  include teleport
   #include splunk
   include ua_pw_change
   include teamviewer
