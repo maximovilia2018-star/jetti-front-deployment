@@ -63,11 +63,11 @@ proxy_service:
 
   exec { 'enable-teleport-managed-updates':
     path    => [ '/usr/bin', '/bin', '/usr/local/bin', '/opt/teleport/system/bin' ],
-    command => 'teleport-update enable',
+    command => 'bash -c "teleport-update link-package 2>/dev/null; teleport-update enable"',
     user    => 'root',
     require => Service['teleport'],
     onlyif  => 'test -f /opt/teleport/system/bin/teleport-update',
-    unless  => '/opt/teleport/system/bin/teleport-update status | grep -qi "enabled: true"',
+    unless  => 'teleport-update status 2>&1 | grep -q "enabled: true"',
     returns => [0, 1],
   }
 }
