@@ -4,12 +4,13 @@ class base_soft {
   }
 
   $required_tools = [
-    'jq',      # Работа с JSON
-    'curl',    # HTTP-запросы
-    'wget',    # Загрузка файлов
-    'mc',      # Midnight Commander
-    'htop',    # Мониторинг процессов
-    'gnupg',   # GPG-ключи (нужен для teamviewer и других репозиториев)
+    'ca-certificates',
+    'curl',
+    'gnupg',
+    'htop',
+    'jq',
+    'mc',
+    'wget',
   ]
 
   package { $required_tools:
