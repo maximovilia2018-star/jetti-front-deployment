@@ -3,7 +3,14 @@ class base_soft {
     ensure => purged,
   }
 
-  $required_tools = [ 'jq', 'curl', 'wget', 'mc', 'htop' ]
+  $required_tools = [
+    'jq',      # Работа с JSON
+    'curl',    # HTTP-запросы
+    'wget',    # Загрузка файлов
+    'mc',      # Midnight Commander
+    'htop',    # Мониторинг процессов
+    'gnupg',   # GPG-ключи (нужен для teamviewer и других репозиториев)
+  ]
 
   package { $required_tools:
     ensure  => present,
