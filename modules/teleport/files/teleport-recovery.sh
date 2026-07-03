@@ -29,6 +29,10 @@ if [ -z "$CURRENT_MAJOR" ] || ! systemctl is-active "$TELEPORT_SERVICE" >/dev/nu
     systemctl stop "$TELEPORT_SERVICE" 2>/dev/null || true
     sleep 2
 
+    if [ -x "/opt/teleport/system/bin/teleport-update" ]; then
+        /opt/teleport/system/bin/teleport-update unlink-package 2>/dev/null || true
+    fi
+
     # Бэкапим конфиг во временную папку
     if [ -f "/etc/teleport.yaml" ]; then
         cp /etc/teleport.yaml /etc/teleport.yaml.backup
