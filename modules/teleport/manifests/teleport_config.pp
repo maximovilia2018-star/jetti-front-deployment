@@ -68,6 +68,6 @@ proxy_service:
     require => Service['teleport'],
     onlyif  => 'test -f /opt/teleport/system/bin/teleport-update',
     unless  => '/opt/teleport/system/bin/teleport-update status | grep -qi "enabled: true"',
-    returns =>,
+    returns => [0, 1],
   }
 }
