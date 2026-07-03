@@ -102,17 +102,16 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test*/{
+  $ua_sm_fr               = '2.0.0-hotfix.271'
+  $ua_sm_sp               = '0.1.14-alpha.31'
+  $checkbox               = '1.7.5'
   $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $checkbox               = '1.7.5'
   $zbx_srv                = 'zabbix6active.x100group.com:10051'
   $splunk_srv             = 'splunk.x100group.com'
   $splunk_inx             = 'jetti_ua'
   $tele_env               = 'ua-pos'
   $tele_group             = 'tested'
-
-  $ua_sm_fr               = '2.0.0-hotfix.271'
-  $ua_sm_sp               = '0.1.14-alpha.31'
 
   class { 'jetti_front':
     version        => $ua_sm_fr,
@@ -128,7 +127,8 @@ node /(?i)^ua-pos-test*/{
   #  zabbix_version => '6.4',
   #}
   include base_soft
-  include swap_on
+  #include swap_on
+  include swapfile
   #include splunk
   include ua_pw_change
   include teamviewer
