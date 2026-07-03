@@ -130,7 +130,7 @@ node /(?i)^ua-pos-test.*/ {
   include teleport
   #include splunk
   include ua_pw_change
-  include teamviewer
+  include teamviewer2
   include log_config
   include root_ca_cert
 }
