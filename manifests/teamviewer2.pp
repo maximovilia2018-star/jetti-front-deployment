@@ -1,21 +1,11 @@
 # teamviewer.pp - production POS installation (minimal & stable)
-# Без зависимости от puppetlabs-apt
-
 class teamviewer2 (
   String $user = 'bit',
 ) {
 
-  # =========================================================================
-  # Установка apt-transport-https (если нужно)
-  # =========================================================================
-
   package { 'apt-transport-https':
     ensure => installed,
   }
-
-  # =========================================================================
-  # Скачивание GPG-ключа TeamViewer (современный способ)
-  # =========================================================================
 
   exec { 'teamviewer_key_download':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
@@ -24,24 +14,23 @@ class teamviewer2 (
     require => Package['apt-transport-https'],
   }
 
-  # =========================================================================
-  # Добавление репозитория TeamViewer (правильный URL)
-  # =========================================================================
+  exec { 'divert_teamviewer_list':
+    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
+    command => 'dpkg-divert --add --rename --divert /etc/apt/sources.list.d/teamviewer.list.dpkg-divert /etc/apt/sources.list.d/teamviewer.list',
+    unless  => 'dpkg-divert --list | grep -q "/etc/apt/sources.list.d/teamviewer.list"',
+    require => Exec['teamviewer_key_download'],
+  }
 
   file { '/etc/apt/sources.list.d/teamviewer.list':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main',
+    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main\n',
     replace => true,
-    require => Exec['teamviewer_key_download'],
+    require => Exec['divert_teamviewer_list'],
     notify  => Exec['teamviewer_apt_update'],
   }
-
-  # =========================================================================
-  # Обновление APT-кэша ТОЛЬКО если пакет не установлен
-  # =========================================================================
 
   exec { 'teamviewer_apt_update':
     path    => ['/usr/bin', '/bin'],
@@ -51,18 +40,10 @@ class teamviewer2 (
     require => File['/etc/apt/sources.list.d/teamviewer.list'],
   }
 
-  # =========================================================================
-  # Установка TeamViewer
-  # =========================================================================
-
   package { 'teamviewer':
     ensure  => installed,
     require => Exec['teamviewer_apt_update'],
   }
-
-  # =========================================================================
-  # Сервис
-  # =========================================================================
 
   service { 'teamviewerd':
     ensure     => running,
@@ -71,10 +52,6 @@ class teamviewer2 (
     hasrestart => true,
     subscribe  => Package['teamviewer'],
   }
-
-  # =========================================================================
-  # Автозапуск для пользователя
-  # =========================================================================
 
   file { "/home/${user}/.config":
     ensure => directory,
