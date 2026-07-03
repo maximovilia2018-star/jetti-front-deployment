@@ -25,7 +25,7 @@ class teleport::teleport_inst (
   }
 
   package { 'teleport':
-    ensure  => 'present', # Просто проверяем, что пакет установлен
+    ensure  => "${install_version}",
     require => [ File['/etc/apt/sources.list.d/teleport.list'], Exec['update-teleport-repository'] ],
   }
 }
