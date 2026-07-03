@@ -1,17 +1,20 @@
-class teleport::teleport_one_time_fix {
-  file { '/usr/local/bin/teleport-one-time-fix.sh':
+class teleport::teleport_one_time_fix (
+  String $target_version,
+){
+  file { '/usr/local/bin/teleport-recovery.sh':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/teleport/teleport-one-time-fix.sh',
+    source => 'puppet:///modules/teleport/teleport-recovery.sh',
   }
-  
-  exec { 'run-teleport-one-time-fix':
-    command => '/usr/local/bin/teleport-one-time-fix.sh',
-    creates => '/root/.fix-applied',  # Выполняется только если этот файл не существует
+
+  exec { 'run-teleport-recovery':
+    command => "/usr/local/bin/teleport-recovery.sh ${target_version}",
     path    => ['/bin', '/usr/bin', '/usr/local/bin'],
-    timeout => 300,
-    require => [Package['teleport'], File['/usr/local/bin/teleport-one-time-fix.sh']],
+    user    => 'root',
+    # Скрипт вернет 0, если служба лежит или отстает БОЛЕЕ ЧЕМ НА 2 версии (ослепла)
+    onlyif  => "/usr/local/bin/teleport-recovery.sh ${target_version}",
+    require => File['/usr/local/bin/teleport-recovery.sh'],
   }
 }
