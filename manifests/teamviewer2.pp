@@ -2,16 +2,20 @@
 class teamviewer2 (
   String $user = 'bit',
 ) {
-
-  package { 'apt-transport-https':
-    ensure => installed,
-  }
-
   exec { 'teamviewer_key_download':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
     command => 'wget -qO - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | gpg --dearmor -o /usr/share/keyrings/teamviewer-keyring.gpg',
     creates => '/usr/share/keyrings/teamviewer-keyring.gpg',
-    require => Package['apt-transport-https'],
+  }
+
+  $teamviewer_orphaned_files = [
+    '/etc/apt/sources.list.d/teamviewer.list.dpkg-dist',
+    '/etc/apt/sources.list.d/teamviewer.list.dpkg-new',
+    '/etc/apt/sources.list.d/teamviewer.list.dpkg-divert',
+  ]
+
+  file { $teamviewer_orphaned_files:
+    ensure => absent,
   }
 
   file { '/etc/apt/sources.list.d/teamviewer.list':
