@@ -14,13 +14,6 @@ class teamviewer2 (
     require => Package['apt-transport-https'],
   }
 
-  exec { 'divert_teamviewer_list':
-    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => 'dpkg-divert --add --rename --divert /etc/apt/sources.list.d/teamviewer.list.dpkg-divert /etc/apt/sources.list.d/teamviewer.list',
-    unless  => 'dpkg-divert --list | grep -q "/etc/apt/sources.list.d/teamviewer.list"',
-    require => Exec['teamviewer_key_download'],
-  }
-
   file { '/etc/apt/sources.list.d/teamviewer.list':
     ensure  => file,
     owner   => 'root',
