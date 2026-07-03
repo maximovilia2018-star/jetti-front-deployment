@@ -66,7 +66,8 @@ proxy_service:
     command => '/opt/teleport/system/bin/teleport-update enable',
     user    => 'root',
     require => Service['teleport'],
-    unless  => '/opt/teleport/system/bin/teleport-update status | grep -qi "enabled: true"',
+    # Выполняем ТОЛЬКО если файл уже скачался службой И в статусе еще нет "enabled: true"
+    unless  => 'test -f /opt/teleport/system/bin/teleport-update && /opt/teleport/system/bin/teleport-update status | grep -qi "enabled: true"',
   }
 
 }
