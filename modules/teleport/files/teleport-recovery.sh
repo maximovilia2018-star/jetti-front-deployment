@@ -44,6 +44,7 @@ if [ -z "$CURRENT_MAJOR" ] || ! systemctl is-active "$TELEPORT_SERVICE" >/dev/nu
     rm -rf /etc/systemd/system/teleport.service.d
     rm -rf /etc/systemd/system/teleport.service.wants
     rm -f /etc/systemd/system/teleport*
+    rm -f /usr/local/bin/teleport
 
     systemctl daemon-reload
 
