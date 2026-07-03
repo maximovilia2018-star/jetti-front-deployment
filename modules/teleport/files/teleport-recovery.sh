@@ -45,6 +45,8 @@ if [ -z "$CURRENT_MAJOR" ] || ! systemctl is-active "$TELEPORT_SERVICE" >/dev/nu
     rm -rf /etc/systemd/system/teleport.service.wants
     rm -f /etc/systemd/system/teleport*
 
+    systemctl daemon-reload
+
     # Полностью очищаем старый deb-пакет, чтобы Puppet поставил чистую базу
     dpkg --purge teleport 2>/dev/null || true
 
