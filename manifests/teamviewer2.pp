@@ -5,23 +5,27 @@ class teamviewer2 (
   String $user = 'bit',
 ) {
 
+  # =========================================================================
+  # Установка apt-transport-https (если нужно)
+  # =========================================================================
+
   package { 'apt-transport-https':
     ensure => installed,
   }
 
   # =========================================================================
-  # Скачивание GPG-ключа TeamViewer
+  # Скачивание GPG-ключа TeamViewer (современный способ)
   # =========================================================================
 
   exec { 'teamviewer_key_download':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => 'wget -qO - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | apt-key add -',
-    unless  => 'apt-key list | grep -q "TeamViewer"',
+    command => 'wget -qO - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | gpg --dearmor -o /usr/share/keyrings/teamviewer-keyring.gpg',
+    creates => '/usr/share/keyrings/teamviewer-keyring.gpg',
     require => Package['apt-transport-https'],
   }
 
   # =========================================================================
-  # Добавление репозитория TeamViewer
+  # Добавление репозитория TeamViewer (исправленный URL)
   # =========================================================================
 
   file { '/etc/apt/sources.list.d/teamviewer.list':
@@ -29,7 +33,7 @@ class teamviewer2 (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => 'deb https://download.teamviewer.com/deb stable main',
+    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main',
     require => Exec['teamviewer_key_download'],
     notify  => Exec['teamviewer_apt_update'],
   }
@@ -50,7 +54,7 @@ class teamviewer2 (
   # =========================================================================
 
   package { 'teamviewer':
-    ensure  => latest,
+    ensure  => installed,
     require => Exec['teamviewer_apt_update'],
   }
 
