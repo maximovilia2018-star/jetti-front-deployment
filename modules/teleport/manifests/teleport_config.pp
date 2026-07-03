@@ -2,29 +2,18 @@ class teleport::teleport_config {
   file { "/etc/rsyslog.d/13-teleport.conf":
     ensure  => 'present',
     replace => 'yes',
-    content => ':rawmsg, contains, "teleport" /var/log/teleport.log
-&~'
- ,
+    content => ':rawmsg, contains, "teleport" /var/log/teleport.log\n&~',
+    notify  => Service['rsyslog'],
   }
 
   file { "/etc/logrotate.d/teleport":
     notify  => Service['syslog'],
     ensure  => 'present',
     replace => 'yes',
-    content => "/var/log/teleport.log {
-      rotate 7
-      daily
-      missingok
-      notifempty
-      compress
-      size 5M
-}"
- ,
+    content => "/var/log/teleport.log {\n  rotate 7\n  daily\n  missingok\n  notifempty\n  compress\n  size 5M\n}",
   }
   
   file { '/etc/teleport.yaml':
-      require => Package['teleport'],
-      notify  => Service['teleport'],
       ensure  => present,
       owner   => 'root',
       group   => 'root',
@@ -32,7 +21,7 @@ class teleport::teleport_config {
       replace => 'yes',
       content => "version: v3
 teleport:
-  nodename: $hostname
+  nodename: ${facts['networking']['hostname']}
   auth_token: 0c3a633af933fbb243a3a9f7fa37c347382f444e66ec3685
   data_dir: /var/lib/teleport
   proxy_server: teleport.x100group.com:443
@@ -48,8 +37,8 @@ auth_service:
 ssh_service:
   enabled: \"yes\"
   labels:
-    env: $tele_env
-    group: $tele_group
+    env: \"${tele_env}\"
+    group: \"${tele_group}\"
   commands:
   - name: hostname
     command: [hostname]
@@ -60,18 +49,25 @@ proxy_service:
   https_keypairs_reload_interval: 0s
   acme: {}",
   }
-    service { 'teleport':
-    name => 'teleport',
-    ensure  => 'running',
-    enable  => true,
+
+  service { 'teleport':
+    ensure     => 'running',
+    enable     => true,
     hasrestart => true,
-    require    => Package['teleport'],
   }
 
-  service { 'syslog':
-    name => 'syslog',
-    ensure  => 'running',
+  service { 'rsyslog':
+    ensure     => 'running',
+    enable     => true,
     hasrestart => true,
+  }
+
+  exec { 'enable-teleport-managed-updates':
+    path    => [ '/usr/bin', '/bin', '/usr/local/bin', '/opt/teleport/system/bin' ],
+    command => '/opt/teleport/system/bin/teleport-update enable',
+    user    => 'root',
+    require => Service['teleport'],
+    unless  => '/opt/teleport/system/bin/teleport-update status | grep -qi "enabled: true"',
   }
 
 }
