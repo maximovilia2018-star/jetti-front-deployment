@@ -101,7 +101,8 @@ node /(?i)^ua-sm-*/{
   include ua_pw_change
 }
 
-node /(?i)^ua-pos-test*/{
+#node /(?i)^ua-pos-test*/{
+node /(?i)^ua-pos-test.*/ {
   $ua_sm_fr               = '2.0.0-hotfix.271'
   $ua_sm_sp               = '0.1.14-alpha.31'
   $checkbox               = '1.7.5'
