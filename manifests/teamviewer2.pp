@@ -26,7 +26,7 @@ class teamviewer2 (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main\n',
+    content => 'deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main',
     replace => true,
     require => Exec['divert_teamviewer_list'],
     notify  => Exec['teamviewer_apt_update'],
