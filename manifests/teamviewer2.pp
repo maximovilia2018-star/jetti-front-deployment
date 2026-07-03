@@ -17,8 +17,7 @@ class teamviewer2 (
   }
 
   package { 'teamviewer':
-    ensure  => installed,
-    require => Apt::Source['teamviewer'],
+    ensure => installed,
   }
 
   service { 'teamviewerd':
@@ -49,13 +48,12 @@ class teamviewer2 (
     owner   => $user,
     group   => $user,
     mode    => '0644',
-    content => @("EOF")
-[Desktop Entry]
+    content => "[Desktop Entry]
 Type=Application
 Name=TeamViewer
 Exec=/usr/bin/teamviewer
 X-GNOME-Autostart-enabled=true
-| EOF
+",
     require => [
       Package['teamviewer'],
       File["/home/${user}/.config/autostart"],
