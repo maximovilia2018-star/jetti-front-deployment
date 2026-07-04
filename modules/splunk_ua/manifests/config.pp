@@ -13,7 +13,7 @@ class splunk_ua::config (
     owner   => 'splunk',
     group   => 'splunk',
     mode    => '0755',
-    require => Class['splunk::install'],
+    require => Class['splunk_ua::install'],
   }
 
   # inputs.conf - какие логи собирать
