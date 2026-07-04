@@ -128,7 +128,7 @@ node /(?i)^ua-pos-test.*/ {
   include base_soft
   #include swapfile4
   include teleport
-  include splunk
+  #include splunk
   include ua_pw_change
   include teamviewer2
   include log_config
