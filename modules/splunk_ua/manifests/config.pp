@@ -2,7 +2,7 @@
 #
 # Настройка Splunk Universal Forwarder.
 
-class splunk::config (
+class splunk_ua::config (
   String $splunk_srv,
   String $splunk_inx,
 ) {
