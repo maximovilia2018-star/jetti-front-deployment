@@ -5,6 +5,9 @@
 class splunk_ua (
   String $splunk_srv = pick($::splunk_srv, 'splunk.x100group.com'),
   String $splunk_inx = pick($::splunk_inx, 'jetti_ua'),
+  #String $splunk_srv,
+  #String $splunk_inx,
+
 ) {
 
   # Установка Splunk Forwarder
