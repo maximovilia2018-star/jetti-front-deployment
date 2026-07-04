@@ -27,9 +27,9 @@ class splunk::config (
 blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
-| EOF
+| EOF,
     require => File['/opt/splunkforwarder/etc/system/local'],
-    notify  => Service['splunkforwarder'],
+    notify => Service['splunk'],
   }
 
   # outputs.conf - куда логи отправлять
@@ -46,9 +46,9 @@ defaultGroup = default-autolb-group
 server = ${splunk_srv}:9997
 
 [tcpout-server://${splunk_srv}:9997]
-| EOF
+| EOF,
     require => File['/opt/splunkforwarder/etc/system/local'],
-    notify  => Service['splunkforwarder'],
+    notify => Service['splunk'],
   }
 
   # DAG
