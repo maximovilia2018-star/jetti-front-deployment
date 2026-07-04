@@ -21,18 +21,18 @@ class splunk_ua::install (
   # Единая проверка установленной версии
   $version_check = "test \"\$(dpkg-query -W -f='\${Version}' splunkforwarder 2>/dev/null)\" = '${splunk_version}'"
 
-  # Скачиваем пакет, ТОЛЬКО если нужная версия не установлена
   exec { 'splunk_download':
     command => "rm -f ${local_path}.tmp && wget -q -O ${local_path}.tmp ${splunk_url} && mv ${local_path}.tmp ${local_path}",
+    creates => $local_path,
     unless  => $version_check,
     timeout => 600,
   }
 
   # Установка пакета через dpkg с автоматическим исправлением зависимостей
-  # apt-get вызывается ТОЛЬКО при ошибке dpkg (экономия времени)
   exec { 'splunk_install':
     command => "dpkg -i ${local_path} || (apt-get -y -f install && dpkg -i ${local_path})",
     unless  => $version_check,
+    require => Exec['splunk_download'],
   }
 
   # Удаление deb-пакета и временного файла
@@ -46,29 +46,18 @@ class splunk_ua::install (
   }
 
   # Принятие лицензии и создание автозапуска
-  # Splunk enable boot-start создает /etc/init.d/splunk
   exec { 'splunk_enable_boot':
     command => '/opt/splunkforwarder/bin/splunk enable boot-start -user splunk --accept-license --answer-yes --no-prompt',
     creates => '/etc/init.d/splunk',
+    require => Exec['splunk_install'],
   }
 
-  # Сервис Splunk (имя: splunk) systemd генерирует splunk.service из /etc/init.d/splunk
+  # Сервис Splunk (управление только запуском, перезапуск через notify из config)
   service { 'splunk':
     ensure    => running,
     enable    => true,
     hasstatus => true,
+    require   => Exec['splunk_enable_boot'],
   }
-
-  # DAG
-  Exec['splunk_download']
-    -> Exec['splunk_install']
-    -> Exec['splunk_enable_boot']
-    -> Service['splunk']
-
-  Exec['splunk_install']
-    -> File[
-      $local_path,
-      "${local_path}.tmp",
-    ]
 
 }
