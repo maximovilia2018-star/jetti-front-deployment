@@ -16,8 +16,10 @@ class splunk (
     fail("Unsupported OS: ${facts['os']['name']}. Only Ubuntu is supported.")
   }
 
-  if !($facts['os']['release']['major'] in ['20', '22']) {
-    fail("Unsupported Ubuntu version: ${facts['os']['release']['full']}. Only 20.04 and 22.04 are supported.")
+  $release = $facts['os']['release']['full']
+
+  unless $release =~ /^(20\.04|22\.04)/ {
+    fail("Unsupported Ubuntu version: ${release}. Only Ubuntu 20.04 and 22.04 are supported.")
   }
 
   # Установка Splunk Forwarder
@@ -31,7 +33,7 @@ class splunk (
     splunk_inx => $splunk_inx,
   }
 
-  # Четкая цепочка зависимостей
+  # Цепочка зависимостей
   Class['splunk::install']
     -> Class['splunk::config']
 
