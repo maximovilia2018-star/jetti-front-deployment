@@ -9,11 +9,10 @@ class splunk_ua::config (
 
   # Директория конфигурации
   file { '/opt/splunkforwarder/etc/system/local':
-    ensure  => directory,
-    owner   => 'splunk',
-    group   => 'splunk',
-    mode    => '0755',
-    #require => Class['splunk_ua::install'],
+    ensure => directory,
+    owner  => 'splunk',
+    group  => 'splunk',
+    mode   => '0755',
   }
 
   # inputs.conf - какие логи собирать
@@ -28,8 +27,8 @@ blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
 | EOF
-    #require => File['/opt/splunkforwarder/etc/system/local'],
-    notify => Service['splunk'],
+    require => File['/opt/splunkforwarder/etc/system/local'],
+    notify  => Service['splunk'],
   }
 
   # outputs.conf - куда логи отправлять
@@ -47,15 +46,8 @@ server = ${splunk_srv}:9997
 
 [tcpout-server://${splunk_srv}:9997]
 | EOF
-    #require => File['/opt/splunkforwarder/etc/system/local'],
-    notify => Service['splunk'],
+    require => File['/opt/splunkforwarder/etc/system/local'],
+    notify  => Service['splunk'],
   }
-
-  # DAG
-  File['/opt/splunkforwarder/etc/system/local']
-    -> File['/opt/splunkforwarder/etc/system/local/inputs.conf']
-
-  File['/opt/splunkforwarder/etc/system/local']
-    -> File['/opt/splunkforwarder/etc/system/local/outputs.conf']
 
 }
