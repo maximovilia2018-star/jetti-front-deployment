@@ -1,4 +1,4 @@
-class splunk_old {
+class splunk {
   package { 'splunkforwarder':
     name => 'splunkforwarder',
   }
