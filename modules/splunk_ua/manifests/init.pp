@@ -6,9 +6,9 @@
 # По умолчанию: '8.2.2'
 
 class splunk_ua (
-  String $splunk_version = pick($::splunk_version, '8.2.2'),
-  String $splunk_srv     = pick($::splunk_srv, 'splunk.x100group.com'),
-  String $splunk_inx     = pick($::splunk_inx, 'jetti_ua'),
+  Enum['8.2.2'] $splunk_version = pick($::splunk_version, '8.2.2'),
+  String        $splunk_srv     = pick($::splunk_srv, 'splunk.x100group.com'),
+  String        $splunk_inx     = pick($::splunk_inx, 'jetti_ua'),
 ) {
 
   # Проверка поддерживаемой ОС
