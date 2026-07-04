@@ -24,7 +24,7 @@ class splunk_ua::config (
     group   => 'splunk',
     mode    => '0644',
     content => "[monitor:///var/log]
-blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
+blacklist = journal|AtolFptrWebServer|teamviewer15|installer|zabbix|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
 ",
