@@ -28,7 +28,7 @@ blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
 | EOF
-    require => File['/opt/splunkforwarder/etc/system/local'],
+    #require => File['/opt/splunkforwarder/etc/system/local'],
     notify => Service['splunk'],
   }
 
@@ -47,7 +47,7 @@ server = ${splunk_srv}:9997
 
 [tcpout-server://${splunk_srv}:9997]
 | EOF
-    require => File['/opt/splunkforwarder/etc/system/local'],
+    #require => File['/opt/splunkforwarder/etc/system/local'],
     notify => Service['splunk'],
   }
 
