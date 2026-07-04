@@ -22,12 +22,12 @@ class splunk::config (
     owner   => 'splunk',
     group   => 'splunk',
     mode    => '0644',
-    content => @("EOF")
+    content => @("EOF"),
 [monitor:///var/log]
 blacklist = journal|AtolFptrWebServer|teamviewer15|installer|\.(?:old|1|gz)$
 disabled = false
 index = ${splunk_inx}
-| EOF,
+| EOF
     require => File['/opt/splunkforwarder/etc/system/local'],
     notify => Service['splunk'],
   }
@@ -38,7 +38,7 @@ index = ${splunk_inx}
     owner   => 'splunk',
     group   => 'splunk',
     mode    => '0644',
-    content => @("EOF")
+    content => @("EOF"),
 [tcpout]
 defaultGroup = default-autolb-group
 
@@ -46,7 +46,7 @@ defaultGroup = default-autolb-group
 server = ${splunk_srv}:9997
 
 [tcpout-server://${splunk_srv}:9997]
-| EOF,
+| EOF
     require => File['/opt/splunkforwarder/etc/system/local'],
     notify => Service['splunk'],
   }
