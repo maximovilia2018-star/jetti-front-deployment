@@ -16,8 +16,4 @@ class splunk_ua (
     splunk_inx => $splunk_inx,
   }
 
-  # Четкая цепочка зависимостей
-  Class['splunk_ua::install']
-    -> Class['splunk_ua::config']
-
 }
