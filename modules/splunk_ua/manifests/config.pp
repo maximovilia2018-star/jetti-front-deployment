@@ -9,10 +9,10 @@ class splunk_ua::config (
 
   # Директория конфигурации
   file { '/opt/splunkforwarder/etc/system/local':
-    ensure => directory,
-    owner  => 'splunk',
-    group  => 'splunk',
-    mode   => '0755',
+    ensure  => directory,
+    owner   => 'splunk',
+    group   => 'splunk',
+    mode    => '0755',
   }
 
   # inputs.conf - какие логи собирать
@@ -28,7 +28,7 @@ disabled = false
 index = ${splunk_inx}
 | EOF
     require => File['/opt/splunkforwarder/etc/system/local'],
-    notify  => Service['splunk'],
+    notify => Service['splunk'],
   }
 
   # outputs.conf - куда логи отправлять
@@ -47,7 +47,7 @@ server = ${splunk_srv}:9997
 [tcpout-server://${splunk_srv}:9997]
 | EOF
     require => File['/opt/splunkforwarder/etc/system/local'],
-    notify  => Service['splunk'],
+    notify => Service['splunk'],
   }
 
 }
