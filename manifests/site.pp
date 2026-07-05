@@ -125,7 +125,7 @@ node /(?i)^ua-pos-test.*/ {
   #  zabbix_version => '6.4',
   #}
   include base_soft
-  #include swapfile4
+  include swapfile
   include teleport
   include splunk_ua
   include ua_pw_change
