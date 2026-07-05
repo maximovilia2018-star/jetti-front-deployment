@@ -126,6 +126,7 @@ node /(?i)^ua-pos-test.*/ {
   #}
   include base_soft
   #include swapfile
+  include journald
   include teleport
   include splunk_ua
   include ua_pw_change
