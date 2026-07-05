@@ -11,7 +11,15 @@ class teleport::teleport_config {
   file { "/etc/logrotate.d/teleport":
     ensure  => 'present',
     replace => 'yes',
-    content => "/var/log/teleport.log {\n  rotate 7\n  daily\n  missingok\n  notifempty\n  compress\n  size 5M\n}",
+    content => "/var/log/teleport.log {
+      rotate 7
+      daily
+      missingok
+      notifempty
+      compress
+      size 5M
+}"
+ ,
   }
   
   file { '/etc/teleport.yaml':
