@@ -2,7 +2,9 @@ class teleport::teleport_config {
   file { "/etc/rsyslog.d/13-teleport.conf":
     ensure  => 'present',
     replace => 'yes',
-    content => ':rawmsg, contains, "teleport" /var/log/teleport.log\n&~',
+    content => ':rawmsg, contains, "teleport" /var/log/teleport.log
+&~'
+ ,
     notify  => Service['rsyslog'],
   }
 
