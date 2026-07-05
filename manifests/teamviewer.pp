@@ -1,64 +1,86 @@
-class teamviewer {
+# teamviewer.pp - production POS installation (minimal & stable)
+class teamviewer (
+  String $user    = 'bit',
+  String $repo    = 'https://linux.teamviewer.com/deb',
+  String $key_url = 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc',
+) {
+  $keyring    = '/usr/share/keyrings/teamviewer-keyring.gpg'
+  $repo_file  = '/etc/apt/sources.list.d/teamviewer.list'
 
-  # https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
-  $deb_file = 'teamviewer_amd64.deb'
-  $download_url = "https://download.teamviewer.com/download/linux/${deb_file}"
-  $local_path = "/tmp/${deb_file}"
-
-  if ! defined(Package['wget']) {
-    package { 'wget': ensure => installed }
+  exec { 'teamviewer_key_download':
+    command => "/usr/bin/wget -qO - ${key_url} | /usr/bin/gpg --dearmor -o ${keyring}",
+    creates => $keyring,
   }
 
-  exec { 'download-teamviewer-deb':
-    path    => ['/usr/bin', '/bin'],
-    command => "wget -q -O ${local_path} ${download_url}",
-    unless  => '/usr/bin/dpkg-query -W -f=\'${Status}\' teamviewer 2>/dev/null | grep -q "install ok installed"',
-    require => Package['wget'],
+  $teamviewer_orphaned_files = [
+    "${repo_file}.dpkg-dist",
+    "${repo_file}.dpkg-new",
+    "${repo_file}.dpkg-divert",
+  ]
+
+  file { $teamviewer_orphaned_files:
+    ensure => absent,
   }
 
-  exec { 'install-teamviewer-package':
-    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "/usr/bin/apt-get update && /usr/bin/apt-get -y -o DPkg::Options::=--force-confold install ${local_path}",
-    user    => 'root',
-    unless  => '/usr/bin/dpkg-query -W -f=\'${Status}\' teamviewer 2>/dev/null | grep -q "install ok installed"',
-    require => Exec['download-teamviewer-deb'],
-    before  => Service['teamviewerd'],
+  file { $repo_file:
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => "deb [signed-by=${keyring}] ${repo} stable main",
+    require => Exec['teamviewer_key_download'],
+    notify  => Exec['teamviewer_apt_update'],
   }
 
-  exec { 'cleanup-teamviewer-deb':
-    path    => ['/usr/bin', '/bin'],
-    command => "rm -f ${local_path}",
-    onlyif  => "test -f ${local_path}",
-    require => Exec['install-teamviewer-package'],
+  exec { 'teamviewer_apt_update':
+    command     => '/usr/bin/apt-get update',
+    refreshonly => true,
+    timeout     => 120,
+    before      => Package['teamviewer'],
+  }
+
+  package { 'teamviewer':
+    ensure  => installed,
+    require => File[$repo_file],
   }
 
   service { 'teamviewerd':
-    ensure     => 'running',
+    ensure     => running,
     enable     => true,
+    hasstatus  => true,
     hasrestart => true,
+    subscribe  => Package['teamviewer'],
   }
 
-  file { [ '/home/bit/.config', '/home/bit/.config/autostart' ]:
-    ensure => 'directory',
-    owner  => 'bit',
-    group  => 'bit',
+  file { "/home/${user}/.config":
+    ensure => directory,
+    owner  => $user,
+    group  => $user,
     mode   => '0755',
   }
 
-  file { '/home/bit/.config/autostart/TeamViewer.desktop':
-    ensure  => 'present',
-    replace => 'yes',
-    owner   => 'bit',
-    group   => 'bit',
-    mode    => '0644',
-    content => "[Desktop Entry]
-Exec=/opt/teamviewer/tv_bin/script/teamviewer
-Name=TeamViewer
-Type=Application
-Version=1.0
-X-GNOME-Autostart-enabled=true
-",
-    require => [ Exec['install-teamviewer-package'], File['/home/bit/.config/autostart'] ],
+  file { "/home/${user}/.config/autostart":
+    ensure  => directory,
+    owner   => $user,
+    group   => $user,
+    mode    => '0755',
+    require => File["/home/${user}/.config"],
   }
 
+  file { "/home/${user}/.config/autostart/TeamViewer.desktop":
+    ensure  => file,
+    owner   => $user,
+    group   => $user,
+    mode    => '0644',
+    content => "[Desktop Entry]
+Type=Application
+Name=TeamViewer
+Exec=/usr/bin/teamviewer
+X-GNOME-Autostart-enabled=true
+",
+    require => [
+      Package['teamviewer'],
+      File["/home/${user}/.config/autostart"],
+    ],
+  }
 }
