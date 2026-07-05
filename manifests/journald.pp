@@ -3,6 +3,8 @@ class journald {
   service { 'systemd-journald':
     ensure => running,
     enable => true,
+    hasstatus  => true,
+    hasrestart => true,
   }
 
   file_line { 'journald_systemmaxuse':
