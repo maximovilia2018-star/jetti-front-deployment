@@ -1,67 +1,93 @@
+# swapfile.pp - управление файлом подкачки для Ubuntu 20.04/22.04
+# 
+# Настраивает swap-файл указанного размера. Автоматически корректирует
+# размер, если он не соответствует заданному. На POS-терминалах должен
+# быть ровно один swap-файл, поэтому все остальные записи в fstab удаляются.
+#
+# Внимание: класс оптимизирован для стандартных путей без пробелов (например, /swapfile).
 class swapfile (
-  String $swapfile     = '/swapfile',
-  String $swapfilesize = '4096' # Размер в МБ
+  Stdlib::Absolutepath $swapfile     = '/swapfile',
+  Integer[512]         $swapfilesize = 4096,        # Размер в МБ (минимум 512МБ)
 ) {
 
-  # Вычисляем размер в блоках по 1М для утилиты stat (4096 МБ = 4294967296 байт)
-  $size_in_bytes = inline_template('<%= @swapfilesize.to_i * 1024 * 1024 %>')
+  $default_path = ['/bin', '/usr/bin', '/sbin', '/usr/sbin']
+  $size_in_bytes = $swapfilesize * 1024 * 1024
 
-  exec { 'Disable non-compliant swap':
-    path    => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
+  # Экранируем \$, чтобы Puppet не интерпретировал $(...),
+  # а командная оболочка выполнила подстановку при выполнении exec.
+  $correct_size_check = "test -f ${swapfile} && test \"\$(stat -c %s ${swapfile})\" -eq ${size_in_bytes}"
+  $wrong_size_check   = "test -f ${swapfile} && test \"\$(stat -c %s ${swapfile})\" -ne ${size_in_bytes}"
+  
+  $is_swap_check      = "blkid -o value -s TYPE ${swapfile} 2>/dev/null | grep -qx swap"
+  $is_active_check    = "swapon --show=NAME --noheadings | grep -q '^${swapfile}$'"
+
+  # 1. Отключаем старый swap, если его размер изменился
+  exec { 'swap_disable':
     command => "swapoff ${swapfile} || swapoff -a",
-    # Запускать отключение если файл существует, но его размер НЕ совпадает с целевым
-    onlyif  => "test -f ${swapfile} && test \"\$(stat -c %s ${swapfile})\" -ne ${size_in_bytes}",
-    before  => Exec['Purge old swapfile if size incorrect'],
+    onlyif  => "${wrong_size_check} && ${is_active_check}",
+    path    => $default_path,
   }
 
-  exec { 'Purge old swapfile if size incorrect':
-    path    => ['/bin', '/usr/bin'],
+  # 2. Удаляем старый файл, если размер не соответствует
+  exec { 'swap_remove':
     command => "rm -f ${swapfile}",
-    # Удаляем если размер файла на диске не равен целевому
-    onlyif  => "test -f ${swapfile} && test \"\$(stat -c %s ${swapfile})\" -ne ${size_in_bytes}",
-    before  => Exec['Create swap file'],
+    onlyif  => $wrong_size_check,
+    path    => $default_path,
   }
 
-  # Создаем файл подкачки
-  exec { 'Create swap file':
-    path    => ['/bin', '/usr/bin'],
-    command => "/bin/dd if=/dev/zero of=${swapfile} bs=1M count=${swapfilesize}",
-    creates => $swapfile,
+  # 3. Создаем новый swap-файл (fallocate с fallback на dd)
+  exec { 'swap_create':
+    command => "fallocate -l ${swapfilesize}M ${swapfile} || dd if=/dev/zero of=${swapfile} bs=1M count=${swapfilesize}",
+    unless  => $correct_size_check,
+    timeout => 1800,
+    path    => $default_path,
   }
 
-  # Выставляем права 0600
-  file { "Set permissions for ${swapfile}":
-    ensure  => 'present',
-    path    => $swapfile,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    require => Exec['Create swap file'],
-    before  => Exec['Attach swap file'],
+  # 4. Выставляем права (0600) — классический паттерн Puppet в строгом стиле
+  file { $swapfile:
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
   }
 
-  # Форматируем и включаем
-  exec { 'Attach swap file':
-    path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-    command => "/sbin/mkswap ${swapfile} && /sbin/swapon ${swapfile}",
-    require => Exec['Create swap file'],
-    unless  => "/sbin/swapon -s | /bin/grep -qE '^${swapfile}\\s'",
+  # 5. Форматируем swap-файл (только если он еще не swap)
+  exec { 'swap_mkswap':
+    command => "mkswap ${swapfile}",
+    unless  => $is_swap_check,
+    path    => $default_path,
   }
 
-  # Очистка fstab от старых записей
-  exec { 'Clean old swap entries from fstab':
-    path    => ['/bin', '/usr/bin'],
-    command => "sed -i '/swap/ { /^${swapfile}\\s/!d }' /etc/fstab",
-    onlyif  => "grep 'swap' /etc/fstab | grep -vE '^${swapfile}\\s'",
-    before  => File_line['Add swap in fstab'],
+  # 6. Включаем swap (если он еще не активен)
+  exec { 'swap_enable':
+    command => "swapon ${swapfile}",
+    unless  => $is_active_check,
+    path    => $default_path,
   }
 
-  # Добавляем запись в fstab
-  file_line { 'Add swap in fstab':
-    ensure  => 'present',
-    path    => '/etc/fstab',
-    line    => "${swapfile}    none    swap    sw    0 0",
-    match   => "^${swapfile}\\s",
-    require => Exec['Attach swap file'],
+  # 7. Очистка fstab: удаляем любые раскомментированные строки swap, 
+  # которые НЕ принадлежат нашему целевому файлу. Комментарии не трогаем.
+  exec { 'swap_clean_fstab':
+    command => "sed -i '/^[[:space:]]*#/! { /[[:space:]]swap[[:space:]]/ { /^${swapfile}[[:space:]]/!d } }' /etc/fstab",
+    onlyif  => "grep -Ev '^[[:space:]]*(#|${swapfile}[[:space:]])' /etc/fstab | grep -q '[[:space:]]swap[[:space:]]'",
+    path    => $default_path,
   }
+
+  # 8. Добавляем/актуализируем запись в fstab
+  file_line { 'swap_fstab':
+    ensure => present,
+    path   => '/etc/fstab',
+    line   => "${swapfile}    none    swap    sw    0 0",
+    match  => "^${swapfile}[[:space:]]",
+  }
+
+  # Линейная цепочка выполнения
+  Exec['swap_disable']
+    -> Exec['swap_remove']
+    -> Exec['swap_create']
+    -> File[$swapfile]
+    -> Exec['swap_mkswap']
+    -> Exec['swap_enable']
+    -> Exec['swap_clean_fstab']
+    -> File_line['swap_fstab']
 }
