@@ -23,7 +23,7 @@ class swapfile4 (
 
   # 1. Отключаем старый swap, если его размер изменился
   exec { 'swap_disable':
-    command => "swapoff ${swapfile}",
+    command => "swapoff ${swapfile} || swapoff -a",
     onlyif  => "${wrong_size_check} && ${is_active_check}",
     path    => $default_path,
   }
