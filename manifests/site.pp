@@ -69,7 +69,7 @@ node /(?i)^ua-mp-*/{
   include swap_on
   include zabbix
   include splunk
-  #include teleport
+  include teleport
   include teamviewer
   include ua_pw_change
 }
@@ -96,7 +96,7 @@ node /(?i)^ua-sm-*/{
   include swap_on
   include zabbix
   include splunk
-  #include teleport
+  include teleport
   include teamviewer
   include ua_pw_change
 }
@@ -281,7 +281,7 @@ node /(?i)^us-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  #include teleport
+  include teleport
   include zabbix
   include splunk
 }
