@@ -34,12 +34,12 @@ class teleport::config {
 
   # Конфигурация Teleport
   file { '/etc/teleport.yaml':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0640',
-      replace => 'yes',
-      content => "version: v3
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0640',
+    content => @("YAML")
+version: v3
 teleport:
   nodename: ${facts['networking']['hostname']}
   auth_token: 0c3a633af933fbb243a3a9f7fa37c347382f444e66ec3685
@@ -51,23 +51,24 @@ teleport:
     format:
       output: text
   ca_pin: sha256:7600b3aa6b6579796258000802fbcd9c2ed3dcdb7fb70124fcc94fb0e99879c5
-  diag_addr: \"\"
+  diag_addr: ""
 auth_service:
-  enabled: \"no\"
+  enabled: "no"
 ssh_service:
-  enabled: \"yes\"
+  enabled: "yes"
   labels:
-    env: \"${tele_env}\"
-    group: \"${tele_group}\"
+    env: $tele_env
+    group: $tele_group
   commands:
   - name: hostname
     command: [hostname]
     period: 1m0s
 proxy_service:
-  enabled: \"no\"
+  enabled: "no"
   https_keypairs: []
   https_keypairs_reload_interval: 0s
-  acme: {}",
+  acme: {}
+| YAML
   }
 
   # Сервисы
