@@ -23,7 +23,7 @@ class teleport::install (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => @("EOF"),
+    content => @("EOF"/L),
 deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.gpg] https://apt.releases.teleport.dev/ubuntu ${facts['os']['distro']['codename']} stable/v${install_version}
 | EOF
   }
