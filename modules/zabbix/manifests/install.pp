@@ -22,52 +22,41 @@ class zabbix::install (
   $repo_url = "https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu/pool/main/z/zabbix-release/${repo_deb}"
 
   # Установка репозитория Zabbix (только если агент не установлен)
-  exec { 'zabbix_repo_download':
+  exec { 'install_zabbix_repository':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "curl -fsSL -o /tmp/${repo_deb} ${repo_url}",
-    unless  => "/usr/bin/dpkg-query -W zabbix-agent >/dev/null 2>&1",
-    timeout => 120,
-  }
-
-  exec { 'zabbix_repo_install':
-    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "dpkg -i /tmp/${repo_deb}",
-    unless  => "/usr/bin/dpkg-query -W zabbix-agent >/dev/null 2>&1",
-  }
-
-  # Обновляем APT-кэш после установки репозитория
-  exec { 'zabbix_apt_update':
-    path        => ['/usr/bin', '/bin'],
-    command     => 'apt-get update',
-    refreshonly => true,
-    timeout     => 120,
+    command => "wget -q --tries=3 --timeout=30 -O /tmp/${repo_deb} ${repo_url} && dpkg -i /tmp/${repo_deb} && apt-get update -qq",
+    unless  => "dpkg -s zabbix-release >/dev/null 2>&1 && grep -q '/zabbix/${zabbix_version}/' /etc/apt/sources.list.d/zabbix.list 2>/dev/null",
+    timeout => 300,
   }
 
   # Установка Zabbix Agent
   package { 'zabbix-agent':
-    ensure => present,
+    ensure  => present,
+    require => Exec['install_zabbix_repository'],
   }
 
   # Директория для логов
   file { '/var/log/zabbix':
-    ensure => directory,
-    owner  => 'zabbix',
-    group  => 'zabbix',
-    mode   => '0755',
+    ensure  => directory,
+    owner   => 'zabbix',
+    group   => 'zabbix',
+    mode    => '0755',
+    require => Package['zabbix-agent'],
   }
 
-  # Очистка deb-пакета репозитория (после установки агента)
-  exec { 'zabbix_repo_cleanup':
+  # Очистка deb-пакета после установки
+  exec { 'cleanup_zabbix_repo_deb':
     path        => ['/usr/bin', '/bin'],
     command     => "rm -f /tmp/${repo_deb}",
     refreshonly => true,
-    subscribe   => Package['zabbix-agent'],
+    subscribe   => Exec['install_zabbix_repository'],
   }
-  
+
   # DAG
-  Exec['zabbix_repo_download']
-    -> Exec['zabbix_repo_install']
-    ~> Exec['zabbix_apt_update']
+  Exec['install_zabbix_repository']
     -> Package['zabbix-agent']
     -> File['/var/log/zabbix']
+
+  Exec['install_zabbix_repository']
+    ~> Exec['cleanup_zabbix_repo_deb']
 }
