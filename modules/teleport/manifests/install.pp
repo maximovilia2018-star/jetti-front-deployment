@@ -10,10 +10,10 @@ class teleport::install (
   exec { 'teleport_key_download':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
     #command => 'wget -qO - https://apt.releases.teleport.dev/gpg | gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp /usr/share/keyrings/teleport-archive-keyring.gpg',
-    command => 'wget -qO - https://apt.releases.teleport.dev/gpg | ' +
-           'gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && ' +
-           'mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp ' +
-           '/usr/share/keyrings/teleport-archive-keyring.gpg',
+    command => 'wget -qO - https://apt.releases.teleport.dev/gpg | ' .
+               'gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && ' .
+               'mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp ' .
+               '/usr/share/keyrings/teleport-archive-keyring.gpg',
     creates => '/usr/share/keyrings/teleport-archive-keyring.gpg',
   }
 
