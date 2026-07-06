@@ -45,9 +45,11 @@ fi
 # Полная очистка
 log "Полная очистка файлов Teleport..."
 rm -rf /opt/teleport
+rm -f /etc/systemd/system/teleport.service
+rm -f /etc/systemd/system/teleport-upgrade.service
 rm -rf /etc/systemd/system/teleport.service.d
+rm -rf /etc/systemd/system/teleport-upgrade.service.d
 rm -rf /etc/systemd/system/teleport.service.wants
-rm -f /etc/systemd/system/teleport*
 rm -f /usr/local/bin/teleport
 rm -f /usr/local/bin/teleport-update
 rm -f /usr/local/bin/tctl
