@@ -18,13 +18,13 @@ TARGET_MAJOR="${TARGET_MAJOR%%.*}"
 
 # Проверяем, что целевая версия — число
 if ! [[ "$TARGET_MAJOR" =~ ^[0-9]+$ ]]; then
-    echo "ERROR: Invalid target version: ${TARGET_VERSION}" >&2
+    #echo "ERROR: Invalid target version: ${TARGET_VERSION}" >&2
     exit 0  # Выполняем восстановление
 fi
 
 # Проверяем версию установленного бинарника
 if command -v teleport >/dev/null 2>&1; then
-    CURRENT_VERSION=$(teleport version 2>/dev/null | awk '{print $2}')
+    CURRENT_VERSION=$(timeout 3 teleport version 2>/dev/null | awk '{print $2}')
     if [ -n "$CURRENT_VERSION" ]; then
         # Извлекаем мажорную версию
         CURRENT_MAJOR="${CURRENT_VERSION#v}"
@@ -32,7 +32,7 @@ if command -v teleport >/dev/null 2>&1; then
 
         # Проверяем, что текущая версия — число
         if ! [[ "$CURRENT_MAJOR" =~ ^[0-9]+$ ]]; then
-            echo "WARNING: Unexpected teleport version format: ${CURRENT_VERSION}" >&2
+            #echo "WARNING: Unexpected teleport version format: ${CURRENT_VERSION}" >&2
             exit 0  # Выполняем восстановление при неожиданном формате
         fi
     else
@@ -48,7 +48,7 @@ if [ -z "${CURRENT_MAJOR:-}" ]; then
 fi
 
 # Проверка: Сервис не запущен
-if ! systemctl is-active --quiet "$TELEPORT_SERVICE" 2>/dev/null; then
+if ! timeout 2 systemctl is-active --quiet "$TELEPORT_SERVICE" 2>/dev/null; then
     exit 0  # требуется восстановление
 fi
 
