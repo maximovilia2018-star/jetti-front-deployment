@@ -9,11 +9,11 @@ class teleport::install (
   # Подготовка APT-репозитория Teleport: Скачиваем GPG-ключ Teleport (с защитой от поврежденного файла)
   exec { 'teleport_key_download':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    #command => 'wget -qO - https://apt.releases.teleport.dev/gpg | gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp /usr/share/keyrings/teleport-archive-keyring.gpg',
-    command => 'wget -qO - https://apt.releases.teleport.dev/gpg | ' .
-               'gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && ' .
-               'mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp ' .
-               '/usr/share/keyrings/teleport-archive-keyring.gpg',
+    command => 'wget -qO - https://apt.releases.teleport.dev/gpg | gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp /usr/share/keyrings/teleport-archive-keyring.gpg',
+    #command => 'wget -qO - https://apt.releases.teleport.dev/gpg | ' .
+    #           'gpg --dearmor -o /usr/share/keyrings/teleport-archive-keyring.gpg.tmp && ' .
+    #           'mv /usr/share/keyrings/teleport-archive-keyring.gpg.tmp ' .
+    #           '/usr/share/keyrings/teleport-archive-keyring.gpg',
     creates => '/usr/share/keyrings/teleport-archive-keyring.gpg',
   }
 
@@ -23,7 +23,7 @@ class teleport::install (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => @("EOF"/L),
+    content => @("EOF"),
 deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.gpg] https://apt.releases.teleport.dev/ubuntu ${facts['os']['distro']['codename']} stable/v${install_version}
 | EOF
   }
