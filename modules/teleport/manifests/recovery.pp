@@ -38,6 +38,7 @@ class teleport::recovery (
   # Скрипт полностью очищает систему перед переустановкой.
   exec { 'run_teleport_recovery':
     command     => "/usr/local/bin/teleport-recovery.sh ${target_version}",
+    cwd         => '/',
     path        => ['/bin', '/usr/bin', '/usr/local/bin'],
     user        => 'root',
     refreshonly => true,
