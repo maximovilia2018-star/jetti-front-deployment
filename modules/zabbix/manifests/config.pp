@@ -23,7 +23,7 @@ class zabbix::config {
     purge   => true,
     owner   => 'root',
     group   => 'root',
-    mode    => '0755',
+    mode    => '0644',
     require => File['/etc/zabbix'],
     notify  => Service['zabbix-agent'],
   }
