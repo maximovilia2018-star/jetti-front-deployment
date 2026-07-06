@@ -7,6 +7,7 @@
 # Выполняется только при необходимости восстановления.
 
 set -euo pipefail
+cd /tmp
 
 TELEPORT_SERVICE="teleport"
 TARGET_MAJOR=$(echo "$1" | sed 's/v//' | cut -d'.' -f1)
