@@ -3,12 +3,7 @@
 # Настраивает Teleport: логирование, конфигурацию, сервис и автообновления.
 
 class teleport::config {
-#class teleport::config (
-  # Переменные из верхнего scope (с проверкой)
-  #String $tele_env   = 'unknown',
-  #String $tele_group = 'unknown',
-#) {
-    # Логирование через rsyslog
+  # Логирование через rsyslog
   file { '/etc/rsyslog.d/13-teleport.conf':
     ensure  => 'present',
     replace => 'yes',
@@ -29,7 +24,6 @@ class teleport::config {
       compress
       size 5M
 }',
-    # Убран некорректный notify, logrotate подхватит файл при следующем раунде cron
   }
 
   # Конфигурация Teleport
