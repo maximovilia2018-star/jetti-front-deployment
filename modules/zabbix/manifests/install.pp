@@ -5,8 +5,20 @@
 class zabbix::install (
   String $zabbix_version,
 ){
-  # Используем универсальный deb-пакет для Ubuntu 20.04/22.04
-  $repo_deb = "zabbix-release_${zabbix_version}-1+ubuntu22.04_all.deb"
+  # Определяем версию Ubuntu для правильного deb-пакета
+  case $facts['os']['release']['major'] {
+    '20.04': {
+      $ubuntu_repo = 'ubuntu20.04'
+    }
+    '22.04': {
+      $ubuntu_repo = 'ubuntu22.04'
+    }
+    default: {
+      fail("Unsupported Ubuntu version ${facts['os']['release']['major']}. Only 20.04 and 22.04 are supported.")
+    }
+  }
+
+  $repo_deb = "zabbix-release_${zabbix_version}-1+${ubuntu_repo}_all.deb"
   $repo_url = "https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu/pool/main/z/zabbix-release/${repo_deb}"
 
   # Установка репозитория Zabbix (только если агент не установлен)
