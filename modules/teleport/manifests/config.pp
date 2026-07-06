@@ -34,6 +34,8 @@ class teleport::config {
 
   # Конфигурация Teleport
   file { '/etc/teleport.yaml':
+      require => Package['teleport'],
+      notify  => Service['teleport'],
       ensure  => present,
       owner   => 'root',
       group   => 'root',
@@ -57,8 +59,8 @@ auth_service:
 ssh_service:
   enabled: \"yes\"
   labels:
-    env: \"${tele_env}\"
-    group: \"${tele_group}\"
+    env: $tele_env
+    group: $tele_group
   commands:
   - name: hostname
     command: [hostname]
