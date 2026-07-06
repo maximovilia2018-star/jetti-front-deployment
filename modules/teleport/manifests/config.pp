@@ -8,23 +8,28 @@ class teleport::config {
   $tele_env = pick($::tele_env, 'unknown')
   $tele_group = pick($::tele_group, 'unknown')
 
-  # Логирование через rsyslog
+    # Логирование через rsyslog
   file { '/etc/rsyslog.d/13-teleport.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/teleport/13-teleport.conf',
-    notify => Service['rsyslog'],
+    ensure  => 'present',
+    replace => 'yes',
+    content => ':rawmsg, contains, "teleport" /var/log/teleport.log
+&~',
+    notify  => Service['rsyslog'], # Перезапускаем rsyslog при изменении конфига логов
   }
 
   # Ротация логов Teleport (не зависит от rsyslog)
   file { '/etc/logrotate.d/teleport':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/teleport/logrotate-teleport',
+    ensure  => 'present',
+    replace => 'yes',
+    content => '/var/log/teleport.log {
+      rotate 7
+      daily
+      missingok
+      notifempty
+      compress
+      size 5M
+}',
+    # Убран некорректный notify, logrotate подхватит файл при следующем раунде cron
   }
 
   # Конфигурация Teleport
