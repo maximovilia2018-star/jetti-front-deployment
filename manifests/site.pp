@@ -17,7 +17,7 @@ node /(?i)^ru-gs-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include ru_pw_change
 }
@@ -41,7 +41,7 @@ node /(?i)^ru-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include ru_pw_change
 }
@@ -67,7 +67,7 @@ node /(?i)^ua-mp-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include teleport
   include teamviewer
@@ -94,7 +94,7 @@ node /(?i)^ua-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include teleport
   include teamviewer
@@ -153,7 +153,7 @@ node /(?i)^ae-ck-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include vnc_soft
 }
@@ -177,7 +177,7 @@ node /(?i)^kz-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
 }
 
@@ -200,7 +200,7 @@ node /(?i)^by-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
   include ru_pw_change
 }
@@ -230,7 +230,7 @@ node /(?i)^hu-sm-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
 }
 
@@ -253,7 +253,7 @@ node /(?i)^ru-ms-*/{
   include log_config
   include root_ca_cert
   include swap_on
-  include zabbix
+  #include zabbix
   include splunk
 }
 
@@ -282,7 +282,7 @@ node /(?i)^us-sm-*/{
   include root_ca_cert
   include swap_on
   include teleport
-  include zabbix
+  #include zabbix
   include splunk
 }
 
