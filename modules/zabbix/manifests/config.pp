@@ -3,14 +3,16 @@
 # Настройка Zabbix Agent.
 
 class zabbix::config {
-  $zbx_srv = pick($::zbx_srv, 'zabbix6active.x100group.com:10051')
+
+  # Переменные из верхнего scope
+  #$zbx_srv = pick($::zbx_srv, 'zabbix6active.x100group.com:10051')
+
   # Директория конфигурации
   file { '/etc/zabbix':
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => Package['zabbix-agent'],
   }
 
   # Каталог дополнительных конфигураций
@@ -43,12 +45,13 @@ class zabbix::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => @("EOF")
+    content => @("EOF"),
 PidFile=/run/zabbix/zabbix_agentd.pid
 LogFile=/var/log/zabbix/zabbix_agentd.log
 LogFileSize=100
 Server=127.0.0.1
 ServerActive=${zbx_srv}
+ServerActive=$zbx_srv
 Hostname=${facts['networking']['hostname']}
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 TLSConnect=psk
@@ -60,7 +63,7 @@ HostMetadata=x100_linux.autoreg
     require => File['/etc/zabbix'],
     notify  => Service['zabbix-agent'],
   }
-
+  
   # Сервис Zabbix Agent
   service { 'zabbix-agent':
     ensure     => running,
@@ -69,22 +72,4 @@ HostMetadata=x100_linux.autoreg
     hasstatus  => true,
     require    => Package['zabbix-agent'],
   }
-
-  # DAG
-  File['/etc/zabbix']
-    -> File['/etc/zabbix/zabbix_agentd.d']
-    -> File['/etc/zabbix/zabbix_agentd.conf']
-
-  File['/etc/zabbix']
-    -> File['/etc/zabbix/zabbix_x100.psk']
-
-  File['/etc/zabbix/zabbix_agentd.conf']
-    ~> Service['zabbix-agent']
-
-  File['/etc/zabbix/zabbix_x100.psk']
-    ~> Service['zabbix-agent']
-
-  File['/etc/zabbix/zabbix_agentd.d']
-    ~> Service['zabbix-agent']
-
 }
