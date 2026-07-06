@@ -24,7 +24,7 @@ class zabbix::install (
   # Установка репозитория Zabbix (только если агент не установлен)
   exec { 'install_zabbix_repository':
     path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "wget -q --tries=3 --timeout=30 -O /tmp/${repo_deb} ${repo_url} && dpkg -i /tmp/${repo_deb} && apt-get update -qq",
+    command => "wget -q --tries=3 --timeout=30 -O /tmp/${repo_deb} ${repo_url} && dpkg -i --force-confmiss /tmp/${repo_deb} && apt-get update -qq",
     unless  => "dpkg -s zabbix-release >/dev/null 2>&1 && grep -q '/zabbix/${zabbix_version}/' /etc/apt/sources.list.d/zabbix.list 2>/dev/null",
     timeout => 300,
   }
