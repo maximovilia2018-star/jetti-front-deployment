@@ -5,58 +5,69 @@
 class zabbix::install (
   String $zabbix_version,
 ){
-  # Определяем версию Ubuntu для правильного deb-пакета
+  # Определяем кодовое имя Ubuntu для репозитория
   case $facts['os']['release']['major'] {
     '20.04': {
-      $ubuntu_repo = 'ubuntu20.04'
+      $ubuntu_codename = 'focal'
     }
     '22.04': {
-      $ubuntu_repo = 'ubuntu22.04'
+      $ubuntu_codename = 'jammy'
     }
     default: {
       fail("Unsupported Ubuntu version ${facts['os']['release']['major']}. Only 20.04 and 22.04 are supported.")
     }
   }
 
-  $repo_deb = "zabbix-release_${zabbix_version}-1+${ubuntu_repo}_all.deb"
-  $repo_url = "https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu/pool/main/z/zabbix-release/${repo_deb}"
+  # Добавляем репозиторий Zabbix (всегда под управлением Puppet)
+  file { '/etc/apt/sources.list.d/zabbix.list':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => "deb [arch=amd64] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
+  }
 
-  # Установка репозитория Zabbix (только если агент не установлен)
-  exec { 'install_zabbix_repository':
-    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "wget -q --tries=3 --timeout=30 -O /tmp/${repo_deb} ${repo_url} && dpkg -i --force-confmiss /tmp/${repo_deb} && apt-get update -qq",
-    unless  => "dpkg -s zabbix-release >/dev/null 2>&1 && grep -q '/zabbix/${zabbix_version}/' /etc/apt/sources.list.d/zabbix.list 2>/dev/null",
-    timeout => 300,
+  # Добавляем GPG ключ репозитория (всегда под управлением Puppet)
+  file { '/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg':
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/zabbix/zabbix-official-repo.gpg',
+  }
+
+  # Обновляем APT-кэш при изменении репозитория или ключа
+  exec { 'zabbix_apt_update':
+    path        => ['/usr/bin', '/bin'],
+    command     => 'apt-get update -qq',
+    refreshonly => true,
+    timeout     => 300,
+    logoutput   => on_failure,
   }
 
   # Установка Zabbix Agent
   package { 'zabbix-agent':
-    ensure  => present,
-    require => Exec['install_zabbix_repository'],
+    ensure => present,
   }
 
   # Директория для логов
   file { '/var/log/zabbix':
-    ensure  => directory,
-    owner   => 'zabbix',
-    group   => 'zabbix',
-    mode    => '0755',
-    require => Package['zabbix-agent'],
+    ensure => directory,
+    owner  => 'zabbix',
+    group  => 'zabbix',
+    mode   => '0755',
   }
 
-  # Очистка deb-пакета после установки
-  exec { 'cleanup_zabbix_repo_deb':
-    path        => ['/usr/bin', '/bin'],
-    command     => "rm -f /tmp/${repo_deb}",
-    refreshonly => true,
-    subscribe   => Exec['install_zabbix_repository'],
-  }
+  # DAG - все зависимости в одном месте
+  File['/etc/apt/sources.list.d/zabbix.list']
+    ~> Exec['zabbix_apt_update']
 
-  # DAG
-  Exec['install_zabbix_repository']
+  File['/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg']
+    ~> Exec['zabbix_apt_update']
+
+  Exec['zabbix_apt_update']
     -> Package['zabbix-agent']
-    -> File['/var/log/zabbix']
 
-  Exec['install_zabbix_repository']
-    ~> Exec['cleanup_zabbix_repo_deb']
+  Package['zabbix-agent']
+    -> File['/var/log/zabbix']
 }
