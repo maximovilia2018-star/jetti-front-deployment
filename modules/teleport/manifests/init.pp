@@ -22,8 +22,8 @@ class teleport (
 
   # Настройка конфигурации Teleport
   class { 'teleport::config':
-    tele_env   => $tele_env,
-    tele_group => $tele_group,
+    #tele_env   => $tele_env,
+    #tele_group => $tele_group,
   }
 
   # Четкая цепочка зависимостей
