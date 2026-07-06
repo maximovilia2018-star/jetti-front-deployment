@@ -51,7 +51,6 @@ LogFile=/var/log/zabbix/zabbix_agentd.log
 LogFileSize=100
 Server=127.0.0.1
 ServerActive=${zbx_srv}
-ServerActive=$zbx_srv
 Hostname=${facts['networking']['hostname']}
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 TLSConnect=psk
