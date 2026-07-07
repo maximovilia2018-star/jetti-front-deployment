@@ -61,16 +61,22 @@ class zabbix::install (
   }
 
   # DAG - все зависимости в одном месте
-  File['/etc/apt/sources.list.d/zabbix.list']
+  File['/usr/share/keyrings/zabbix.gpg']
+    -> File['/etc/apt/sources.list.d/zabbix.list']
     ~> Exec['zabbix_apt_update']
+    -> Package['zabbix-agent']
+    -> File['/var/log/zabbix']
+  
+  #File['/etc/apt/sources.list.d/zabbix.list']
+  #  ~> Exec['zabbix_apt_update']
 
   #File['/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg']
-  File['/usr/share/keyrings/zabbix.gpg']
-    ~> Exec['zabbix_apt_update']
+  #File['/usr/share/keyrings/zabbix.gpg']
+  #  ~> Exec['zabbix_apt_update']
 
-  Exec['zabbix_apt_update']
-    -> Package['zabbix-agent']
+  #Exec['zabbix_apt_update']
+  #  -> Package['zabbix-agent']
 
-  Package['zabbix-agent']
-    -> File['/var/log/zabbix']
+  #Package['zabbix-agent']
+  #  -> File['/var/log/zabbix']
 }
