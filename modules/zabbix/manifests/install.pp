@@ -24,11 +24,13 @@ class zabbix::install (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => "deb [arch=amd64] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
+    #content => "deb [arch=amd64] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
+    content => "deb [arch=amd64 signed-by=/usr/share/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
   }
 
   # Добавляем GPG ключ репозитория (всегда под управлением Puppet)
-  file { '/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg':
+  #file { '/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg':
+  file { '/usr/share/keyrings/zabbix.gpg':
     ensure => file,
     owner  => 'root',
     group  => 'root',
