@@ -64,7 +64,8 @@ class zabbix::install (
   File['/etc/apt/sources.list.d/zabbix.list']
     ~> Exec['zabbix_apt_update']
 
-  File['/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg']
+  #File['/etc/apt/trusted.gpg.d/zabbix-official-repo.gpg']
+  File['/usr/share/keyrings/zabbix.gpg']
     ~> Exec['zabbix_apt_update']
 
   Exec['zabbix_apt_update']
