@@ -1,5 +1,5 @@
 # teamviewer.pp - production POS installation (minimal & stable)
-class teamviewer (
+class teamviewer_old (
   String $user    = 'bit',
   String $repo    = 'https://linux.teamviewer.com/deb',
   String $key_url = 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc',
