@@ -27,9 +27,8 @@ class teamviewer (
     logoutput => on_failure,
   }
 
-  # Обновляем кэш APT сразу после bootstrap
-  # Флаг refreshonly гарантирует, что эта команда выполнится ВСЕГО ОДИН РАЗ.
-  # При всех последующих запусках Puppet этот exec будет полностью игнорироваться.
+  # Обновляем индекс APT только после успешного bootstrap.
+  # На обычных запусках Puppet этот ресурс не выполняется.
   exec { 'apt_update_after_bootstrap':
     command     => '/usr/bin/apt-get update',
     refreshonly => true,
