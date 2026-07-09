@@ -7,6 +7,7 @@ class jetti_front (
     command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install jetti-front=$version && reboot" ,
     user    => 'root',
     unless  => ["/bin/dpkg -s jetti-front | grep -oP \'Version: $version$\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
+    require => File['/opt/precheck_before_update.sh'],
   }
 
   file { "/etc/environment":
