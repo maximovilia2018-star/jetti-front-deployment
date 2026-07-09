@@ -45,6 +45,10 @@ class teamviewer (
     -> Package['teamviewer']
     -> Service['teamviewerd']
 
+  # Если после установки отсутствует /etc/apt/sources.list.d/teamviewer.list, проверить и удалить блокировку
+  # dpkg-divert --list /etc/apt/sources.list.d/teamviewer.list
+  # dpkg-divert --rename --remove /etc/apt/sources.list.d/teamviewer.list
+
   # Теперь Puppet управляет пакетом через репозиторий.
   package { 'teamviewer':
     ensure => latest,
