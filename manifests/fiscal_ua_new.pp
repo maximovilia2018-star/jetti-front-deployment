@@ -65,6 +65,7 @@ class fiscal_ua_new(
     command => '/bin/bash /opt/checkbox_kasa_multiple.sh',
     user    => 'root',
     logoutput => 'true',
+    require   => File['/opt/checkbox_kasa_multiple.sh'],
     unless  => ["/bin/bash /opt/checkbox_kasa_multiple.sh", "/bin/dpkg -s checkbox-kasa | grep -oP \'Version: $versioncheckbox$\'"],
   }
 
