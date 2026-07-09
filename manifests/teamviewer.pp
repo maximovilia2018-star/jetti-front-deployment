@@ -19,8 +19,7 @@ class teamviewer (
 
   # Устанавливаем из .deb только если пакет отсутствует (bootstrap)
   exec { 'bootstrap_teamviewer':
-    #command   => "/usr/bin/apt-get -y install ./teamviewer_amd64.deb",
-    command   => "/usr/bin/apt-get -y install ./teamviewer_amd64.deb || /usr/bin/apt-get -y -f install; if [ -n \"$(/usr/sbin/dpkg-divert --list /etc/apt/sources.list.d/teamviewer.list)\" ]; then /usr/bin/dpkg-divert --rename --remove /etc/apt/sources.list.d/teamviewer.list; fi",
+    command   => "/usr/bin/apt-get -y install ./teamviewer_amd64.deb",
     cwd       => '/tmp',
     unless    => $package_installed,
     require   => Exec['download_teamviewer'],
