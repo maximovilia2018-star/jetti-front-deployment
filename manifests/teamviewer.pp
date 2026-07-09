@@ -13,6 +13,7 @@ class teamviewer (
     command   => "/usr/bin/wget -qO ${deb_path} ${pkg_source}",
     unless    => $package_installed,
     path      => ['/usr/bin', '/bin'],
+    timeout   => 300,
     logoutput => on_failure,
   }
 
