@@ -18,9 +18,9 @@ log() {
 TARGET_VERSION="${1:-}"
 TARGET_MAJOR="${TARGET_VERSION#v}"
 TARGET_MAJOR="${TARGET_MAJOR%%.*}"
-#echo "=== НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} ===" > "$LOG_FILE"
-log "=== НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} ==="
-log "Target Version: $TARGET_VERSION    Major: $TARGET_MAJOR"
+#echo "-= НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} =-" > "$LOG_FILE"
+log "-- НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} --"
+log "Target Version: $TARGET_VERSION    Major: $TARGET_MAJOR" >&2
 # Проверяем, что целевая версия — число
 if ! [[ "$TARGET_MAJOR" =~ ^[0-9]+$ ]]; then
     log "ERROR: Invalid target version: ${TARGET_VERSION}" >&2
@@ -30,12 +30,12 @@ fi
 # Проверяем версию установленного бинарника
 if command -v teleport >/dev/null 2>&1; then
     CURRENT_VERSION=$(timeout 3 teleport version 2>/dev/null | awk '{print $2}')
-    log "Current version: $CURRENT_VERSION"
+    log "Current version: $CURRENT_VERSION" >&2
     if [ -n "$CURRENT_VERSION" ]; then
         # Извлекаем мажорную версию
         CURRENT_MAJOR="${CURRENT_VERSION#v}"
         CURRENT_MAJOR="${CURRENT_MAJOR%%.*}"
-        log "Current Major: $CURRENT_MAJOR"
+        log "Current Major: $CURRENT_MAJOR" >&2
 
         # Проверяем, что текущая версия — число
         if ! [[ "$CURRENT_MAJOR" =~ ^[0-9]+$ ]]; then
@@ -51,22 +51,22 @@ fi
 
 # Проверка: Teleport не установлен
 if [ -z "${CURRENT_MAJOR:-}" ]; then
-    log "Teleport не установлен"
+    log "Teleport не установлен" >&2
     exit 0  # требуется восстановление
 fi
 
 # Проверка: Сервис не запущен
 if ! timeout 2 systemctl is-active --quiet "$TELEPORT_SERVICE" 2>/dev/null; then
-    log "Сервис не запущен"
+    log "Сервис не запущен" >&2
     exit 0  # требуется восстановление
 fi
 
 # Проверка: Критический разрыв версий ("отставший" агент)
 CRITICAL_VERSION_GAP=$((TARGET_MAJOR - CURRENT_MAJOR))
 if [ "$CRITICAL_VERSION_GAP" -ge 2 ]; then
-    log "Критический разрыв версий"
+    log "Критический разрыв версий" >&2
     exit 0  # требуется восстановление
 fi
 
-log "Все проверки пройдены"
+log "Все проверки пройдены" >&2
 exit 1  # восстановление не требуется
