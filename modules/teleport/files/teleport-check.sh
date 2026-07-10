@@ -29,7 +29,7 @@ fi
 
 # Проверяем версию установленного бинарника
 if command -v teleport >/dev/null 2>&1; then
-    CURRENT_VERSION=$(timeout 3 teleport version 2>/dev/null | awk '{print $2}')
+    CURRENT_VERSION=$(timeout 10 teleport version 2>/dev/null | awk '{print $2}')
     log "Current version: $CURRENT_VERSION" >&2
     if [ -n "$CURRENT_VERSION" ]; then
         # Извлекаем мажорную версию
