@@ -13,6 +13,7 @@ node /(?i)^ru-gs-*/{
     version => "$ru_gs_sp",
     githubtoken => "$githubtoken",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -37,6 +38,7 @@ node /(?i)^ru-sm-*/{
     version => "$ru_sm_sp",
     githubtoken => "$githubtoken",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -63,6 +65,7 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -90,6 +93,7 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -147,6 +151,7 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -171,6 +176,7 @@ node /(?i)^kz-sm-*/{
     version => "$kz_sm_sp",
     githubtoken => "$githubtoken",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -194,6 +200,7 @@ node /(?i)^by-sm-*/{
     version => "$by_sm_sp",
     githubtoken => "$githubtoken",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -224,6 +231,7 @@ node /(?i)^hu-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -247,6 +255,7 @@ node /(?i)^ru-ms-*/{
     version => "$ru_ms_sp",
     githubtoken => "$githubtoken",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
@@ -275,6 +284,7 @@ node /(?i)^us-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
+  include profile_base
   #include base_soft
   #include log_config
   #include root_ca_cert
