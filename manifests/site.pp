@@ -58,7 +58,7 @@ node /(?i)^ua-mp-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
   include teleport
   #include teamviewer
