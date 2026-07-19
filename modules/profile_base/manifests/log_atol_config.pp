@@ -6,7 +6,7 @@
 # - уровень логирования драйверов ATOL (INFO → ERROR)
 # - срок хранения логов драйверов ATOL (14 дней → 2 дня)
 #
-class log_config {
+class profile_base::log_atol_config {
   # Единый путь для exec-ресурсов
   $default_path = ['/usr/bin', '/bin']
 
