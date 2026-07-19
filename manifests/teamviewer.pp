@@ -91,7 +91,7 @@ EOF
 
   # Запуск TeamViewer для пользователя bit (только после установки)
   exec { 'start_teamviewer':
-    command => "/usr/sbin/runuser -u ${user} -- bash -c 'export DISPLAY=:0; export XDG_RUNTIME_DIR=/run/user/1000; export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; sleep 1; nohup /usr>
+    command => "/usr/sbin/runuser -u ${user} -- bash -c 'export DISPLAY=:0; export XDG_RUNTIME_DIR=/run/user/1000; export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; sleep 1; nohup /usr/bin/teamviewer >/dev/null 2>&1 &'",
     path        => ['/usr/bin', '/bin'],
     logoutput   => false,
     refreshonly => true,
