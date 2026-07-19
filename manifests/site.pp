@@ -13,12 +13,12 @@ node /(?i)^ru-gs-*/{
     version => "$ru_gs_sp",
     githubtoken => "$githubtoken",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include ru_pw_change
 }
 
@@ -37,12 +37,12 @@ node /(?i)^ru-sm-*/{
     version => "$ru_sm_sp",
     githubtoken => "$githubtoken",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include ru_pw_change
 }
 
@@ -63,12 +63,12 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include teleport
   include teamviewer
   include ua_pw_change
@@ -90,12 +90,12 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include teleport
   include teamviewer
   include ua_pw_change
@@ -124,16 +124,16 @@ node /(?i)^ua-pos-test.*/ {
   #class { 'zabbix':
   #  zabbix_version => '6.4',
   #}
-  include base_soft
+  #include base_soft
   #include swapfile
-  include journald
-  include splunk_ua
+  #include journald
+  #include splunk_ua
   include teleport
-  include zabbix
+  #include zabbix
   include ua_pw_change
   include teamviewer
-  include log_config
-  include root_ca_cert
+  #include log_config
+  #include root_ca_cert
 }
 
 node /(?i)^ae-ck-*/{
@@ -149,12 +149,12 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include vnc_soft
 }
 
@@ -173,12 +173,12 @@ node /(?i)^kz-sm-*/{
     version => "$kz_sm_sp",
     githubtoken => "$githubtoken",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^by-sm-*/{
@@ -196,12 +196,12 @@ node /(?i)^by-sm-*/{
     version => "$by_sm_sp",
     githubtoken => "$githubtoken",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
   include ru_pw_change
 }
 
@@ -226,12 +226,12 @@ node /(?i)^hu-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^ru-ms-*/{
@@ -249,12 +249,12 @@ node /(?i)^ru-ms-*/{
     version => "$ru_ms_sp",
     githubtoken => "$githubtoken",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   #include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^us-sm-*/{
@@ -277,13 +277,13 @@ node /(?i)^us-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   include teleport
   #include zabbix
-  include splunk
+  #include splunk
 }
 
 node 'default' {
