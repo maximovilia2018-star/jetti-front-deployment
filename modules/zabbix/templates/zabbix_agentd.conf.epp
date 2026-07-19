@@ -1,7 +1,7 @@
 <%- | String $zbx_srv, String $hostname | -%>
 PidFile=/run/zabbix/zabbix_agentd.pid
 LogFile=/var/log/zabbix/zabbix_agentd.log
-LogFileSize=1000
+LogFileSize=100
 Server=127.0.0.1
 ServerActive=<%= $zbx_srv %>
 Hostname=<%= $hostname %>
