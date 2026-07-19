@@ -61,7 +61,7 @@ node /(?i)^ua-mp-*/{
   #include zabbix
   #include splunk
   include teleport
-  include teamviewer
+  #include teamviewer
   include ua_pw_change
 }
 
@@ -85,7 +85,7 @@ node /(?i)^ua-sm-*/{
   #include zabbix
   #include splunk
   include teleport
-  include teamviewer
+  #include teamviewer
   include ua_pw_change
 }
 
