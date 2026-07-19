@@ -102,7 +102,7 @@ node /(?i)^ua-sm-*/{
 }
 
 node /(?i)^ua-pos-test.*/ {
-  $ua_sm_fr               = '2.0.0-hotfix.271'
+  $ua_sm_fr               = '2.0.0-hotfix.273'
   $ua_sm_sp               = '0.1.14-alpha.31'
   $checkbox               = '1.7.5'
   $githubtoken            = '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'
