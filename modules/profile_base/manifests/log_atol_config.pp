@@ -1,4 +1,4 @@
-# log_atol_config.pp - настройка логирования для ATOL-FPTR
+# log_config.pp - настройка логирования для ATOL-FPTR
 #
 # Настраивает:
 # - rsyslog конфигурацию для сбора логов ATOL-fptr
@@ -6,20 +6,9 @@
 # - уровень логирования драйверов ATOL (INFO → ERROR)
 # - срок хранения логов драйверов ATOL (14 дней → 2 дня)
 #
-class profile_base::log_atol_config {
+class log_config {
   # Единый путь для exec-ресурсов
   $default_path = ['/usr/bin', '/bin']
-
-  # Объявляем службу rsyslog для применения изменений в конфигурации
-  ensure_resource('service', 'rsyslog', {
-    ensure => running,
-    enable => true,
-  })
-
-  #service { 'rsyslog':
-  #  ensure     => running,
-  #  enable     => true,
-  #}
 
   # Rsyslog конфигурация для ATOL-fptr (исправлен синтаксис &~ → stop)
   file { '/etc/rsyslog.d/15-atol-fptr.conf':
@@ -30,8 +19,7 @@ class profile_base::log_atol_config {
     content => @("EOF")
 :rawmsg, contains, "atol-fptr-web-server" /var/log/ATOL-fptr.log
 stop
-| EOF,
-    notify  => Service['rsyslog'], # Перезапускаем rsyslog при изменении конфига
+| EOF
   }
 
   # Logrotate конфигурация для ATOL-fptr
@@ -40,7 +28,6 @@ stop
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => File['/etc/rsyslog.d/15-atol-fptr.conf'],
     content => @("EOF")
 /var/log/ATOL-fptr.log {
   daily
