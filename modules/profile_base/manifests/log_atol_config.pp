@@ -1,4 +1,4 @@
-# log_ATOL_config.pp - настройка логирования для ATOL-FPTR
+# log_atol_config.pp - настройка логирования для ATOL-FPTR
 #
 # Настраивает:
 # - rsyslog конфигурацию для сбора логов ATOL-fptr
@@ -6,7 +6,7 @@
 # - уровень логирования драйверов ATOL (INFO → ERROR)
 # - срок хранения логов драйверов ATOL (14 дней → 2 дня)
 #
-class profile_base::log_ATOL_config {
+class profile_base::log_atol_config {
   # Единый путь для exec-ресурсов
   $default_path = ['/usr/bin', '/bin']
 
