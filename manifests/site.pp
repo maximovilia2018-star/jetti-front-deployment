@@ -82,7 +82,7 @@ node /(?i)^ua-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
   include teleport
   #include teamviewer
@@ -131,7 +131,7 @@ node /(?i)^ae-ck-*/{
     appinsightskey => "$applicationinsightskey",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
   include vnc_soft
 }
@@ -152,7 +152,7 @@ node /(?i)^kz-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
 }
 
@@ -199,7 +199,7 @@ node /(?i)^hu-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
 }
 
@@ -245,7 +245,7 @@ node /(?i)^us-sm-*/{
   }
   include profile_base
   include teleport
-  #include zabbix
+  include zabbix
   #include splunk
 }
 
