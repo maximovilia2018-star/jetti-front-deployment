@@ -110,7 +110,7 @@ node /(?i)^ua-pos-test.*/ {
   #  versioncheckbox => $checkbox,
   #}
   include profile_base
-  #include splunk_ua
+  include splunk
   include teleport
   #include zabbix
   include ua_pw_change
