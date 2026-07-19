@@ -16,13 +16,15 @@ class teleport::config {
   file { '/etc/logrotate.d/teleport':
     ensure  => 'present',
     replace => 'yes',
-    content => '/var/log/teleport.log {
+    content => '/var/log/teleport.log
+/var/log/teleport-check.log
+/var/log/teleport-recovery.log {
       rotate 7
       daily
       missingok
       notifempty
       compress
-      size 5M
+      size 2M
 }',
   }
 
