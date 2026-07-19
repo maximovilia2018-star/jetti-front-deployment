@@ -121,9 +121,7 @@ node /(?i)^ua-pos-test.*/ {
   #class { 'fiscal_ua_new':
   #  versioncheckbox => $checkbox,
   #}
-  #class { 'zabbix':
-  #  zabbix_version => '6.4',
-  #}
+  include profile_base
   #include base_soft
   #include swapfile
   #include journald
