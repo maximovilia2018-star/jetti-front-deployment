@@ -14,10 +14,6 @@ node /(?i)^ru-gs-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include ru_pw_change
@@ -39,10 +35,6 @@ node /(?i)^ru-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include ru_pw_change
@@ -66,10 +58,6 @@ node /(?i)^ua-mp-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include teleport
@@ -94,10 +82,6 @@ node /(?i)^ua-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include teleport
@@ -126,16 +110,11 @@ node /(?i)^ua-pos-test.*/ {
   #  versioncheckbox => $checkbox,
   #}
   include profile_base
-  #include base_soft
-  #include swapfile
-  #include journald
   #include splunk_ua
   include teleport
   #include zabbix
   include ua_pw_change
   include teamviewer
-  #include log_config
-  #include root_ca_cert
 }
 
 node /(?i)^ae-ck-*/{
@@ -152,10 +131,6 @@ node /(?i)^ae-ck-*/{
     appinsightskey => "$applicationinsightskey",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include vnc_soft
@@ -177,10 +152,6 @@ node /(?i)^kz-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
 }
@@ -201,10 +172,6 @@ node /(?i)^by-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include ru_pw_change
@@ -232,10 +199,6 @@ node /(?i)^hu-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
 }
@@ -256,10 +219,6 @@ node /(?i)^ru-ms-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
 }
@@ -285,10 +244,6 @@ node /(?i)^us-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   include teleport
   #include zabbix
   #include splunk
