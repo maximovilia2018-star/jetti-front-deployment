@@ -11,10 +11,15 @@ class profile_base::log_atol_config {
   $default_path = ['/usr/bin', '/bin']
 
   # Объявляем службу rsyslog для применения изменений в конфигурации
-  service { 'rsyslog':
-    ensure     => running,
-    enable     => true,
-  }
+  ensure_resource('service', 'rsyslog', {
+    ensure => running,
+    enable => true,
+  })
+
+  #service { 'rsyslog':
+  #  ensure     => running,
+  #  enable     => true,
+  #}
 
   # Rsyslog конфигурация для ATOL-fptr (исправлен синтаксис &~ → stop)
   file { '/etc/rsyslog.d/15-atol-fptr.conf':
