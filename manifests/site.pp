@@ -96,7 +96,7 @@ node /(?i)^ua-pos-test.*/ {
   $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $zbx_srv                = 'zabbix6active.x100group.com:10051'
-  $splunk_srv             = 'splunk.x100-group.com'
+  $splunk_srv             = 'splunk.x100group.com'
   $splunk_inx             = 'jetti_ua'
   $teleport_version       = '16'
   $tele_env               = 'ua-pos'
