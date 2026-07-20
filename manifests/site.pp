@@ -15,7 +15,7 @@ node /(?i)^ru-gs-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include pw_ru_change
 }
 
@@ -36,7 +36,7 @@ node /(?i)^ru-sm-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include pw_ru_change
 }
 
@@ -59,7 +59,7 @@ node /(?i)^ua-mp-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include teleport
   include teamviewer
   include pw_ua_change
@@ -83,7 +83,7 @@ node /(?i)^ua-sm-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include teleport
   include teamviewer
   include pw_ua_change
@@ -132,7 +132,7 @@ node /(?i)^ae-ck-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include vnc_soft
 }
 
@@ -153,7 +153,7 @@ node /(?i)^kz-sm-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^by-sm-*/{
@@ -173,7 +173,7 @@ node /(?i)^by-sm-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
   include pw_ru_change
 }
 
@@ -200,7 +200,7 @@ node /(?i)^hu-sm-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^ru-ms-*/{
@@ -220,7 +220,7 @@ node /(?i)^ru-ms-*/{
   }
   include profile_base
   include zabbix
-  include splunk
+  #include splunk
 }
 
 node /(?i)^us-sm-*/{
@@ -246,7 +246,7 @@ node /(?i)^us-sm-*/{
   include profile_base
   include teleport
   include zabbix
-  include splunk
+  #include splunk
 }
 
 node 'default' {
