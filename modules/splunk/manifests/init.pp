@@ -4,23 +4,11 @@
 class splunk (
 #  String $splunk_srv = pick($facts['splunk_srv'], 'splunk.x100group.comn'),
 #  String $splunk_inx = pick($facts['splunk_inx'], 'jetti_ua3'),
-  String $splunk_srv = 'splunk.x100group.comn3',
-  String $splunk_inx = 'jetti_ua3',
-  #String $splunk_srv,
-  #String $splunk_inx,
+#  String $splunk_srv = 'splunk.x100group.comn33',
+#  String $splunk_inx = 'jetti_ua33',
+  String $splunk_srv,
+  String $splunk_inx,
 ) {
-#class splunk (
-#  String $splunk_srv = '',
-#  String $splunk_inx = '',
-#) {
-#  $srv = $splunk_srv ? {
-#    ''      => 'splunk.x100group.com3',
-#    default => $splunk_srv,
-#  }
-#  $inx = $splunk_inx ? {
-#    ''      => 'jetti_ua3',
-#    default => $splunk_inx,
-#  }
   # Установка Splunk Forwarder
   include splunk::install
   # Настройка Splunk Forwarder
