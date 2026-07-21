@@ -19,7 +19,7 @@ class teleport::config (
   file { '/etc/logrotate.d/teleport':
     ensure  => 'present',
     replace => 'yes',
-    content => '/var/log/teleport.log {
+    content => '/var/log/teleport*.log {
       rotate 7
       daily
       missingok
