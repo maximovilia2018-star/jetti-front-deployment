@@ -3,8 +3,8 @@
 # Настройка Splunk Universal Forwarder.
 
 class splunk::config (
-  String $splunk_srv,
-  String $splunk_inx,
+  String $int_srv,
+  String $int_inx,
 ) {
 
   $conf_dir = '/opt/splunkforwarder/etc/system/local'
@@ -26,7 +26,7 @@ class splunk::config (
     content => "[monitor:///var/log]
 blacklist = journal|AtolFptrWebServer|teamviewer15|installer|zabbix|\.(?:old|1|gz)$
 disabled = false
-index = ${splunk_inx}
+index = ${int_inx}
 ",
     require => File[$conf_dir],
     notify  => Service['splunk'],
@@ -42,9 +42,9 @@ index = ${splunk_inx}
 defaultGroup = default-autolb-group
 
 [tcpout:default-autolb-group]
-server = ${splunk_srv}:9997
+server = ${int_srv}:9997
 
-[tcpout-server://${splunk_srv}:9997]
+[tcpout-server://${int_srv}:9997]
 ",
     require => File[$conf_dir],
     notify  => Service['splunk'],
