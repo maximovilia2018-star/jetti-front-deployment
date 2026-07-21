@@ -3,7 +3,7 @@
 # Установка Zabbix Agent
 
 class zabbix::install (
-  String $zabbix_version,
+  String $zbx_ver,
 ){
   # Определяем кодовое имя Ubuntu для репозитория
   case $facts['os']['release']['major'] {
@@ -24,8 +24,8 @@ class zabbix::install (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    #content => "deb [arch=amd64] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
-    content => "deb [arch=amd64 signed-by=/usr/share/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/${zabbix_version}/ubuntu ${ubuntu_codename} main\n",
+    #content => "deb [arch=amd64] https://repo.zabbix.com/zabbix/${zbx_ver}/ubuntu ${ubuntu_codename} main\n",
+    content => "deb [arch=amd64 signed-by=/usr/share/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/${zbx_ver}/ubuntu ${ubuntu_codename} main\n",
   }
 
   # Добавляем GPG ключ репозитория (всегда под управлением Puppet)
