@@ -5,23 +5,27 @@
 # 1. teleport::recovery - проверка и восстановление (при необходимости)
 # 2. teleport::install - установка пакета Teleport
 # 3. teleport::config - настройка конфигурации Teleport
-
-class teleport (
-  String $version = pick($teleport_version, '16'),
-){
+class teleport {
+  # Перебираем: локальный scope -> scope ноды -> жесткий дефолт
+  $tele_ver = pick($tele_ver, $::tele_ver, '16')
+  $tele_env = pick($tele_env, $::tele_env, 'ua-pos')
+  $tele_grp = pick($tele_grp, $::tele_grp, 'restoran')
 
   # Проверка и восстановление Teleport (при необходимости)
   class { 'teleport::recovery':
-    target_version => $version,
+    target_version => $tele_ver,
   }
 
   # Установка Teleport
   class { 'teleport::install':
-    install_version => $version,
+    install_version => $tele_ver,
   }
 
   # Настройка конфигурации Teleport
-  class { 'teleport::config': }
+  class { 'teleport::config': 
+    tele_env => $tele_env,
+    tele_grp => $tele_grp,
+  }
 
   # Четкая цепочка зависимостей
   Class['teleport::recovery']
