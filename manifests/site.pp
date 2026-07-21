@@ -111,7 +111,7 @@ node /(?i)^ua-pos-test.*/ {
   #}
   include profile_base
   include splunk
-  include splunk2
+  #include splunk2
   include teleport
   include zabbix
   include pw_ua_change
