@@ -1,7 +1,7 @@
 <%- |
 String $hostname,
 String $tele_env,
-String $tele_group
+String $tele_grp
 | -%>
 version: v3
 teleport:
@@ -22,7 +22,7 @@ ssh_service:
   enabled: "yes"
   labels:
     env: <%= $tele_env %>
-    group: <%= $tele_group %>
+    group: <%= $tele_grp %>
   commands:
   - name: hostname
     command: [hostname]
