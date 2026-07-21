@@ -99,7 +99,7 @@ node /(?i)^ua-pos-test.*/ {
   $splunk_srv             = 'splunk.x100group.com'
   $splunk_inx             = 'jetti_ua'
   $splunk_var             = 'Jetti_VAR-site.pp'
-  $teleport_version       = '16'
+  #$teleport_version       = '16'
   $tele_env               = 'ua-pos'
   $tele_group             = 'tested'
 
