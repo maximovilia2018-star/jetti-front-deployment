@@ -2,7 +2,10 @@
 #
 # Настраивает Teleport: логирование, конфигурацию, сервис и автообновления.
 
-class teleport::config {
+class teleport::config (
+  String $tele_env,
+  String $tele_grp,
+) {
   # Логирование через rsyslog
   file { '/etc/rsyslog.d/13-teleport.conf':
     ensure  => 'present',
@@ -16,15 +19,13 @@ class teleport::config {
   file { '/etc/logrotate.d/teleport':
     ensure  => 'present',
     replace => 'yes',
-    content => '/var/log/teleport.log
-/var/log/teleport-check.log
-/var/log/teleport-recovery.log {
+    content => '/var/log/teleport.log {
       rotate 7
       daily
       missingok
       notifempty
       compress
-      size 2M
+      size 5M
 }',
   }
 
@@ -39,9 +40,9 @@ class teleport::config {
     content => epp(
       'teleport/teleport.yaml.epp',
       {
-        'hostname'  => $facts['networking']['hostname'],
-        'tele_env'  => $tele_env,
-        'tele_group'=> $tele_group,
+        'hostname' => $facts['networking']['hostname'],
+        'tele_env' => $tele_env,
+        'tele_grp' => $tele_grp,
       }
     ),
   }
