@@ -84,7 +84,8 @@ class teamviewer (
 [Desktop Entry]
 Type=Application
 Name=TeamViewer
-Exec=/usr/bin/teamviewer
+#Exec=/usr/bin/teamviewer
+Exec=bash -c "sleep 5 && /usr/bin/teamviewer"
 X-GNOME-Autostart-enabled=true
 EOF
   }
