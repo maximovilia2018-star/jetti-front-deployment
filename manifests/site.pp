@@ -98,6 +98,7 @@ node /(?i)^ua-pos-test.*/ {
   $zbx_srv                = 'zabbix6active.x100group.com:10051'
   $splunk_srv             = 'splunk.x100group.com'
   $splunk_inx             = 'jetti_ua'
+  $splunk_var             = 'Jetti_UA-site.pp'
   $teleport_version       = '16'
   $tele_env               = 'ua-pos'
   $tele_group             = 'tested'
