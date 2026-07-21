@@ -58,10 +58,10 @@ node /(?i)^ua-mp-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
-  #include splunk
-  #include teleport
-  #include teamviewer
+  include zabbix
+  include splunk
+  include teleport
+  include teamviewer
   include pw_ua_change
 }
 
@@ -82,10 +82,10 @@ node /(?i)^ua-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
-  #include splunk
-  #include teleport
-  #include teamviewer
+  include zabbix
+  include splunk
+  include teleport
+  include teamviewer
   include pw_ua_change
 }
 
@@ -132,8 +132,8 @@ node /(?i)^ae-ck-*/{
     appinsightskey => "$applicationinsightskey",
   }
   include profile_base
-  #include zabbix
-  #include splunk
+  include zabbix
+  include splunk
   include vnc_soft
 }
 
@@ -200,8 +200,8 @@ node /(?i)^hu-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include zabbix
-  #include splunk
+  include zabbix
+  include splunk
 }
 
 node /(?i)^ru-ms-*/{
@@ -245,9 +245,9 @@ node /(?i)^us-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  #include teleport
-  #include zabbix
-  #include splunk
+  include teleport
+  include zabbix
+  include splunk
 }
 
 node 'default' {
