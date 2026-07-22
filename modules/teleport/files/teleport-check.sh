@@ -18,8 +18,8 @@ log() {
 TARGET_VERSION="${1:-}"
 TARGET_MAJOR="${TARGET_VERSION#v}"
 TARGET_MAJOR="${TARGET_MAJOR%%.*}"
-#echo "-= НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} =-" > "$LOG_FILE"
-log "-- НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} --"
+echo "-= НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} =-" > "$LOG_FILE"
+#log "-- НАЧАЛО ПРОВЕРКИ TARGET=${TARGET_MAJOR} --"
 log "Target Version: $TARGET_VERSION    Major: $TARGET_MAJOR" >&2
 # Проверяем, что целевая версия — число
 if ! [[ "$TARGET_MAJOR" =~ ^[0-9]+$ ]]; then
