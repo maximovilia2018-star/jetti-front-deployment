@@ -14,8 +14,8 @@ node /(?i)^ru-gs-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
-  #include splunk
+  include zabbix
+  include splunk
   include pw_ru_change
 }
 
@@ -35,8 +35,8 @@ node /(?i)^ru-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
-  #include splunk
+  include zabbix
+  include splunk
   include pw_ru_change
 }
 
@@ -153,7 +153,7 @@ node /(?i)^kz-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
 }
 
@@ -173,7 +173,7 @@ node /(?i)^by-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
   include pw_ru_change
 }
@@ -220,7 +220,7 @@ node /(?i)^ru-ms-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  #include zabbix
+  include zabbix
   #include splunk
 }
 
