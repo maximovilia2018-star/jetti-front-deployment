@@ -132,7 +132,7 @@ node /(?i)^ae-ck-*/{
     appinsightskey => "$applicationinsightskey",
   }
   include profile_base
-  include teleport::fix
+  include teleport
   include zabbix
   include splunk
   include vnc_soft
