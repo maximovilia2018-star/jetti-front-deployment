@@ -1,52 +1,52 @@
-node /(?i)^ru-gs-*/{
-  $ru_gs_fr = '2.0.0-hotfix.271'
-  $ru_gs_sp = '0.1.14-alpha.93'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix5.x100group.com:10049'
+#node /(?i)^ru-gs-*/{
+#  $ru_gs_fr = '2.0.0-hotfix.271'
+#  $ru_gs_sp = '0.1.14-alpha.93'
+#  $githubtoken = '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'
+#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+#  $zbx_srv = 'zabbix5.x100group.com:10049'
 
-  class {jetti_front:
-    version => "$ru_gs_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ru_gs_sp",
-    githubtoken => "$githubtoken",
-  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
-  include zabbix
-  include splunk
-  include vnc_soft
-  include ru_pw_change
-}
+#  class {jetti_front:
+#    version => "$ru_gs_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$ru_gs_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include base_soft
+#  include log_config
+#  include root_ca_cert
+#  include swap_on
+#  include zabbix
+#  include splunk
+#  include vnc_soft
+#  include ru_pw_change
+#}
 
-node /(?i)^ru-sm-*/{
-  $ru_sm_fr = '2.0.0-hotfix.271'
-  $ru_sm_sp = '0.1.14-alpha.93'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix5.x100group.com:10049'
+#node /(?i)^ru-sm-*/{
+#  $ru_sm_fr = '2.0.0-hotfix.271'
+#  $ru_sm_sp = '0.1.14-alpha.93'
+#  $githubtoken = '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'
+#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+#  $zbx_srv = 'zabbix5.x100group.com:10049'
 
-  class {jetti_front:
-    version => "$ru_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ru_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
-  include zabbix
-  include splunk
-  include vnc_soft
-  include ru_pw_change
-}
+#  class {jetti_front:
+#    version => "$ru_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$ru_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include base_soft
+#  include log_config
+#  include root_ca_cert
+#  include swap_on
+#  include zabbix
+#  include splunk
+#  include vnc_soft
+#  include ru_pw_change
+#}
 
 node /(?i)^ua-mp-*/{
   $ua_mp_fr = '2.0.0-hotfix.273'
@@ -162,55 +162,55 @@ node /(?i)^ae-ck-*/{
 
 }
 
-node /(?i)^kz-sm-*/{
-  $kz_sm_fr = '2.0.0-hotfix.271'
-  $kz_sm_sp = '0.1.12'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $tele_env = 'kz-sm'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
+#node /(?i)^kz-sm-*/{
+#  $kz_sm_fr = '2.0.0-hotfix.271'
+#  $kz_sm_sp = '0.1.12'
+#  $githubtoken = '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'
+#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+#  $tele_env = 'kz-sm'
+#  $tele_group = 'restoran'
+#  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
-  class {jetti_front:
-    version => "$kz_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$kz_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
-  include zabbix
-  include splunk
+#  class {jetti_front:
+#    version => "$kz_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$kz_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include base_soft
+#  include log_config
+#  include root_ca_cert
+#  include swap_on
+#  include zabbix
+#  include splunk
 
-}
+#}
 
-node /(?i)^by-sm-*/{
-  $by_sm_fr = '2.0.0-hotfix.271'
-  $by_sm_sp = '0.1.12'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix5.x100group.com:10049'
+#node /(?i)^by-sm-*/{
+#  $by_sm_fr = '2.0.0-hotfix.271'
+#  $by_sm_sp = '0.1.12'
+#  $githubtoken = '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'
+#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+#  $zbx_srv = 'zabbix5.x100group.com:10049'
 
-  class {jetti_front:
-    version => "$by_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$by_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
-  include zabbix
-  include splunk
-  include ru_pw_change
-}
+#  class {jetti_front:
+#    version => "$by_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$by_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include base_soft
+#  include log_config
+#  include root_ca_cert
+#  include swap_on
+#  include zabbix
+#  include splunk
+#  include ru_pw_change
+#}
 
 node /(?i)^hu-sm-*/{
   $hu_sm_fr = '2.0.0-hotfix.271'
@@ -225,42 +225,43 @@ node /(?i)^hu-sm-*/{
     version => "$hu_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
-    version => "$hu_sm_sp",
-    githubtoken => "$githubtoken",
-  }
+  #class {jetti_front_fiscal_spooler:
+  #  version => "$hu_sm_sp",
+  #  githubtoken => "$githubtoken",
+  #}
   include base_soft
   include log_config
   include root_ca_cert
+  include teleport
   include swap_on
   include zabbix
   include splunk
 
 }
 
-node /(?i)^ru-ms-*/{
-  $hu_sm_fr = '2.0.0-hotfix.271'
-  $hu_sm_sp = '0.1.12'
-  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix5.x100group.com:10049'
+#node /(?i)^ru-ms-*/{
+#  $hu_sm_fr = '2.0.0-hotfix.271'
+#  $hu_sm_sp = '0.1.12'
+#  $githubtoken = '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'
+#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+#  $zbx_srv = 'zabbix5.x100group.com:10049'
 
-  class {jetti_front:
-    version => "$ru_ms_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ru_ms_sp",
-    githubtoken => "$githubtoken",
-  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
-  include zabbix
-  include splunk
-  include ru_pw_change
-}
+#  class {jetti_front:
+#    version => "$ru_ms_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$ru_ms_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include base_soft
+#  include log_config
+#  include root_ca_cert
+#  include swap_on
+#  include zabbix
+#  include splunk
+#  include ru_pw_change
+#}
 
 node /(?i)^us-sm-*/{
   $us_sm_fr = '2.0.0-hotfix.271'
@@ -275,16 +276,16 @@ node /(?i)^us-sm-*/{
     version => "$us_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
-    version => "$us_sm_sp",
-    githubtoken => "$githubtoken",
-  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$us_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
   include base_soft
   include log_config
   include root_ca_cert
   include swap_on
   include teleport
-  include teleport::teleport_fix
+#  include teleport::teleport_fix
   include zabbix
   include splunk
 }
