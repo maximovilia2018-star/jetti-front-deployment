@@ -63,10 +63,10 @@ class teleport::config (
   # Управление автообновлениями Teleport (если доступно)
   exec { 'teleport_enable_updates':
     path    => ['/usr/bin', '/bin', '/usr/local/bin', '/opt/teleport/system/bin'],
-    command => 'bash -c "teleport-update link-package 2>/dev/null || true; teleport-update enable"',
+    command => 'bash -c "/opt/teleport/system/bin/teleport-update link-package 2>/dev/null || true; /opt/teleport/system/bin/teleport-update enable"',
     user    => 'root',
     onlyif  => 'test -f /opt/teleport/system/bin/teleport-update',
-    unless  => 'teleport-update status 2>&1 | grep -q "enabled: true"',
+    unless  => '/opt/teleport/system/bin/teleport-update status 2>&1 | grep -q "enabled: true"',
   }
 
   # После запуска сервиса → включаем автообновления
