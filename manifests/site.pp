@@ -137,25 +137,25 @@ node /(?i)^ae-ck-*/{
   include vnc_soft
 }
 
-#node /(?i)^kz-sm-*/{
-#  $kz_sm_fr = '2.0.0-hotfix.273'
-#  $kz_sm_sp = '0.1.14-alpha.25'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
+node /(?i)^kz-sm-*/{
+  $kz_sm_fr = '2.0.0-hotfix.273'
+  $kz_sm_sp = '0.1.14-alpha.25'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  $zbx_srv = 'zabbix5.x100group.com:10049'
 
-#  class {jetti_front:
-#    version => "$kz_sm_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$kz_sm_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include profile_base
-#  include zabbix
-#  #include splunk
-#}
+  class {jetti_front:
+    version => "$kz_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {jetti_front_fiscal_spooler:
+    version => "$kz_sm_sp",
+    githubtoken => "$githubtoken",
+  }
+  include profile_base
+  include zabbix
+  #include splunk
+}
 
 #node /(?i)^by-sm-*/{
 #  $by_sm_fr = '2.0.0-hotfix.271'
