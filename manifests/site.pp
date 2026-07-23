@@ -154,7 +154,7 @@ node /(?i)^kz-sm-*/{
     githubtoken => "$githubtoken",
   }
   include profile_base
-  include teleport
+  #include teleport
   include zabbix
   #include splunk
 }
