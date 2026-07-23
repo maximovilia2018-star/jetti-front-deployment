@@ -20,11 +20,10 @@ deb [signed-by=${teleport_keyring}] https://apt.releases.teleport.dev/ubuntu ${f
     mode    => '0755',
     content => @("EOF")
 #!/bin/bash
+set -e
 
-systemctl stop teleport
-apt-get remove -y teleport
-#echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.gpg] https://apt.releases.teleport.dev/ubuntu jammy stable/v16" > /etc/apt/sources.list.d/teleport.list
-apt-get update -qq
+systemctl stop teleport || true
+apt-get purge -y teleport || true
 
 rm -rf /opt/teleport
 rm -rf /var/lib/teleport
@@ -32,17 +31,20 @@ rm -rf /etc/systemd/system/teleport.service.d
 rm -rf /etc/systemd/system/teleport.service.wants
 rm -f /etc/systemd/system/teleport*
 
+systemctl daemon-reload
+
+apt-get update -qq
 apt-get install -y teleport
 | EOF
   }
 
   exec { 'root_fix_sh':
-    path    => ['/usr/bin', '/bin'],
     command => '/root/fix.sh',
-    timeout => 300,
+    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
+    timeout => 600,
   }
 
-  Exec['root_fix_sh']
-    -> File['/etc/apt/sources.list.d/teleport.list']
-    -> Exec['/root/fix.sh']
+  File['/etc/apt/sources.list.d/teleport.list']
+    -> File['/root/fix.sh']
+    -> Exec['root_fix_sh']
 }
