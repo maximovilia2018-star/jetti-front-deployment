@@ -3,11 +3,6 @@ class teleport::fix {
   $install_version = '16'
   $teleport_keyring = '/usr/share/keyrings/teleport-archive-keyring.gpg'
 
-  exec { 'tele_fix_key_download':
-    path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-    command => "wget -qO - https://apt.releases.teleport.dev/gpg | gpg --dearmor -o ${teleport_keyring}.tmp && mv ${teleport_keyring}.tmp ${teleport_keyring}",
-  }
-
   file { '/etc/apt/sources.list.d/teleport.list':
     ensure  => file,
     owner   => 'root',
@@ -18,22 +13,36 @@ deb [signed-by=${teleport_keyring}] https://apt.releases.teleport.dev/ubuntu ${f
 | EOF
   }
 
-  exec { 'tele_fix_apt_update':
-    path      => ['/usr/bin', '/bin'],
-    command   => 'apt-get update',
-    timeout   => 300,
-    tries     => 3,
-    try_sleep => 5,
+  file { '/root/fix.sh':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => @("EOF")
+#!/bin/bash
+
+systemctl stop teleport
+apt-get remove -y teleport
+#echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.gpg] https://apt.releases.teleport.dev/ubuntu jammy stable/v16" > /etc/apt/sources.list.d/teleport.list
+apt-get update -qq
+
+rm -rf /opt/teleport
+rm -rf /var/lib/teleport
+rm -rf /etc/systemd/system/teleport.service.d
+rm -rf /etc/systemd/system/teleport.service.wants
+rm -f /etc/systemd/system/teleport*
+
+apt-get install -y teleport
+| EOF
   }
 
-  exec { 'tele_fix_force_reinstall':
+  exec { 'root_fix_sh':
     path    => ['/usr/bin', '/bin'],
-    command => 'apt-get install -y --reinstall teleport',
+    command => '/root/fix.sh',
     timeout => 300,
   }
 
-  Exec['tele_fix_key_download']
+  Exec['root_fix_sh']
     -> File['/etc/apt/sources.list.d/teleport.list']
-    -> Exec['tele_fix_apt_update']
-    -> Exec['tele_fix_force_reinstall']
+    -> Exec['/root/fix.sh']
 }
