@@ -24,7 +24,7 @@ set -e
 
 systemctl stop teleport || true
 apt-get purge -y teleport || true
-
+echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.gpg] https://apt.releases.teleport.dev/ubuntu jammy stable/v16" > /etc/apt/sources.list.d/teleport.list
 rm -rf /opt/teleport
 rm -rf /var/lib/teleport
 rm -rf /etc/systemd/system/teleport.service.d
@@ -34,7 +34,7 @@ rm -f /etc/systemd/system/teleport*
 systemctl daemon-reload
 
 apt-get update -qq
-apt-get install -y teleport
+apt-get install --reinstall -y teleport=16.5.18
 | EOF
   }
 
