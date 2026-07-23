@@ -30,7 +30,7 @@ deb [signed-by=${teleport_keyring}] https://apt.releases.teleport.dev/ubuntu ${f
     path        => ['/usr/bin', '/bin'],
     command     => 'apt-get update',
     refreshonly => true,
-    timeout     => 120,
+    timeout     => 300,
     tries       => 3,
     try_sleep   => 5,
   }
