@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=CashDesk
+Comment=Cash Desk Sushi Master
+Exec=jetti-front
+Hidden=false
+NoDisplay=false
+Terminal=false
