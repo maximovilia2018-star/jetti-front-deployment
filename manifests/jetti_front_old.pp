@@ -1,4 +1,4 @@
-class jetti_front (
+class jetti_front_old (
     $version,
     $appinsightskey,
 ) {
