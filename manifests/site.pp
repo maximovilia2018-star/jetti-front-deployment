@@ -1,45 +1,3 @@
-#node /(?i)^ru-gs-*/{
-#  $ru_gs_fr = '2.0.0-hotfix.271'
-#  $ru_gs_sp = '0.1.14-alpha.91'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
-
-#  class {jetti_front:
-#    version => "$ru_gs_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$ru_gs_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include profile_base
-#  include zabbix
-#  include splunk
-#  include pw_ru_change
-#}
-
-#node /(?i)^ru-sm-*/{
-#  $ru_sm_fr = '2.0.0-hotfix.271'
-#  $ru_sm_sp = '0.1.14-alpha.91'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
-
-#  class {jetti_front:
-#    version => "$ru_sm_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$ru_sm_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include profile_base
-#  include zabbix
-#  include splunk
-#  include pw_ru_change
-#}
-
 node /(?i)^ua-mp-*/{
   $ua_mp_fr = '2.0.0-hotfix.273'
   $ua_mp_sp = '0.1.14-alpha.31'
@@ -54,7 +12,7 @@ node /(?i)^ua-mp-*/{
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
   include profile_base
@@ -159,27 +117,6 @@ node /(?i)^kz-sm-*/{
   #include splunk
 }
 
-#node /(?i)^by-sm-*/{
-#  $by_sm_fr = '2.0.0-hotfix.271'
-#  $by_sm_sp = '0.1.13-rc.2'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
-
-#  class {jetti_front:
-#    version => "$by_sm_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$by_sm_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include profile_base
-#  include zabbix
-#  #include splunk
-#  include pw_ru_change
-#}
-
 node /(?i)^hu-sm-*/{
   $hu_sm_fr = '2.0.0-hotfix.273'
   $hu_sm_sp = '0.1.14-alpha.31'
@@ -206,26 +143,6 @@ node /(?i)^hu-sm-*/{
   include zabbix
   include splunk
 }
-
-#node /(?i)^ru-ms-*/{
-#  $hu_sm_fr = '2.0.0-hotfix.273'
-#  $hu_sm_sp = '0.1.12'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv = 'zabbix5.x100group.com:10049'
-
-#  class {jetti_front:
-#    version => "$ru_ms_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$ru_ms_sp",
-#    githubtoken => "$githubtoken",
-#  }
-#  include profile_base
-#  include zabbix
-#  #include splunk
-#}
 
 node /(?i)^us-sm-*/{
   $us_sm_fr = '2.0.0-hotfix.271'
