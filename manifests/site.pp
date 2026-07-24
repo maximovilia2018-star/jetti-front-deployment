@@ -91,9 +91,9 @@ node /(?i)^ae-ck-*/{
   }
   include profile_base
   #include teleport::conf
-  include zabbix
-  include splunk
-  include vnc_soft
+  #include zabbix
+  #include splunk
+  #include vnc_soft
 }
 
 node /(?i)^kz-sm-*/{
@@ -113,7 +113,7 @@ node /(?i)^kz-sm-*/{
   }
   include profile_base
   #include teleport
-  include zabbix
+  #include zabbix
   #include splunk
 }
 
@@ -139,9 +139,9 @@ node /(?i)^hu-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  include teleport
-  include zabbix
-  include splunk
+  #include teleport
+  #include zabbix
+  #include splunk
 }
 
 node /(?i)^us-sm-*/{
@@ -165,9 +165,9 @@ node /(?i)^us-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile_base
-  include teleport
-  include zabbix
-  include splunk
+  #include teleport
+  #include zabbix
+  #include splunk
 }
 
 node 'default' {
