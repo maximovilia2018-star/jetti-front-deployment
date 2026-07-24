@@ -248,8 +248,8 @@ do
         }
 
     log "Enable and Start service checkbox-kasa@$num"
-#    systemctl enable "checkbox-kasa@$num"
-#    systemctl start "checkbox-kasa@$num"
+    systemctl enable "checkbox-kasa@$num"
+    systemctl start "checkbox-kasa@$num"
 
 done < <(jq -c '.result.fiscalSettings[]' <<<"$cashbox_response")
 
@@ -282,8 +282,8 @@ if mkdir -p "$archdir"; then
         fi
 
         log "Stop and Disable service checkbox-kasa@$num"
-#         systemctl stop "checkbox-kasa@$num"
-#         systemctl disable "checkbox-kasa@$num"
+        systemctl stop "checkbox-kasa@$num"
+        systemctl disable "checkbox-kasa@$num"
 
         # Перемещение и логирование
         if mv "$confdir" "$target_arch"; then
