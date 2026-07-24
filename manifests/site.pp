@@ -8,10 +8,10 @@ node /(?i)^ua-mp-*/{
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
 
-  class {jetti_front:
-    version => "$ua_mp_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$ua_mp_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
@@ -32,10 +32,10 @@ node /(?i)^ua-sm-*/{
   $tele_env = 'ua-sm'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-  class {jetti_front:
-    version => "$ua_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$ua_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
@@ -60,10 +60,10 @@ node /(?i)^ua-pos-test.*/ {
   $tele_env               = 'ua-pos'
   $tele_grp               = 'tested'
 
-  class { 'jetti_front':
-    version        => $ua_sm_fr,
-    appinsightskey => $applicationinsightskey,
-  }
+#  class { 'jetti_front':
+#    version        => $ua_sm_fr,
+#    appinsightskey => $applicationinsightskey,
+#  }
   class { 'fiscal_ua':
     versioncheckbox => $checkbox,
   }
@@ -85,10 +85,10 @@ node /(?i)^ae-ck-*/{
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
 
-  class {jetti_front:
-    version => "$ae_ck_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$ae_ck_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   include profile_base
   #include teleport::conf
   #include zabbix
@@ -103,10 +103,10 @@ node /(?i)^kz-sm-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $zbx_srv = 'zabbix5.x100group.com:10049'
 
-  class {jetti_front:
-    version => "$kz_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$kz_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   class {jetti_front_fiscal_spooler:
     version => "$kz_sm_sp",
     githubtoken => "$githubtoken",
@@ -127,10 +127,10 @@ node /(?i)^hu-sm-*/{
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
 
-  class {jetti_front:
-    version => "$hu_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$hu_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   class {jetti_front_fiscal_spooler:
     version => "$hu_sm_sp",
     githubtoken => "$githubtoken",
@@ -153,10 +153,10 @@ node /(?i)^us-sm-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
 
-  class {jetti_front:
-    version => "$us_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
+#  class {jetti_front:
+#    version => "$us_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
   class {jetti_front_fiscal_spooler:
     version => "$us_sm_sp",
     githubtoken => "$githubtoken",
