@@ -1,0 +1,3 @@
+Package: jetti-front
+Pin: release o=*
+Pin-Priority: -1
