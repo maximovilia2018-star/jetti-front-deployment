@@ -1,6 +1,6 @@
 # modules/profile_base/manifests/base_soft.pp
 class profile_base::base_soft {
-  package { ['unattended-upgrades', 'bit-cash-box']:
+  package { ['unattended-upgrades', 'bit-cash-box', 'lubuntu-update-notifier']:
     ensure  => purged,
   }
 
