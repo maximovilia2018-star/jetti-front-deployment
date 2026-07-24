@@ -65,7 +65,7 @@ if [ "$status" = "true" ]; then
         while read -r unit _
         do
             log "Restart service $unit"
-#            systemctl restart "$unit"
+            systemctl restart "$unit"
         done < <(systemctl list-unit-files --state=enabled --no-legend 'checkbox-kasa*')
     fi
     exit 0
