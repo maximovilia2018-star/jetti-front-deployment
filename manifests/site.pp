@@ -32,10 +32,10 @@ node /(?i)^ua-sm-*/{
   $tele_env = 'ua-sm'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-#  class {jetti_front:
-#    version => "$ua_sm_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
+  class {jetti_front:
+    version => "$ua_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
