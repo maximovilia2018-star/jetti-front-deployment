@@ -36,7 +36,7 @@ node /(?i)^ua-sm-*/{
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
   include profile_base
@@ -135,7 +135,7 @@ node /(?i)^hu-sm-*/{
     version => "$hu_sm_sp",
     githubtoken => "$githubtoken",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
   include profile_base
@@ -161,7 +161,7 @@ node /(?i)^us-sm-*/{
     version => "$us_sm_sp",
     githubtoken => "$githubtoken",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
   include profile_base
