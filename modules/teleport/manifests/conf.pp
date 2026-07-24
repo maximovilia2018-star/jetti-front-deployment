@@ -31,8 +31,6 @@ class teleport::conf {
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
-    require => Package['teleport'],
-    notify  => Service['teleport'],
     content => epp(
       'teleport/teleport.yaml.epp',
       {
