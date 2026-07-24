@@ -106,9 +106,9 @@ node /(?i)^ua-pos-test.*/ {
     version        => $ua_sm_fr,
     appinsightskey => $applicationinsightskey,
   }
-  #class { 'fiscal_ua_new':
-  #  versioncheckbox => $checkbox,
-  #}
+  class { 'fiscal_ua':
+    versioncheckbox => $checkbox,
+  }
   include profile_base
   include splunk
   #include splunk2
