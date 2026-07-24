@@ -2,7 +2,7 @@
 #
 # Настраивает Teleport: логирование, конфигурацию, сервис и автообновления.
 
-class teleport::config {
+class teleport::conf {
   # Логирование через rsyslog
   file { '/etc/rsyslog.d/13-teleport.conf':
     ensure  => 'present',
