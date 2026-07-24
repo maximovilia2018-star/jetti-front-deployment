@@ -60,10 +60,10 @@ node /(?i)^ua-pos-test.*/ {
   $tele_env               = 'ua-pos'
   $tele_grp               = 'tested'
 
-#  class { 'jetti_front':
-#    version        => $ua_sm_fr,
-#    appinsightskey => $applicationinsightskey,
-#  }
+  class { 'jetti_front_old':
+    version        => $ua_sm_fr,
+    appinsightskey => $applicationinsightskey,
+  }
   class { 'fiscal_ua':
     versioncheckbox => $checkbox,
   }
