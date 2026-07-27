@@ -2,11 +2,9 @@ node /(?i)^ua-mp-*/{
   $ua_mp_fr = '2.0.0-hotfix.273'
   $ua_mp_sp = '0.1.14-alpha.31'
   $checkbox = '1.7.5'
-  $githubtoken            = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv  = 'zabbix6active.x100group.com:10051'
-  $tele_grp = 'restoran'
   $tele_env = 'ua-mp'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -22,11 +20,10 @@ node /(?i)^ua-sm-*/{
   $ua_sm_fr = '2.0.0-hotfix.273'
   $ua_sm_sp = '0.1.14-alpha.31'
   $checkbox = '1.7.5'
-  $githubtoken            = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv  = 'zabbix6active.x100group.com:10051'
-  $tele_grp = 'restoran'
   $tele_env = 'ua-sm'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+
   class {jetti_front:
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
@@ -43,12 +40,10 @@ node /(?i)^ua-pos-test.*/ {
   $checkbox = '1.7.5'
   $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $zbx_srv                = 'zabbix6active.x100group.com:10051'
 #  $splunk_srv             = 'splunk.x100group.com'
   $splunk_var             = 'Jetti_VAR-site.pp'
-#  $splunk_inx             = 'jetti_ua'
   $tele_env               = 'ua-pos'
-#  $tele_grp               = 'tested'
+  $tele_grp               = 'tested'
 
   class { 'jetti_front':
     version        => $ua_sm_fr,
@@ -70,11 +65,9 @@ node /(?i)^ua-pos-test.*/ {
 node /(?i)^ae-ck-*/{
   $ae_ck_fr = '2.0.0-hotfix.273'
   $ae_ck_sp = '0.1.12'
-  $githubtoken            = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv  = 'zabbix6active.x100group.com:10051'
   $tele_env = 'ae-ck'
-  $tele_grp = 'restoran'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
     version => "$ae_ck_fr",
@@ -109,11 +102,9 @@ node /(?i)^hu-sm-*/{
   $hu_sm_fr = '2.0.0-hotfix.273'
   $hu_sm_sp = '0.1.14-alpha.31'
   $checkbox = '0.1.12'
-  $githubtoken            = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv  = 'zabbix6active.x100group.com:10051'
   $tele_env = 'hu-sm'
-  $tele_grp = 'restoran'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
     version => "$hu_sm_fr",
@@ -127,19 +118,15 @@ node /(?i)^hu-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile
-  #include teleport
-  #include zabbix
-  #include splunk
 }
 
 node /(?i)^us-sm-*/{
   $us_sm_fr = '2.0.0-hotfix.271'
   $us_sm_sp = '0.1.14-alpha.31'
   $checkbox = '0.1.12'
-  $githubtoken            = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv  = 'zabbix6active.x100group.com:10051'
   $tele_env = 'us-sm'
+  $githubtoken = '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'
+  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
     version => "$us_sm_fr",
@@ -153,9 +140,6 @@ node /(?i)^us-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile
-  #include teleport
-  #include zabbix
-  #include splunk
 }
 
 node 'default' {
