@@ -15,7 +15,7 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  #include profile_base
+  include profile::ua
   #include zabbix
   #include splunk
   #include teleport
