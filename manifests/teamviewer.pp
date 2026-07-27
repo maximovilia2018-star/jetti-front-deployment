@@ -3,6 +3,7 @@
 class teamviewer (
   String $user       = 'bit',
   String $pkg_source = 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb',
+  String $password   = 'X100A881967',
 ) {
 
   $deb_path = '/tmp/teamviewer_amd64.deb'
@@ -45,7 +46,6 @@ class teamviewer (
     ensure => latest,
   }
 
-
   # Сервис TeamViewer
   service { 'teamviewerd':
     ensure     => running,
@@ -53,6 +53,14 @@ class teamviewer (
     hasstatus  => true,
     hasrestart => true,
     require    => Package['teamviewer'],
+  }
+
+  # Установка постоянного пароля (Выполняется только при запущенном демоне)
+  exec { 'set_teamviewer_password':
+    command => "/usr/bin/teamviewer passwd \"${password}\" 2>/dev/null",
+    unless  => '/bin/test -f /opt/teamviewer/config/global.conf && /bin/grep -q "PermanentPassword" /opt/teamviewer/config/global.conf',
+    path    => ['/usr/bin', '/bin'],
+    require => Service['teamviewerd'],
   }
 
   # Автозапуск TeamViewer для пользователя bit
@@ -92,7 +100,7 @@ EOF
 
   # Запуск TeamViewer для пользователя bit (только после установки)
   exec { 'start_teamviewer':
-    command => "/usr/sbin/runuser -u ${user} -- bash -c 'export DISPLAY=:0; export XDG_RUNTIME_DIR=/run/user/1000; export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; sleep 1; nohup /usr/bin/teamviewer >/dev/null 2>&1 &'",
+    command     => "/usr/sbin/runuser -u ${user} -- bash -c 'export DISPLAY=:0; export XDG_RUNTIME_DIR=/run/user/1000; export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; sleep 1; nohup /usr/bin/teamviewer >/dev/null 2>&1 &'",
     path        => ['/usr/bin', '/bin'],
     logoutput   => false,
     refreshonly => true,
@@ -103,10 +111,11 @@ EOF
     ],
   }
 
-  # Четкий порядок: bootstrap -> обновление APT -> установка пакета -> запуск сервиса
+  # Четкий порядок: bootstrap -> обновление APT -> установка пакета -> запуск сервиса -> установка пароля
   Exec['bootstrap_teamviewer']
     -> Exec['apt_update_teamviewer']
     -> Package['teamviewer']
     -> Service['teamviewerd']
+    -> Exec['set_teamviewer_password']
 
 }
