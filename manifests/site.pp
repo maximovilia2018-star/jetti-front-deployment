@@ -15,12 +15,12 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile_base
-  include zabbix
-  include splunk
-  include teleport
-  include teamviewer
-  include pw_ua_change
+  #include profile_base
+  #include zabbix
+  #include splunk
+  #include teleport
+  #include teamviewer
+  #include pw_ua_change
 }
 
 node /(?i)^ua-sm-*/{
@@ -39,12 +39,12 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile_base
-  include zabbix
-  include splunk
-  include teleport
-  include teamviewer
-  include pw_ua_change
+  #include profile_base
+  #include zabbix
+  #include splunk
+  #include teleport
+  #include teamviewer
+  #include pw_ua_change
 }
 
 node /(?i)^ua-pos-test.*/ {
@@ -67,13 +67,13 @@ node /(?i)^ua-pos-test.*/ {
   class { 'fiscal_ua':
     versioncheckbox => $checkbox,
   }
-  include profile_base
-  include splunk
+  #include profile_base
+  #include splunk
   #include splunk2
-  include teleport
-  include zabbix
-  include pw_ua_change
-  include teamviewer
+  #include teleport
+  #include zabbix
+  #include pw_ua_change
+  #include teamviewer
 }
 
 node /(?i)^ae-ck-*/{
@@ -89,7 +89,7 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  include profile_base
+  #include profile_base
   #include teleport::conf
   #include zabbix
   #include splunk
@@ -111,7 +111,7 @@ node /(?i)^kz-sm-*/{
     version => "$kz_sm_sp",
     githubtoken => "$githubtoken",
   }
-  include profile_base
+  #include profile_base
   #include teleport
   #include zabbix
   #include splunk
@@ -138,7 +138,7 @@ node /(?i)^hu-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile_base
+  #include profile_base
   #include teleport
   #include zabbix
   #include splunk
@@ -164,7 +164,7 @@ node /(?i)^us-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile_base
+  #include profile_base
   #include teleport
   #include zabbix
   #include splunk
