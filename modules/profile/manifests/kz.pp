@@ -5,6 +5,7 @@ class profile::kz {
 
   # Базовый слой компании
   include profile::base
+  include profile::log_atol_config
 #  include profile::ru_pw_change
 
   class { 'zabbix':
