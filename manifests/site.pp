@@ -67,6 +67,7 @@ node /(?i)^ua-pos-test.*/ {
   class { 'fiscal_ua':
     versioncheckbox => $checkbox,
   }
+  include profile::ua
   #include profile_base
   #include splunk
   #include splunk2
