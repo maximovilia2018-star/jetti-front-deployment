@@ -43,12 +43,12 @@ node /(?i)^ua-pos-test.*/ {
   $checkbox = '1.7.5'
   $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv                = 'zabbix6active.x100group.com:10051'
-  $splunk_srv             = 'splunk.x100group.com'
+#  $zbx_srv                = 'zabbix6active.x100group.com:10051'
+#  $splunk_srv             = 'splunk.x100group.com'
   $splunk_var             = 'Jetti_VAR-site.pp'
-  $splunk_inx             = 'jetti_ua'
+#  $splunk_inx             = 'jetti_ua'
   $tele_env               = 'ua-pos'
-  $tele_grp               = 'tested'
+#  $tele_grp               = 'tested'
 
   class { 'jetti_front':
     version        => $ua_sm_fr,
