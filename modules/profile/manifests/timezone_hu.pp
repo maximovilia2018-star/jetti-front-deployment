@@ -3,7 +3,7 @@ class profile::timezone_hu {
 
   file { '/etc/localtime':
     ensure => 'link',
-    target => '/usr/share/zoneinfo/Europe/Budapest',
+    target => '../usr/share/zoneinfo/Europe/Budapest',
     force  => true,
   }
 
