@@ -45,8 +45,6 @@ node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-#  $splunk_srv = 'splunk.x100group.com'
-#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -56,11 +54,6 @@ node /(?i)^ua-mp-*/{
     versioncheckbox => "$checkbox",
   }
   include profile::ua
-  #include zabbix
-  #include splunk
-  #include splunk_conf
-  #include teleport
-  #include teamviwer
 }
 
 node /(?i)^ua-sm-*/{
@@ -72,8 +65,6 @@ node /(?i)^ua-sm-*/{
   $tele_env = 'ua-sm'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-#  $splunk_srv = 'splunk.x100group.com'
-#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -83,11 +74,6 @@ node /(?i)^ua-sm-*/{
     versioncheckbox => "$checkbox",
   }
   include profile::ua
-  #include zabbix
-  #include splunk
-  #include splunk_conf
-  #include teleport
-  #include teamviwer
 }
 
 node /(?i)^ua-pos-test*/{
@@ -99,8 +85,6 @@ node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-#  $splunk_srv = 'splunk.x100group.com'
-#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -110,10 +94,6 @@ node /(?i)^ua-pos-test*/{
     versioncheckbox => "$checkbox",
   }
   include profile::ua
-  #include zabbix
-  #include splunk
-  #include teleport
-  #include teamviwer
 }
 
 node /(?i)^ae-ck-*/{
@@ -129,10 +109,7 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  #include base_soft
   #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include zabbix
   #include splunk
   include profile
@@ -155,11 +132,8 @@ node /(?i)^hu-sm-*/{
   #  version => "$hu_sm_sp",
   #  githubtoken => "$githubtoken",
   #}
-  #include base_soft
   #include log_config
-  #include root_ca_cert
   #include teleport
-  #include swap_on
   #include zabbix
   #include splunk
   include profile
@@ -182,10 +156,7 @@ node /(?i)^us-sm-*/{
 #    version => "$us_sm_sp",
 #    githubtoken => "$githubtoken",
 #  }
-  #include base_soft
   #include log_config
-  #include root_ca_cert
-  #include swap_on
   #include teleport
 #  include teleport::teleport_fix
   #include zabbix
