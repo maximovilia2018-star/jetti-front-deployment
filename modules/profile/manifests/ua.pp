@@ -7,14 +7,14 @@ class profile::ua {
   include profile::ua_pw_change
 
   include splunk
-#  include teleport
+  include teleport
   include teamviewer
   class { 'zabbix':
     zabbix_srv => $zbx_srv_ua,
   }
   # Точечное применение GPG-ключа только для одного конкретного хоста
-  if $::hostname == 'ua-sm-poskamenskoe-03' {
-    include teleport::keyring_gpg
-  }
+#  if $::hostname == 'ua-sm-poskamenskoe-03' {
+#    include teleport::keyring_gpg
+#  }
 
 }
