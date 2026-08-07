@@ -23,7 +23,7 @@ class teleport::teleport_config {
   }
   
   file { '/etc/teleport.yaml':
-#      require => Package['teleport'],
+      require => Package['teleport'],
       notify  => Service['teleport'],
       ensure  => present,
       owner   => 'root',
@@ -65,7 +65,7 @@ proxy_service:
     ensure  => 'running',
     enable  => true,
     hasrestart => true,
-#    require    => Package['teleport'],
+    require    => Package['teleport'],
   }
 
   service { 'syslog':
