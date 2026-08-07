@@ -100,9 +100,6 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  #include log_config
-  #include zabbix
-  #include splunk
   include profile::ae
 }
 
@@ -121,10 +118,6 @@ node /(?i)^hu-sm-*/{
   #  version => "$hu_sm_sp",
   #  githubtoken => "$githubtoken",
   #}
-  #include log_config
-  #include teleport
-  #include zabbix
-  #include splunk
   include profile::hu
 }
 
@@ -143,11 +136,6 @@ node /(?i)^us-sm-*/{
 #    version => "$us_sm_sp",
 #    githubtoken => "$githubtoken",
 #  }
-  #include log_config
-  #include teleport
-#  include teleport::teleport_fix
-  #include zabbix
-  #include splunk
   include profile
 }
 
