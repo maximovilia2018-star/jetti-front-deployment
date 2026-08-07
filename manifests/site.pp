@@ -21,6 +21,7 @@ node /(?i)^ua-mp-*/{
   #include log_config
   #include root_ca_cert
   #include swap_on
+  include profile::ua
   include zabbix
   include splunk
   include splunk_conf
