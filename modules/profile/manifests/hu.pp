@@ -7,7 +7,7 @@ class profile::hu {
 #  include profile::ua_pw_change
 
 #  include splunk
-#  include teleport
+  include teleport
 #  include teamviewer
 #  include vnc_soft
   class { 'zabbix':
