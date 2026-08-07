@@ -6,8 +6,6 @@ node 'ua-sm-poskamenskoe-03' {
   $checkbox = '1.7.5'
   $tele_ver = '15'
   $tele_env = 'ua-sm'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -43,8 +41,6 @@ node /(?i)^ua-mp-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.7.5'
   $tele_env = 'ua-mp'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -63,8 +59,6 @@ node /(?i)^ua-sm-*/{
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.7.5'
   $tele_env = 'ua-sm'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -84,7 +78,6 @@ node /(?i)^ua-pos-test*/{
   $checkbox = '1.7.5'
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -102,8 +95,6 @@ node /(?i)^ae-ck-*/{
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $tele_env = 'ae-ck'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$ae_ck_fr",
@@ -121,8 +112,6 @@ node /(?i)^hu-sm-*/{
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $tele_env = 'hu-sm'
-  $tele_group = 'restoran'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$hu_sm_fr",
@@ -143,10 +132,8 @@ node /(?i)^us-sm-*/{
   $us_sm_fr = '2.0.0-hotfix.271'
   $us_sm_sp = '0.1.14-alpha.31'
   $tele_env = 'us-sm'
-  $tele_group = 'restoran'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-  $zbx_srv = 'zabbix6active.x100group.com:10051'
 
   class {jetti_front:
     version => "$us_sm_fr",
