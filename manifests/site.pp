@@ -24,9 +24,9 @@ node 'ua-sm-poskamenskoe-03' {
   include splunk
   #include teleport
   include teamviewer
-  #class { 'zabbix':
-  #  zabbix_srv => $zbx_srv_ua,
-  #}
+  class { 'zabbix':
+    zabbix_srv => "$zbx_srv",
+  }
 
   #include teleport::keyring_gpg
   #include teleport::teleport_one_time_fix
