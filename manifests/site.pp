@@ -103,7 +103,7 @@ node /(?i)^ae-ck-*/{
   #include log_config
   #include zabbix
   #include splunk
-  include profile
+  include profile::ae
 }
 
 node /(?i)^hu-sm-*/{
