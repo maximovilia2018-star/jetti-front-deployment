@@ -16,7 +16,18 @@ node 'ua-sm-poskamenskoe-03' {
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include profile::ua
+#  include profile::ua
+  include profile::base
+  include profile::timezone_ua
+  include profile::ua_pw_change
+
+  include splunk
+  #include teleport
+  include teamviewer
+  #class { 'zabbix':
+  #  zabbix_srv => $zbx_srv_ua,
+  #}
+
   #include teleport::keyring_gpg
   #include teleport::teleport_one_time_fix
   #include teleport
