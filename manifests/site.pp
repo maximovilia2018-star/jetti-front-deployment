@@ -29,7 +29,7 @@ node 'ua-sm-poskamenskoe-03' {
   #include teleport::teleport_one_time_fix
   #include teleport
   #include teleport::teleport_inst
-  include teleport::teleport_config
+  #include teleport::teleport_config
   
 }
 
