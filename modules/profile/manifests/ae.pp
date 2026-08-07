@@ -9,6 +9,7 @@ class profile::ae {
 #  include splunk
 #  include teleport
 #  include teamviewer
+#  include vnc_soft
 #  class { 'zabbix':
 #    zabbix_srv => $zbx_srv_ua,
 #  }
