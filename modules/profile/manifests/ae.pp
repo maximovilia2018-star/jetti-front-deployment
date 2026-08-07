@@ -6,7 +6,7 @@ class profile::ae {
 #  include profile::timezone_ua
 #  include profile::ua_pw_change
 
-#  include splunk
+  include splunk
   include teleport
 #  include teamviewer
 #  include vnc_soft
