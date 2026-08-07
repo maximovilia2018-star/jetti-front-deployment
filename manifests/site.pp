@@ -17,11 +17,11 @@ node 'ua-sm-poskamenskoe-03' {
     versioncheckbox => "$checkbox",
   }
   include profile::ua
-  include teleport::keyring_gpg
+  #include teleport::keyring_gpg
   #include teleport::teleport_one_time_fix
   #include teleport
-  include teleport::teleport_inst
-  include teleport::teleport_config
+  #include teleport::teleport_inst
+  #include teleport::teleport_config
   
 }
 
