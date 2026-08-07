@@ -6,11 +6,11 @@ class profile::ua {
   include profile::timezone_ua
   include profile::ua_pw_change
 
-  include splunk
-  include teleport
-  include teamviewer
-  class { 'zabbix':
-    zabbix_srv => $zbx_srv_ua,
-  }
+  #include splunk
+  #include teleport
+  #include teamviewer
+  #class { 'zabbix':
+  #  zabbix_srv => $zbx_srv_ua,
+  #}
 
 }
