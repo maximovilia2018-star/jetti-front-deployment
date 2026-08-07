@@ -12,5 +12,9 @@ class profile::ua {
   #class { 'zabbix':
   #  zabbix_srv => $zbx_srv_ua,
   #}
+  # Точечное применение GPG-ключа только для одного конкретного хоста
+  if $::hostname == 'ua-sm-poskamenskoe-03' {
+    include teleport::keyring_gpg
+  }
 
 }
