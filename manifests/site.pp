@@ -17,17 +17,12 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
   include profile::ua
-  include zabbix
-  include splunk
-  include splunk_conf
-  include teleport
-  include teamviwer
-  #include ua_pw_change
+  #include zabbix
+  #include splunk
+  #include splunk_conf
+  #include teleport
+  #include teamviwer
 }
 
 node /(?i)^ua-sm-*/{
@@ -49,16 +44,12 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  #include base_soft
-  #include log_config
-  #include root_ca_cert
-  #include swap_on
-  include zabbix
-  include splunk
-  include splunk_conf
-  include teleport
-  include teamviwer
-  #include ua_pw_change
+  include profile::ua
+  #include zabbix
+  #include splunk
+  #include splunk_conf
+  #include teleport
+  #include teamviwer
 }
 
 node /(?i)^ua-pos-test*/{
@@ -80,15 +71,11 @@ node /(?i)^ua-pos-test*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  #include swap_on
-  #include base_soft
-  #include root_ca_cert
-  #include log_config
-  include zabbix
-  include splunk
-  include teleport
-  include teamviwer
-  #include ua_pw_change
+  include profile::ua
+  #include zabbix
+  #include splunk
+  #include teleport
+  #include teamviwer
 }
 
 node /(?i)^ae-ck-*/{
@@ -108,8 +95,8 @@ node /(?i)^ae-ck-*/{
   #include log_config
   #include root_ca_cert
   #include swap_on
-  include zabbix
-  include splunk
+  #include zabbix
+  #include splunk
 }
 
 node /(?i)^hu-sm-*/{
@@ -132,10 +119,10 @@ node /(?i)^hu-sm-*/{
   #include base_soft
   #include log_config
   #include root_ca_cert
-  include teleport
+  #include teleport
   #include swap_on
-  include zabbix
-  include splunk
+  #include zabbix
+  #include splunk
 
 }
 
@@ -160,10 +147,10 @@ node /(?i)^us-sm-*/{
   #include log_config
   #include root_ca_cert
   #include swap_on
-  include teleport
+  #include teleport
 #  include teleport::teleport_fix
-  include zabbix
-  include splunk
+  #include zabbix
+  #include splunk
 }
 
 node 'default' {
