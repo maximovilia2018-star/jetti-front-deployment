@@ -20,7 +20,7 @@ node 'ua-sm-poskamenskoe-03' {
   include profile::ua_pw_change
 
   include splunk
-  #include teleport
+  include teleport
   include teamviewer
   class { 'zabbix':
     zabbix_srv => "$zbx_srv",
