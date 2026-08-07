@@ -8,7 +8,7 @@ class profile::ua {
 
   include splunk
   #include teleport
-  #include teamviewer
+  include teamviewer
   #class { 'zabbix':
   #  zabbix_srv => $zbx_srv_ua,
   #}
