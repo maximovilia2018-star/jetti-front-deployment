@@ -97,6 +97,7 @@ node /(?i)^ae-ck-*/{
   #include swap_on
   #include zabbix
   #include splunk
+  include profile
 }
 
 node /(?i)^hu-sm-*/{
@@ -123,7 +124,7 @@ node /(?i)^hu-sm-*/{
   #include swap_on
   #include zabbix
   #include splunk
-
+  include profile
 }
 
 node /(?i)^us-sm-*/{
@@ -151,6 +152,7 @@ node /(?i)^us-sm-*/{
 #  include teleport::teleport_fix
   #include zabbix
   #include splunk
+  include profile
 }
 
 node 'default' {
