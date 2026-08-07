@@ -125,7 +125,7 @@ node /(?i)^hu-sm-*/{
   #include teleport
   #include zabbix
   #include splunk
-  include profile
+  include profile::hu
 }
 
 node /(?i)^us-sm-*/{
