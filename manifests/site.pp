@@ -73,7 +73,7 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  include profile
+  include profile::ae
   #include teleport::conf
   #include zabbix
   #include splunk
