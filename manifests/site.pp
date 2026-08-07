@@ -4,7 +4,6 @@ node 'ua-sm-poskamenskoe-03' {
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
   $checkbox = '1.7.5'
-  $tele_ver = '15'
   $tele_env = 'ua-sm'
 
   class {jetti_front:
