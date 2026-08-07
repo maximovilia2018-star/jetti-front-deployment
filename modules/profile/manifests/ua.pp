@@ -15,10 +15,6 @@ class profile::ua {
   # Точечное применение GPG-ключа только для одного конкретного хоста
   if $::hostname == 'ua-sm-poskamenskoe-03' {
     include teleport::keyring_gpg
-    include teleport::teleport_one_time_fix
-    #include teleport::teleport_inst
-    #include teleport::teleport_config
-    #include teleport::teleport_fix
   }
 
 }
