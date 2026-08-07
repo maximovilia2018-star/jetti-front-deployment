@@ -17,16 +17,16 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   include zabbix
   include splunk
   include splunk_conf
   include teleport
   include teamviwer
-  include ua_pw_change
+  #include ua_pw_change
 }
 
 node /(?i)^ua-sm-*/{
@@ -48,16 +48,16 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   include zabbix
   include splunk
   include splunk_conf
   include teleport
   include teamviwer
-  include ua_pw_change
+  #include ua_pw_change
 }
 
 node /(?i)^ua-pos-test*/{
@@ -79,15 +79,15 @@ node /(?i)^ua-pos-test*/{
   class {fiscal_ua_new:
     versioncheckbox => "$checkbox",
   }
-  include swap_on
-  include base_soft
-  include root_ca_cert
-  include log_config
+  #include swap_on
+  #include base_soft
+  #include root_ca_cert
+  #include log_config
   include zabbix
   include splunk
   include teleport
   include teamviwer
-  include ua_pw_change
+  #include ua_pw_change
 }
 
 node /(?i)^ae-ck-*/{
@@ -103,10 +103,10 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   include zabbix
   include splunk
 }
@@ -128,11 +128,11 @@ node /(?i)^hu-sm-*/{
   #  version => "$hu_sm_sp",
   #  githubtoken => "$githubtoken",
   #}
-  include base_soft
-  include log_config
-  include root_ca_cert
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
   include teleport
-  include swap_on
+  #include swap_on
   include zabbix
   include splunk
 
@@ -155,10 +155,10 @@ node /(?i)^us-sm-*/{
 #    version => "$us_sm_sp",
 #    githubtoken => "$githubtoken",
 #  }
-  include base_soft
-  include log_config
-  include root_ca_cert
-  include swap_on
+  #include base_soft
+  #include log_config
+  #include root_ca_cert
+  #include swap_on
   include teleport
 #  include teleport::teleport_fix
   include zabbix
