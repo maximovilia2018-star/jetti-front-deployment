@@ -17,7 +17,7 @@ class teleport {
   }
 
   # Установка Teleport
-  class { 'teleport::install':
+  class { 'teleport::install2':
     install_version => $tele_ver,
   }
 
@@ -29,7 +29,7 @@ class teleport {
 
   # Четкая цепочка зависимостей
   Class['teleport::recovery']
-    -> Class['teleport::install']
+    -> Class['teleport::install2']
     -> Class['teleport::config']
 
 }
