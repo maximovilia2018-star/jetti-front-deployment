@@ -3,7 +3,7 @@
 
 TELEPORT_SERVICE="teleport"
 LOG_FILE="/var/log/teleport-one-time-fix.log"
-MARKER_FILE="/root/.fix-applied"
+MARKER_FILE="/root/.fix-applied1"
 
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
