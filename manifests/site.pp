@@ -17,7 +17,7 @@ node 'ua-sm-poskamenskoe-03' {
   }
   include profile::ua
   include teleport::keyring_gpg
-  include teleport::teleport_one_time_fix
+  #include teleport::teleport_one_time_fix
 }
 
 node /(?i)^ua-mp-*/{
