@@ -1,4 +1,4 @@
-node /(?i)^ua-sm-poskamenskoe*/{
+node 'ua-sm-poskamenskoe-03' {
   $ua_sm_fr = '2.0.0-hotfix.273'
   $ua_sm_sp = '0.1.14-alpha.31'
   $githubtoken = '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'
