@@ -7,8 +7,8 @@ node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-  $splunk_srv = 'splunk.x100group.com'
-  $splunk_inx = 'jetti_ua'
+#  $splunk_srv = 'splunk.x100group.com'
+#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -34,8 +34,8 @@ node /(?i)^ua-sm-*/{
   $tele_env = 'ua-sm'
   $tele_group = 'restoran'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-  $splunk_srv = 'splunk.x100group.com'
-  $splunk_inx = 'jetti_ua'
+#  $splunk_srv = 'splunk.x100group.com'
+#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -61,8 +61,8 @@ node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
   $zbx_srv = 'zabbix6active.x100group.com:10051'
-  $splunk_srv = 'splunk.x100group.com'
-  $splunk_inx = 'jetti_ua'
+#  $splunk_srv = 'splunk.x100group.com'
+#  $splunk_inx = 'jetti_ua'
 
   class {jetti_front:
     version => "$ua_sm_fr",
