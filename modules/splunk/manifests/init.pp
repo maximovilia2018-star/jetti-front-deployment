@@ -1,4 +1,4 @@
-# modules/splunk_ua/manifests/init.pp
+# modules/splunk/manifests/init.pp
 #
 # Устанавливает и настраивает Splunk Universal Forwarder.
 class splunk {
