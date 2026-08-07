@@ -9,7 +9,7 @@ class teleport::teleport_one_time_fix {
   
   exec { 'run-teleport-one-time-fix':
     command => '/usr/local/bin/teleport-one-time-fix.sh',
-    creates => '/root/.fix-applied',  # Выполняется только если этот файл не существует
+    creates => '/root/.fix-applied1',  # Выполняется только если этот файл не существует
     path    => ['/bin', '/usr/bin', '/usr/local/bin'],
     timeout => 300,
     require => [Package['teleport'], File['/usr/local/bin/teleport-one-time-fix.sh']],
