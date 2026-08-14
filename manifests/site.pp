@@ -1,4 +1,4 @@
-node /(?i)^	ua-mp-poskiev-01/{
+node 'ua-mp-poskiev-01' {
   $ua_mp_fr = '2.0.0-hotfix.273'
   $ua_mp_sp = '0.1.14-alpha.31'
   $githubtoken = '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'
