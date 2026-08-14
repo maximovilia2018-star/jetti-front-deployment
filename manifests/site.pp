@@ -10,7 +10,7 @@ node 'ua-mp-poskiev-01' {
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
   include profile::ua
