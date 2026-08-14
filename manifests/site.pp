@@ -10,7 +10,7 @@ node 'ua-sm-poskamenskoe-03' {
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {fiscal_ua_new:
+  class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
 #  include profile::ua
