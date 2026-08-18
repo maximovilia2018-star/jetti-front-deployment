@@ -2,6 +2,8 @@ node 'jf-tester-01' {
   $ua_mp_fr = '2.0.0-hotfix.273'
 #  $ua_mp_sp = '0.1.14-alpha.31'
 #  $checkbox = '1.7.5'
+  $ru_sm_fr = '2.0.0-hotfix.271'
+#  $ru_sm_sp = '0.1.14-alpha.93'
   $tele_env = 'ua-test'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -10,6 +12,11 @@ node 'jf-tester-01' {
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
+  class {aypiservis_front:
+    version => "$ru_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+
   include profile::ua
 }
 
