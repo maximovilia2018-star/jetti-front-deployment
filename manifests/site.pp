@@ -1,6 +1,7 @@
 node 'jf-tester-01' {
   include profile::ua
 }
+
 node /(?i)^ua-mp-*/{
   $ua_mp_fr = '2.0.0-hotfix.273'
   $ua_mp_sp = '0.1.14-alpha.31'
