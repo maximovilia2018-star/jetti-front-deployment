@@ -4,18 +4,18 @@ class aypiservis_front (
 ) {
 
   exec { "aypiservis-front":
-    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install aypiservis-front=$version && reboot" ,
+    command => "/usr/bin/dpkg --configure -a && /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold --force-yes install aypiservis-front=$version" ,
     user    => 'root',
     unless  => ["/bin/dpkg -s aypiservis-front | grep -oP \'Version: $version$\'", "/bin/bash /opt/precheck_before_update.sh ${version}"],
   }
 
-  file { "/etc/environment":
-    ensure  => 'present',
-    replace => 'yes',
-    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
-ENV=\"${environment}\"
-INSTRUMENTATION_KEY=${$appinsightskey}",
-  }
+#  file { "/etc/environment":
+#    ensure  => 'present',
+#    replace => 'yes',
+#    content => "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\"
+#ENV=\"${environment}\"
+#INSTRUMENTATION_KEY=${$appinsightskey}",
+#  }
 
   package { 'aypiservis-front':
     ensure => "$version",
@@ -23,52 +23,18 @@ INSTRUMENTATION_KEY=${$appinsightskey}",
     noop => true,
   }
 
-  file { '/etc/apt/sources.list.d/x100.list':
-      ensure  => 'present',
-      replace => 'no',
-      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
-      mode    => '0644',
-  }
+#  file { '/etc/apt/sources.list.d/x100.list':
+#      ensure  => 'present',
+#      replace => 'no',
+#      content => 'deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front',
+#      mode    => '0644',
+#  }
 
-  file { '/home/bit/.config/autostart/x100-front.desktop':
-      ensure  => 'present',
-      replace => 'yes',
-      content => '[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Name=CashDesk
-Comment=Cash Desk Sushi Master
-Exec=aypiservis-front
-Hidden=false
-NoDisplay=false
-Terminal=false',
-      mode    => '0644',
-  }
-
-  exec { 'apt-get-update':
-    command => "apt-get update",
-    onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
-    path    => [ '/usr/bin', '/bin' ],
-  }
-
-  file { '/opt/intall-front.sh':
-    ensure  => 'present',
-    mode    => '0755',
-    replace => 'yes',
-    content => "#!/bin/bash
-  VER=\$1
-  /usr/bin/apt-get -q -y install aypiservis-front=\$VER && reboot
-    ",
-  }
-
-  class { 'sudo':
-      config_file_replace => false,
-  }
-
-  sudo::conf { 'bit':
-       priority => 10,
-       content  => 'bit ALL= NOPASSWD: /opt/intall-front.sh',
-  }
+#  exec { 'apt-get-update':
+#    command => "apt-get update",
+#    onlyif  => "wget -q -N -P /tmp https://repository.jfd-prod.x100platforma.com:443/artifactory/debian/dists/x100/Release && ! cmp -s /tmp/Release /var/lib/apt/lists/repository.jfd-prod.x100platforma.com_artifactory_debian_dists_x100_Release",
+#    path    => [ '/usr/bin', '/bin' ],
+#  }
 
   file { '/opt/precheck_before_update.sh':
       ensure  => 'present',
