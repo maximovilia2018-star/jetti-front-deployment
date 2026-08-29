@@ -1,9 +1,9 @@
 class puppet_agent {
   # Изменяем интервал опроса сервера до 15 минут, чтобы снизить нагрузку
-  puppet_config { 'agent/runinterval':
-    ensure => present,
-    value  => '15m',
-    notify => Service['puppet'],
+  exec { 'update_puppet_runinterval':
+    command => '/bin/sed -i "/^\[agent\]/,/^\[/ s/^#\?\s*runinterval\s*=.*/runinterval = 15m/" /etc/puppetlabs/puppet/puppet.conf',
+    unless  => '/bin/grep -E "^[^#]*runinterval\s*=\s*15m" /etc/puppetlabs/puppet/puppet.conf',
+    notify  => Service['puppet'],
   }
 
   service { 'puppet':
