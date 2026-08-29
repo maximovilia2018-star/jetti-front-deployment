@@ -14,6 +14,7 @@ node /(?i)^ru-gs-*/{
     githubtoken => "$githubtoken",
   }
   include base_soft
+  include puppet_agent
   include log_config
   include root_ca_cert
   include swap_on
@@ -36,6 +37,7 @@ node /(?i)^ru-sm-*/{
     githubtoken => "$githubtoken",
   }
   include base_soft
+  include puppet_agent
   include log_config
   include root_ca_cert
   include swap_on
@@ -58,6 +60,7 @@ node /(?i)^ru-ms-*/{
     githubtoken => "$githubtoken",
   }
   include base_soft
+  include puppet_agent
   include log_config
   include root_ca_cert
   include swap_on
