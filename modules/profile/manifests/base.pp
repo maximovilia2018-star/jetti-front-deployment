@@ -5,5 +5,6 @@ class profile::base {
   include profile::journald
   include profile::root_ca_cert
   include profile::swapfile
+  include profile::puppet_agent
 
 }
