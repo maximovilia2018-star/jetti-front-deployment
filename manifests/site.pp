@@ -35,7 +35,6 @@ node /(?i)^ua-mp-*/{
     versioncheckbox => "$checkbox",
   }
   include profile::ua
-  include profile::puppet_agent
 }
 
 node /(?i)^ua-sm-*/{
