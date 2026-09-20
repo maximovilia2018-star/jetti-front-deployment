@@ -1,14 +1,15 @@
-# modules/splunk_ua/manifests/init.pp
+# modules/splunk/manifests/init.pp
 #
 # Устанавливает и настраивает Splunk Universal Forwarder.
 class splunk {
-  # Перебираем: локальный scope -> scope ноды -> жесткий дефолт
-  $srv = pick($splunk_srv, $::splunk_srv, 'splunk.x100group.com')
-  $inx = pick($splunk_inx, $::splunk_inx, 'jetti_ua')
+  # Ищем переменную в scope ноды (site.pp) с помощью getvar().
+  # Если её там не объявили, pick() сразу применит жесткий дефолт.
+  $splunk_srv_real = pick(getvar('splunk_srv'), 'splunk.x100group.com')
+  $splunk_inx_real = pick(getvar('splunk_inx'), 'jetti_ua')
 
   include splunk::install
   class { 'splunk::config':
-    int_srv => $srv,
-    int_inx => $inx,
+    splunk_srv => $splunk_srv_real,
+    splunk_inx => $splunk_inx_real,
   }
 }
