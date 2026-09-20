@@ -9,8 +9,8 @@ class zabbix (
   Optional[String] $zabbix_srv = undef,
 ) {
   # Установка Zabbix Agent
-  $version = pick($zabbix_ver, $::zbx_ver, '6.4')
-  $zserver = pick($zabbix_srv, $::zbx_srv, 'zabbix6active.x100group.com:10051')
+  $version = pick(getvar('zbx_ver'), '6.4')
+  $zserver = pick(getvar('zbx_srv'), 'zabbix6active.x100group.com:10051')
 
   class { 'zabbix::install':
     zbx_ver => $version,
