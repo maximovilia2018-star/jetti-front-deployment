@@ -9,7 +9,7 @@ class splunk {
 
   include splunk::install
   class { 'splunk::config':
-    splunk_srv => $splunk_srv_real,
-    splunk_inx => $splunk_inx_real,
+    int_srv => $splunk_srv_real,
+    int_inx => $splunk_inx_real,
   }
 }
