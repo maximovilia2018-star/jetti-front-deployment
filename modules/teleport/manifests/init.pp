@@ -7,9 +7,13 @@
 # 3. teleport::config - настройка конфигурации Teleport
 class teleport {
   # Перебираем: локальный scope -> scope ноды -> жесткий дефолт
-  $tele_ver = pick($tele_ver, $::tele_ver, '16')
-  $tele_env = pick($tele_env, $::tele_env, 'ua-pos')
-  $tele_grp = pick($tele_grp, $::tele_grp, 'restoran')
+  #$tele_ver = pick($tele_ver, $::tele_ver, '16')
+  #$tele_env = pick($tele_env, $::tele_env, 'ua-pos')
+  #$tele_grp = pick($tele_grp, $::tele_grp, 'restoran')
+  $tele_ver = pick(getvar('tele_ver'), '16')
+  $tele_env = pick(getvar('tele_env'), 'ua-pos')
+  $tele_grp = pick(getvar('tele_grp'), 'restoran')
+
 
   # Проверка и восстановление Teleport (при необходимости)
   class { 'teleport::recovery':
