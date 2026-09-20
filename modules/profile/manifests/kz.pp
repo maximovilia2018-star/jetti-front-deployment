@@ -1,7 +1,7 @@
 #modules/profile/manifests/kz.pp
 class profile::kz {
   # Инфраструктурные константы региона KZ
-  $zbx_srv_ua = pick($zbx_srv, $::zbx_srv, 'zabbix5.x100group.com:10049')
+  $zbx_srv_kz = 'zabbix5.x100group.com:10049'
 
   # Базовый слой компании
   include profile::base
@@ -9,7 +9,7 @@ class profile::kz {
 #  include profile::ru_pw_change
 
   class { 'zabbix':
-    zabbix_srv => $zbx_srv_ua,
+    zabbix_srv => $zbx_srv_kz,
   }
 #  include vnc_soft
 
