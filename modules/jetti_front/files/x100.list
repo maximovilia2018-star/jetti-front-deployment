@@ -1,2 +1,2 @@
 deb [trusted=yes] https://repository.jfd-prod.x100platforma.com/artifactory/debian x100 front
-#deb [trusted=yes arch=all] https://nexus.x100group.com/repository/debian/ x100 main
+#deb [ trusted=yes arch=all,amd64 ] https://nexus.x100group.com/repository/debian x100 main
