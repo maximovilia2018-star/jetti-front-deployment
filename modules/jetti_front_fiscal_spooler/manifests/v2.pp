@@ -90,6 +90,15 @@ class jetti_front_fiscal_spooler::v2 (
     enable => true,
   }
 
+  # Отключение автообновления (apt upgrade)
+  #file { '/etc/apt/preferences.d/jetti-front-fiscal-spooler.pref':
+  #  ensure  => file,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  source => 'puppet:///modules/fiscal_ua/jetti-front-fiscal-spooler.pref',
+  #}
+
   # Строгая последовательность деплоя приложения
   Package['jetti-front-fiscal-spooler'] -> File[$config_path] -> Service['jetti-front-fiscal-spooler']
 
