@@ -39,4 +39,6 @@ class profile::nexus_repo {
     command     => '/usr/bin/apt-get update',
     refreshonly => true,
   }
+  
+  File['/etc/apt/sources.list.d/x100.list'] -> Exec['apt_update_nexus']
 }
