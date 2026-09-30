@@ -15,6 +15,7 @@ class jetti_front (
     $appinsightskey,
 ) {
 
+  require profile::nexus_repo
   $update_script = '/usr/local/bin/update-jetti-front.sh'
 
   file { "/etc/environment":
@@ -38,18 +39,9 @@ INSTRUMENTATION_KEY=${$appinsightskey}",
 
   # Контроль требуемой версии
   package { 'jetti-front':
-    ensure => $version,
+    ensure => installed,
     noop   => true,
   }
-
-  # Репозиторий X100
-  #file { '/etc/apt/sources.list.d/x100.list':
-  #  ensure  => file,
-  #  owner   => 'root',
-  #  group   => 'root',
-  #  mode    => '0644',
-  #  source  => 'puppet:///modules/jetti_front/x100.list',
-  #}
 
   # Автозагрузка для пользователя bit
   file { '/home/bit/.config/autostart/x100-front.desktop':
