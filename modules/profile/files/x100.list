@@ -1,1 +1,2 @@
-deb [ trusted=yes arch=all,amd64 ] https://nexus.x100group.com/repository/debian x100 main
+#deb [ trusted=yes arch=all,amd64 ] https://nexus.x100group.com/repository/debian x100 main
+deb [ signed-by=/usr/share/keyrings/x100.gpg arch=all,amd64 ] https://nexus.x100group.com/repository/debian x100 main
