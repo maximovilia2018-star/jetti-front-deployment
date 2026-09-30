@@ -84,6 +84,7 @@ class fiscal_ua (
     require => [
       File[$sync_script],
       File[$check_script],
+      File[$decrypt_tool],
     ],
   }
 
