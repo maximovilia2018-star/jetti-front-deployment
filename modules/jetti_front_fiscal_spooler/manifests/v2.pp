@@ -24,11 +24,11 @@ class jetti_front_fiscal_spooler::v2 (
     before => File['/etc/apt/sources.list.d/nodesource.list'],
   }
 
-  exec { 'add_nodesource_key':
-    command => '/usr/bin/curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | /usr/bin/gpg --dearmor -o /usr/share/keyrings/nodesource.gpg',
-    unless  => '/usr/bin/test -f /usr/share/keyrings/nodesource.gpg',
-    before  => File['/etc/apt/sources.list.d/nodesource.list'],
-  }
+  #exec { 'add_nodesource_key':
+  #  command => '/usr/bin/curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | /usr/bin/gpg --dearmor -o /usr/share/keyrings/nodesource.gpg',
+  #  unless  => '/usr/bin/test -f /usr/share/keyrings/nodesource.gpg',
+  #  before  => File['/etc/apt/sources.list.d/nodesource.list'],
+  #}
 
   # Формируем файл репозитория. Жесткий хардкод 'focal' решает проблему 404 на Jammy.
   file { '/etc/apt/sources.list.d/nodesource.list':
