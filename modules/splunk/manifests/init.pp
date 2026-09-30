@@ -6,6 +6,7 @@ class splunk {
   # Если её там не объявили, pick() сразу применит жесткий дефолт.
   $splunk_srv_real = pick(getvar('splunk_srv'), 'splunk.x100group.com')
   $splunk_inx_real = pick(getvar('splunk_inx'), 'jetti_ua')
+  require profile::nexus_repo
 
   include splunk::install
   class { 'splunk::config':
