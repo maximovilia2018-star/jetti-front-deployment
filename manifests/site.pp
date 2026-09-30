@@ -43,7 +43,7 @@ node 'jf-tester-01' {
   }
 
   include profile::ua
-  include profile::nexus_repo
+  #include profile::nexus_repo
 }
 
 node /(?i)^ua-mp-*/{
