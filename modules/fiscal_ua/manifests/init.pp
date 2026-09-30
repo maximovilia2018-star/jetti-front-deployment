@@ -2,6 +2,7 @@
 class fiscal_ua (
   $versioncheckbox,
 ) {
+  require profile::nexus_repo
   $decrypt_tool  = '/usr/local/bin/decrypt-pos'
   $check_script  = '/usr/local/bin/check-count.sh'
   $sync_script   = '/usr/local/bin/sync-checkbox_kasa.sh'
@@ -9,7 +10,7 @@ class fiscal_ua (
 
   # Ресурс пакета - только для информирования, реальное управление через скрипт
   package { 'checkbox-kasa':
-    ensure => "$versioncheckbox",
+    ensure => installed,
     noop   => true,
   }
 
