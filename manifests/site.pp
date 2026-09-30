@@ -2,17 +2,17 @@
 # 1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ (TOP SCOPE)
 # Значения по умолчанию для всей инфраструктуры
 # ==============================================================================
-#$githubtoken            = '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'
-#$applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+$githubtoken            = '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'
+$applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
 # Базовые версии фронтендов по умолчанию
-#$ua_mp_fr = '2.0.0-hotfix.273'
-#$ua_sm_fr = '2.0.0-hotfix.273'
-#$ru_sm_fr = '2.0.0-hotfix.271'
-#$ae_ck_fr = '2.0.0-hotfix.273'
-#$kz_sm_fr = '2.0.0-hotfix.273'
-#$hu_sm_fr = '2.0.0-hotfix.273'
-#$us_sm_fr = '2.0.0-hotfix.271'
+$ua_mp_fr = '2.0.0-hotfix.273'
+$ua_sm_fr = '2.0.0-hotfix.273'
+$ru_sm_fr = '2.0.0-hotfix.271'
+$ae_ck_fr = '2.0.0-hotfix.273'
+$kz_sm_fr = '2.0.0-hotfix.273'
+$hu_sm_fr = '2.0.0-hotfix.273'
+$us_sm_fr = '2.0.0-hotfix.271'
 
 # Базовые версии спулеров по умолчанию
 #$ua_mp_sp = '0.1.14-alpha.31'
@@ -23,20 +23,14 @@
 #$us_sm_sp = '0.1.14-alpha.31'
 
 # Чекбоксы по умолчанию
-#$checkbox_default = '1.7.5'
+#$checkbox = '1.7.5'
 
 # ==============================================================================
 # 2. ОПИСАНИЕ НОД (NODE SCOPES)
 # ==============================================================================
 node 'jf-tester-01' {
-  $ua_mp_fr = '2.0.0-hotfix.273'
-  $ru_sm_fr = '2.0.0-hotfix.271'
-#  $ua_mp_sp = '0.1.14-alpha.31'
-#  $ru_sm_sp = '0.1.14-alpha.93'
-#  $checkbox = '1.7.5'
-#  $checkbox = '1.7.3'
-#  $githubtoken = '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'
-  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
+  #$ua_mp_fr = '2.0.0-hotfix.273'
+  #$applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
   class {jetti_front:
     version => "$ua_mp_fr",
@@ -115,8 +109,8 @@ node /(?i)^ua-pos-test.*/ {
 }
 
 node /(?i)^ae-ck-*/{
-  $ae_ck_fr = '2.0.0-hotfix.273'
-  $ae_ck_sp = '0.1.12'
+  #$ae_ck_fr = '2.0.0-hotfix.273'
+  #$ae_ck_sp = '0.1.12'
   $tele_env = 'ae-ck'
   $githubtoken = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
@@ -133,8 +127,8 @@ node /(?i)^ae-ck-*/{
 }
 
 node /(?i)^kz-sm-*/{
-  $kz_sm_fr = '2.0.0-hotfix.273'
-  $kz_sm_sp = '0.1.14-alpha.25'
+  #$kz_sm_fr = '2.0.0-hotfix.273'
+  #$kz_sm_sp = '0.1.14-alpha.25'
   $githubtoken            = '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'
   $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
@@ -150,8 +144,8 @@ node /(?i)^kz-sm-*/{
 }
 
 node /(?i)^hu-sm-*/{
-  $hu_sm_fr = '2.0.0-hotfix.273'
-  $hu_sm_sp = '0.1.14-alpha.31'
+  #$hu_sm_fr = '2.0.0-hotfix.273'
+  #$hu_sm_sp = '0.1.14-alpha.31'
   $checkbox = '0.1.12'
   $tele_env = 'hu-sm'
   $githubtoken = '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'
@@ -172,8 +166,8 @@ node /(?i)^hu-sm-*/{
 }
 
 node /(?i)^us-sm-*/{
-  $us_sm_fr = '2.0.0-hotfix.271'
-  $us_sm_sp = '0.1.14-alpha.31'
+  #$us_sm_fr = '2.0.0-hotfix.271'
+  #$us_sm_sp = '0.1.14-alpha.31'
   $checkbox = '0.1.12'
   $tele_env = 'us-sm'
   $githubtoken = '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'
