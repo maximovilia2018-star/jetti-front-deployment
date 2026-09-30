@@ -27,7 +27,8 @@ class jetti_front_fiscal_spooler::v2 (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main\n",
+    #content => "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main\n",
+    content => "deb [signed-by=/usr/share/keyrings/nodesource.gpg AllowWeak=yes] https://deb.nodesource.com/node_14.x focal main\n",
     notify  => Exec['apt_update_nodesource'],
   }
 
