@@ -30,6 +30,9 @@ $checkbox = '1.7.5'
 # ==============================================================================
 node 'jf-tester-01' {
   # Токены и версии берутся из Global Scope автоматически
+  # Временная строка отладки (выведет и глобальную, и локальные переменные)
+  notice(">>> DEBUG: GLOBAL ua_mp_fr = ${::ua_mp_fr} | GLOBAL key = ${::applicationinsightskey} <<<")
+  
   class {jetti_front:
     version        => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
