@@ -3,7 +3,7 @@
 # Оптимизированный манифест установки фискального спулера для Puppet 8.
 # Рассчитан строго на инфраструктуру Ubuntu 20.04 / 22.04.
 #
-class jetti_front_fiscal_spooler (
+class jetti_front_fiscal_spooler::v2 (
   $version,
   $githubtoken,
 ) {
