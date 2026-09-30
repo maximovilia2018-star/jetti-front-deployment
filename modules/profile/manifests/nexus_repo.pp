@@ -9,6 +9,7 @@ class profile::nexus_repo {
     group   => 'root',
     mode    => '0644',
     content => "Acquire::https::${nexus_domain}::Verify-Peer \"false\";\nAcquire::https::${nexus_domain}::Verify-Host \"false\";\n",
+    before  => Exec['apt_update_nexus'],
   }
 
   # Копирование готового скомпилированного бинарного PGP-ключ подписи пакетов
@@ -19,6 +20,7 @@ class profile::nexus_repo {
     mode   => '0644',
     source => 'puppet:///modules/profile/x100.gpg',
     notify => Exec['apt_update_nexus'],
+    before => Exec['apt_update_nexus'],
   }
 
   # Репозиторий X100
@@ -28,6 +30,8 @@ class profile::nexus_repo {
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/profile/x100.list',
+    notify => Exec['apt_update_nexus'],
+    before => Exec['apt_update_nexus'],
   }
 
   # Обновление кэша APT при изменении конфигураций
