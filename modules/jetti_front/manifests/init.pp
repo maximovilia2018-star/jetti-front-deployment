@@ -43,13 +43,13 @@ INSTRUMENTATION_KEY=${$appinsightskey}",
   }
 
   # Репозиторий X100
-  file { '/etc/apt/sources.list.d/x100.list':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/jetti_front/x100.list',
-  }
+  #file { '/etc/apt/sources.list.d/x100.list':
+  #  ensure  => file,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  source  => 'puppet:///modules/jetti_front/x100.list',
+  #}
 
   # Автозагрузка для пользователя bit
   file { '/home/bit/.config/autostart/x100-front.desktop':
