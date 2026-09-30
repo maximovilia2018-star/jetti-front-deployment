@@ -1,19 +1,21 @@
 # modules/jetti_front_fiscal_spooler/manifests/init.pp
 #
-# Оптимизированный манифест установки фискального спулера для Puppet 8.
-# Рассчитан строго на инфраструктуру Ubuntu 20.04 / 22.04.
+# Манифест установки фискального спулера для Puppet 8.
+# Рассчитан на инфраструктуру Ubuntu 20.04 / 22.04.
 #
 class jetti_front_fiscal_spooler::v2 (
   $version,
   $githubtoken,
 ) {
 
-  # Гарантируем, что базовый Nexus репозиторий подключен
   require profile::nexus_repo
 
   $down_hostname = downcase($::facts['networking']['hostname'])
   $config_path   = '/opt/jetti-front-fiscal-spooler/config.production.yaml'
 
+  # ============================================================================
+  # УСТАНОВКА NODE.JS 14
+  # ============================================================================
   # Скачиваем GPG-ключ репозитория
   file { '/usr/share/keyrings/nodesource.gpg':
     ensure => file,
@@ -24,19 +26,12 @@ class jetti_front_fiscal_spooler::v2 (
     before => File['/etc/apt/sources.list.d/nodesource.list'],
   }
 
-  #exec { 'add_nodesource_key':
-  #  command => '/usr/bin/curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | /usr/bin/gpg --dearmor -o /usr/share/keyrings/nodesource.gpg',
-  #  unless  => '/usr/bin/test -f /usr/share/keyrings/nodesource.gpg',
-  #  before  => File['/etc/apt/sources.list.d/nodesource.list'],
-  #}
-
   # Формируем файл репозитория. Жесткий хардкод 'focal' решает проблему 404 на Jammy.
   file { '/etc/apt/sources.list.d/nodesource.list':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    #content => "deb [signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x focal main\n",
     content => "deb [signed-by=/usr/share/keyrings/nodesource.gpg AllowWeak=yes] https://deb.nodesource.com/node_14.x focal main\n",
     notify  => Exec['apt_update_nodesource'],
   }
@@ -54,21 +49,13 @@ class jetti_front_fiscal_spooler::v2 (
     before => Package['jetti-front-fiscal-spooler'],
   }
 
-  # ============================================================================
-  # ДРАЙВЕРЫ ККМ АТОЛ И СИСТЕМНЫЕ ОБНОВЛЕНИЯ
-  # Добавляем focal-updates для скачивания системных зависимостей АТОЛ
-  file { '/etc/apt/sources.list.d/focal-updates.list':
-    ensure  => file,
-    replace => false,
-    content => "deb http://ubuntu.com focal-updates main restricted universe multiverse\n",
-    mode    => '0644',
-    before  => [Package['libfptr10'], Package['libfptr10-gui'], Package['fptr10-test-util']],
-  }
-
-  # Установка пакетов драйверов
-  package { ['libfptr10', 'libfptr10-gui', 'fptr10-test-util']:
-    ensure => installed,
-    before => Package['jetti-front-fiscal-spooler'],
+  # Отключение автообновления (apt upgrade)
+  file { '/etc/apt/preferences.d/jetti-front-fiscal-spooler.pref':
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/fiscal_ua/jetti-front-fiscal-spooler.pref',
   }
 
   # ============================================================================
@@ -79,10 +66,6 @@ class jetti_front_fiscal_spooler::v2 (
     ensure => installed,
     noop   => true,
   }
-
-  # ============================================================================
-  # КОНФИГУРАЦИЯ И СЛУЖБА
-  # ============================================================================
 
   # Скачивание файла конфигурации напрямую из приватного репозитория GitHub
   file { $config_path:
@@ -100,16 +83,6 @@ class jetti_front_fiscal_spooler::v2 (
     enable => true,
   }
 
-  # Отключение автообновления (apt upgrade)
-  #file { '/etc/apt/preferences.d/jetti-front-fiscal-spooler.pref':
-  #  ensure  => file,
-  #  owner   => 'root',
-  #  group   => 'root',
-  #  mode    => '0644',
-  #  source => 'puppet:///modules/fiscal_ua/jetti-front-fiscal-spooler.pref',
-  #}
-
   # Строгая последовательность деплоя приложения
   Package['jetti-front-fiscal-spooler'] -> File[$config_path] -> Service['jetti-front-fiscal-spooler']
-
 }
