@@ -29,10 +29,6 @@ $checkbox = '1.7.5'
 # 2. ОПИСАНИЕ НОД (NODE SCOPES)
 # ==============================================================================
 node 'jf-tester-01' {
-  # Токены и версии берутся из Global Scope автоматически
-  # Временная строка отладки (выведет и глобальную, и локальные переменные)
-  notice(">>> DEBUG: GLOBAL ua_mp_fr = ${::ua_mp_fr} | GLOBAL key = ${::applicationinsightskey} <<<")
-  
   class {jetti_front:
     version        => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
@@ -41,14 +37,11 @@ node 'jf-tester-01' {
     version        => "$ru_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-
   include profile::ua
-  #include profile::nexus_repo
 }
 
 node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
-
   class {jetti_front:
     version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
@@ -61,7 +54,6 @@ node /(?i)^ua-mp-*/{
 
 node /(?i)^ua-sm-*/{
   $tele_env = 'ua-sm'
-
   class {jetti_front:
     version => "$ua_sm_fr",
     appinsightskey => "$applicationinsightskey",
@@ -86,18 +78,10 @@ node /(?i)^ua-pos-test.*/ {
     versioncheckbox => $checkbox,
   }
   include profile::ua
-  #include profile_base
-  #include splunk
-  #include splunk2
-  #include teleport
-  #include zabbix
-  #include pw_ua_change
-  #include teamviewer
 }
 
 node /(?i)^ae-ck-*/{
   $tele_env = 'ae-ck'
-
   class {jetti_front:
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
@@ -120,7 +104,6 @@ node /(?i)^kz-sm-*/{
 node /(?i)^hu-sm-*/{
   $checkbox = '0.1.12'
   $tele_env = 'hu-sm'
-
   class {jetti_front:
     version => "$hu_sm_fr",
     appinsightskey => "$applicationinsightskey",
@@ -138,7 +121,6 @@ node /(?i)^hu-sm-*/{
 node /(?i)^us-sm-*/{
   $checkbox = '0.1.12'
   $tele_env = 'us-sm'
-
   class {jetti_front:
     version => "$us_sm_fr",
     appinsightskey => "$applicationinsightskey",
