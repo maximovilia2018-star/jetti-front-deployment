@@ -22,6 +22,14 @@ class fiscal_ua (
     source => 'puppet:///modules/fiscal_ua/checkbox-kasa.pref',
   }
 
+  file { '/etc/apt/preferences.d/jetti-front-fiscal-spooler.pref':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source => 'puppet:///modules/fiscal_ua/jetti-front-fiscal-spooler.pref',
+  }
+
   # Синхронизируем скрипт проверки
   file { $check_script:
     ensure => file,
