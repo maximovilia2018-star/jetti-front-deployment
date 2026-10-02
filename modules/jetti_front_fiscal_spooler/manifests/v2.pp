@@ -85,6 +85,7 @@ class jetti_front_fiscal_spooler::v2 (
       source => "puppet:///modules/jetti_front_fiscal_spooler/${lib_name}.so.${drv_ver}",
       # Драйвер обязан быть на диске ДО спулера
       before => Package['jetti-front-fiscal-spooler'],
+      notify => Exec['ldconfig_update'],
     }
     # Создаем символическую ссылку (аналог команды ln -s -f)
     file { "${lib_dir}/${lib_name}.so":
@@ -92,7 +93,15 @@ class jetti_front_fiscal_spooler::v2 (
       target => "${lib_dir}/${lib_name}.so.${drv_ver}",
       force  => true, # Ключ force принудительно перезапишет старые или битые ссылки
       before => Package['jetti-front-fiscal-spooler'],
+      notify => Exec['ldconfig_update'],
     }
+  }
+
+  # Принудительно регистрируем папку /usr/lib64 в кэше линкера, чтобы ОС точно видела файлы
+  exec { 'ldconfig_update':
+    command     => '/sbin/ldconfig /usr/lib64',
+    refreshonly => true,
+    before      => Package['jetti-front-fiscal-spooler'],
   }
   
   # ============================================================================
