@@ -64,6 +64,15 @@ class jetti_front_fiscal_spooler::v2 (
   $lib_dir = '/usr/lib64'
   $drv_ver = '1.5.19'
 
+  # Гарантируем, что папка /usr/lib64 физически существует в Ubuntu
+  file { $lib_dir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    before => File["${lib_dir}/libCommLibX.so.${drv_ver}"], # Папка должна быть ДО файлов
+  }
+
   # Массив базовых имен библиотек
   $ingenico_libs = ['libCommLibX', 'libECRLibX', 'libBPOSLib']
 
