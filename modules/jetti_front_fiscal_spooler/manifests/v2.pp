@@ -59,6 +59,34 @@ class jetti_front_fiscal_spooler::v2 (
   }
 
   # ============================================================================
+  # УСТАНОВКА ДРАЙВЕРОВ INGENICO (Замена ручной установки install.sh)
+  # ============================================================================
+  $lib_dir = '/usr/lib64'
+  $drv_ver = '1.5.19'
+
+  # Массив базовых имен библиотек
+  $ingenico_libs = ['libCommLibX', 'libECRLibX', 'libBPOSLib']
+
+  $ingenico_libs.each |$lib_name| {
+    file { "${lib_dir}/${lib_name}.so.${drv_ver}":
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => "puppet:///modules/jetti_front_fiscal_spooler/${lib_name}.so.${drv_ver}",
+      # Драйвер обязан быть на диске ДО спулера
+      before => Package['jetti-front-fiscal-spooler'],
+    }
+    # Создаем символическую ссылку (аналог команды ln -s -f)
+    file { "${lib_dir}/${lib_name}.so":
+      ensure => link,
+      target => "${lib_dir}/${lib_name}.so.${drv_ver}",
+      force  => true, # Ключ force принудительно перезапишет старые или битые ссылки
+      before => Package['jetti-front-fiscal-spooler'],
+    }
+  }
+  
+  # ============================================================================
   # УСТАНОВКА ПРИЛОЖЕНИЯ СПУЛЕРА
   # ============================================================================
   # Контролируем наличие пакета (заморожен на уровне ОС через APT preferences)
