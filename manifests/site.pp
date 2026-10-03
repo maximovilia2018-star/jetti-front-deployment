@@ -14,8 +14,8 @@ $hu_sm_fr = '2.0.0-hotfix.273'
 $us_sm_fr = '2.0.0-hotfix.271'
 
 # Базовые версии спулеров по умолчанию
-$ua_mp_sp = '0.1.14-alpha.31'
-$ua_sm_sp = '0.1.14-alpha.31'
+$ua_mp_sp = '0.1.14-alpha.32'
+$ua_sm_sp = '0.1.14-alpha.32'
 $ae_ck_sp = '0.1.12'
 $kz_sm_sp = '0.1.14-alpha.25'
 $hu_sm_sp = '0.1.14-alpha.31'
