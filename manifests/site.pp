@@ -29,7 +29,7 @@ $checkbox = '1.7.5'
 # ===================================
 node 'jf-tester-01' {
   class {jetti_front:
-    version        => "$ua_sm_fr",
+    version        => "$ru_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
   class {aypiservis_front:
