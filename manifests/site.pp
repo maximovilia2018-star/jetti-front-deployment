@@ -5,7 +5,7 @@ $githubtoken            = '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'
 $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
 
 # Базовые версии фронтендов по умолчанию
-$ua_mp_fr = '2.0.0-hotfix.273'
+$ua_mp_fr = '2.0.0-hotfix.287'
 $ua_sm_fr = '2.0.0-hotfix.273'
 $ru_sm_fr = '2.0.0-hotfix.271'
 $ae_ck_fr = '2.0.0-hotfix.273'
