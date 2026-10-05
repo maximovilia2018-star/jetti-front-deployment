@@ -35,6 +35,12 @@ class profile::base_soft {
     content => "Apt::Notification::Ubuntu-Pro::ESM-Apps-Security-Status \"hidden\";\nApt::Notification::Ubuntu-Pro::ESM-Infra-Security-Status \"hidden\";\n",
   }
 
+  # Блокируем фоновые службы Ubuntu Pro, чтобы они не запускались по таймерам systemd
+  service { ['apt-news.service', 'esm-cache.service']:
+    ensure => 'stopped',
+    enable => 'mask',
+  }
+
   # Специфичная очистка для Ubuntu 22.04 (Jammy)
   #if $facts['os']['release']['major'] == '22.04' {
     # Создаем директорию для конфига клиента, если её еще нет
