@@ -32,10 +32,11 @@ class profile::base_soft {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => @(EOF),
-               Apt::Notification::Ubuntu-Pro::ESM-Apps-Security-Status "hidden";
-               Apt::Notification::Ubuntu-Pro::ESM-Infra-Security-Status "hidden";
-               EOF
+    content => "Apt::Notification::Ubuntu-Pro::ESM-Apps-Security-Status \"hidden\";\nApt::Notification::Ubuntu-Pro::ESM-Infra-Security-Status \"hidden\";\n",
+    #content => @(EOF),
+    #Apt::Notification::Ubuntu-Pro::ESM-Apps-Security-Status "hidden";
+    #Apt::Notification::Ubuntu-Pro::ESM-Infra-Security-Status "hidden";
+    #EOF
   }
 
   # Специфичная очистка для Ubuntu 22.04 (Jammy)
