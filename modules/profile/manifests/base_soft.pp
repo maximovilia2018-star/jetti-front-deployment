@@ -36,10 +36,14 @@ class profile::base_soft {
   }
 
   # Блокируем фоновые службы Ubuntu Pro, чтобы они не запускались по таймерам systemd
-  service { ['apt-news.service', 'esm-cache.service']:
-    ensure => 'stopped',
-    enable => 'mask',
+  exec { 'mask-ubuntu-pro-services':
+    command => '/usr/bin/systemctl mask apt-news.service esm-cache.service && /usr/bin/systemctl stop apt-news.service esm-cache.service',
+    unless  => '/usr/bin/systemctl is-enabled apt-news.service | /usr/bin/grep -q masked',
   }
+  #service { ['apt-news.service', 'esm-cache.service']:
+  #  ensure => 'stopped',
+  #  enable => 'mask',
+  #}
 
   # Специфичная очистка для Ubuntu 22.04 (Jammy)
   #if $facts['os']['release']['major'] == '22.04' {
