@@ -22,7 +22,7 @@ class profile::base_soft {
   }
 
   # Удаляем старый дефолтный файл хука Canonical
-  file { '/etc/apt/apt.conf.d/20apt-esm-hook':
+  file { '/etc/apt/apt.conf.d/20apt-esm-hook.conf':
     ensure => absent,
   }
 
