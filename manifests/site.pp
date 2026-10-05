@@ -34,7 +34,8 @@ node 'jf-tester-01' {
     appinsightskey => "$applicationinsightskey",
   }
   class {aypiservis_front:
-    version        => "$ru_sm_fr",
+    #version        => "$ru_sm_fr",
+    version        => "2.0.0-hotfix.287",
     appinsightskey => "$applicationinsightskey",
   }
   include profile::ua
