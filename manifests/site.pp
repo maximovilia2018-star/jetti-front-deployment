@@ -24,7 +24,8 @@ $checkbox = '1.7.5'
 # ===================================
 # ОПИСАНИЕ НОД (NODE SCOPES)
 # ===================================
-node 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
+#node 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
+node 'ua-sm-poskharkiv-02' {
   $tele_env = 'ua-sm'
   class {jetti_front:
     version => "$ua_sm_fr",
