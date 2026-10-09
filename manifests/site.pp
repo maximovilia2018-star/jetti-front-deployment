@@ -1,20 +1,3 @@
-#node 'ua-sm-posodessa-03' {
-#  $ua_sm_sp = '0.1.14-alpha.31'
-#  $githubtoken = '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'
-#  $applicationinsightskey = '90b61832-cd0d-4d7f-b6dd-b539a6b0f8c9'
-#  $checkbox = '1.7.5'
-#  $tele_env = 'ua-sm'
-
-#  class {jetti_front:
-#    version => "2.0.0-hotfix.286",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {fiscal_ua:
-#    versioncheckbox => "$checkbox",
-#  }
-#  include profile::ua
-#}
-
 node 'ua-sm-poskamenskoe-03', 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
   $ua_sm_fr = '2.0.0-hotfix.273'
   $ua_sm_sp = '0.1.14-alpha.31'
@@ -30,24 +13,17 @@ node 'ua-sm-poskamenskoe-03', 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-#  include profile::ua
-  include profile::base
-  include profile::timezone_ua
-  include profile::ua_pw_change
+  #include profile::ua
+  #include profile::base
+  #include profile::timezone_ua
+  #include profile::ua_pw_change
 
-  include splunk
+  #include splunk
   #include teleport
-  include teamviewer
-  class { 'zabbix':
-    zabbix_srv => "$zbx_srv",
-  }
-
-  #include teleport::keyring_gpg
-  #include teleport::teleport_one_time_fix
-  #include teleport
-  #include teleport::teleport_inst
-  #include teleport::teleport_config
-  
+  #include teamviewer
+  #class { 'zabbix':
+  #  zabbix_srv => "$zbx_srv",
+  #}
 }
 
 node /(?i)^ua-mp-*/{
@@ -65,7 +41,7 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile::ua
+  #include profile::ua
 }
 
 node /(?i)^ua-sm-*/{
@@ -83,7 +59,7 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile::ua
+  #include profile::ua
 }
 
 node /(?i)^ua-pos-test*/{
@@ -102,7 +78,7 @@ node /(?i)^ua-pos-test*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  include profile::ua
+  #include profile::ua
 }
 
 node /(?i)^ae-ck-*/{
@@ -116,7 +92,7 @@ node /(?i)^ae-ck-*/{
     version => "$ae_ck_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  include profile::ae
+  #include profile::ae
 }
 
 node /(?i)^hu-sm-*/{
@@ -130,11 +106,7 @@ node /(?i)^hu-sm-*/{
     version => "$hu_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  #class {jetti_front_fiscal_spooler:
-  #  version => "$hu_sm_sp",
-  #  githubtoken => "$githubtoken",
-  #}
-  include profile::hu
+  #include profile::hu
 }
 
 node /(?i)^us-sm-*/{
@@ -148,11 +120,7 @@ node /(?i)^us-sm-*/{
     version => "$us_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-#  class {jetti_front_fiscal_spooler:
-#    version => "$us_sm_sp",
-#    githubtoken => "$githubtoken",
-#  }
-  include profile
+  #include profile
 }
 
 node 'default' {
