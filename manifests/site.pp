@@ -34,16 +34,16 @@ node 'ua-sm-poskamenskoe-03', 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
     versioncheckbox => "$checkbox",
   }
   #include profile::ua
-  #include profile::base
-  #include profile::timezone_ua
-  #include profile::ua_pw_change
+  include profile::base
+  include profile::timezone_ua
+  include profile::ua_pw_change
 
-  #include splunk
-  #include teleport
-  #include teamviewer
-  #class { 'zabbix':
-  #  zabbix_srv => "$zbx_srv",
-  #}
+  include splunk
+  include teleport
+  include teamviewer
+  class { 'zabbix':
+    zabbix_srv => "$zbx_srv",
+  }
 }
 
 node /(?i)^ua-mp-*/{
@@ -55,7 +55,7 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  #include profile::ua
+  include profile::ua
 }
 
 node /(?i)^ua-sm-*/{
