@@ -67,7 +67,7 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  #include profile::ua
+  include profile::ua
 }
 
 node /(?i)^ua-pos-test*/{
