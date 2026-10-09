@@ -24,7 +24,6 @@ $checkbox = '1.7.5'
 # ===================================
 # ОПИСАНИЕ НОД (NODE SCOPES)
 # ===================================
-#node 'ua-sm-poskamenskoe-03', 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
 node 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
   $tele_env = 'ua-sm'
   class {jetti_front:
@@ -42,6 +41,7 @@ node 'ua-sm-poskharkiv-02', 'ua-sm-posodessa-03' {
   include splunk
   #include teleport
   include teamviewer
+  include teamviewer::info
   class { 'zabbix':
     zabbix_srv => "$zbx_srv",
   }
