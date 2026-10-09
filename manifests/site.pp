@@ -24,29 +24,6 @@ $checkbox = '1.7.5'
 # ===================================
 # ОПИСАНИЕ НОД (NODE SCOPES)
 # ===================================
-#node 'ua-sm-poskharkiv-02' {
-#  $tele_env = 'ua-sm'
-#  class {jetti_front:
-#    version => "$ua_sm_fr",
-#    appinsightskey => "$applicationinsightskey",
-#  }
-#  class {fiscal_ua:
-#    versioncheckbox => "$checkbox",
-#  }
-#  #include profile::ua
-#  include profile::base
-#  include profile::timezone_ua
-#  include profile::ua_pw_change
-
-#  include splunk
-#  #include teleport
-#  include teamviewer
-#  include teamviewer::info
-#  class { 'zabbix':
-#    zabbix_srv => "$zbx_srv",
-#  }
-#}
-
 node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
   class {jetti_front:
