@@ -48,6 +48,28 @@ node /(?i)^ua-sm-*/{
   include profile::ua
 }
 
+node 'ua-sm-pospavlohrad-01' {
+  $tele_env = 'ua-sm'
+  class {jetti_front:
+    version => "$ua_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
+  #include profile::ua
+  include profile::base
+  include profile::timezone_ua
+  include profile::ua_pw_change
+
+  include splunk
+  #include teleport
+  include teamviewer
+  class { 'zabbix':
+    zabbix_srv => "$zbx_srv",
+  }
+}
+
 node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
