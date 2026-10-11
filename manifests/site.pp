@@ -57,17 +57,7 @@ node 'ua-sm-pospavlohrad-01' {
   class {fiscal_ua:
     versioncheckbox => "$checkbox",
   }
-  #include profile::ua
-  include profile::base
-  include profile::timezone_ua
-  include profile::ua_pw_change
-
-  include splunk
-  #include teleport
-  include teamviewer
-  class { 'zabbix':
-    zabbix_srv => "$zbx_srv",
-  }
+  include profile::ua_t
 }
 
 node /(?i)^ua-pos-test*/{
