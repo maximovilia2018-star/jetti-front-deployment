@@ -60,21 +60,21 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
-node 'ua-sm-posukrainka-01', 'ua-sm-posvinnitsa-01', 'ua-sm-posvishnevoe-01', 'ua-sm-poszaporozhe-02', 'ua-sm-poszaporozhe-05' {
-  $tele_env = 'ua-sm'
-  class {jetti_front:
-    version => "$ua_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {fiscal_ua:
-    versioncheckbox => "$checkbox",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ua_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  include profile::ua
-}
+#node 'ua-sm-posukrainka-01' {
+#  $tele_env = 'ua-sm'
+#  class {jetti_front:
+#    version => "$ua_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {fiscal_ua:
+#    versioncheckbox => "$checkbox",
+#  }
+#  class {jetti_front_fiscal_spooler:
+#    version => "$ua_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include profile::ua
+#}
 
 node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
