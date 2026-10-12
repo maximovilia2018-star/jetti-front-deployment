@@ -103,51 +103,51 @@ node /(?i)^ae-ck-*/{
   include profile::ae
 }
 
-node /(?i)^kz-sm-*/{
-  class {jetti_front:
-    version => "$kz_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler_old:
-    version => "$kz_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  include profile::kz
-}
+#node /(?i)^kz-sm-*/{
+#  class {jetti_front:
+#    version => "$kz_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler_old:
+#    version => "$kz_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  include profile::kz
+#}
 
-node /(?i)^hu-sm-*/{
-  $checkbox = '0.1.12'
-  $tele_env = 'hu-sm'
-  class {jetti_front:
-    version => "$hu_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler_old:
-    version => "$hu_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  class {fiscal_ua:
-    versioncheckbox => "$checkbox",
-  }
-  include profile
-}
+#node /(?i)^hu-sm-*/{
+#  $checkbox = '0.1.12'
+#  $tele_env = 'hu-sm'
+#  class {jetti_front:
+#    version => "$hu_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler_old:
+#    version => "$hu_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  class {fiscal_ua:
+#    versioncheckbox => "$checkbox",
+#  }
+#  include profile
+#}
 
-node /(?i)^us-sm-*/{
-  $checkbox = '0.1.12'
-  $tele_env = 'us-sm'
-  class {jetti_front:
-    version => "$us_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {jetti_front_fiscal_spooler_old:
-    version => "$us_sm_sp",
-    githubtoken => "$githubtoken",
-  }
-  class {fiscal_ua:
-    versioncheckbox => "$checkbox",
-  }
-  include profile
-}
+#node /(?i)^us-sm-*/{
+#  $checkbox = '0.1.12'
+#  $tele_env = 'us-sm'
+#  class {jetti_front:
+#    version => "$us_sm_fr",
+#    appinsightskey => "$applicationinsightskey",
+#  }
+#  class {jetti_front_fiscal_spooler_old:
+#    version => "$us_sm_sp",
+#    githubtoken => "$githubtoken",
+#  }
+#  class {fiscal_ua:
+#    versioncheckbox => "$checkbox",
+#  }
+#  include profile
+#}
 
 node 'default' {
 
