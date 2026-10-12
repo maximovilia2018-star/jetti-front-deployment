@@ -119,7 +119,8 @@ class jetti_front_fiscal_spooler::v2 (
     owner  => 'root',
     group  => 'root',
     mode   => '0600',
-    source => "https://${githubtoken}@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/${down_hostname}/config.production.yaml",
+    #source => "https://${githubtoken}@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/${down_hostname}/config.production.yaml",
+    source => 'puppet:///modules/fiscal_ua/config.production.yaml',
     notify => Service['jetti-front-fiscal-spooler'],
   }
 
