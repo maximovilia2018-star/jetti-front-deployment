@@ -1,4 +1,4 @@
-class jetti_front_fiscal_spooler (
+class jetti_front_fiscal_spooler_old (
     $version,
     $githubtoken,
 ) {
