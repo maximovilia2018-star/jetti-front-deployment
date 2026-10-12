@@ -49,7 +49,6 @@ node /(?i)^ua-mp-*/{
   }
   class {jetti_front_fiscal_spooler:
     version => "$ua_mp_sp",
-    githubtoken => "$githubtoken",
   }
   include profile::ua
 }
