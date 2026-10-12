@@ -65,7 +65,7 @@ node /(?i)^ua-sm-*/{
   include profile::ua
 }
 
-node 'ua-sm-poskharkiv-03' {
+node 'ua-sm-posbrovary-02' {
   $tele_env = 'ua-sm'
   class {jetti_front:
     version => "$ua_sm_fr",
@@ -76,7 +76,6 @@ node 'ua-sm-poskharkiv-03' {
   }
   class {jetti_front_fiscal_spooler:
     version => "$ua_sm_sp",
-    githubtoken => "$githubtoken",
   }
   include profile::ua
 }
