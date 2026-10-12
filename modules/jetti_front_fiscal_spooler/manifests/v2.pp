@@ -109,9 +109,13 @@ class jetti_front_fiscal_spooler::v2 (
   # ============================================================================
   # Контролируем наличие пакета (заморожен на уровне ОС через APT preferences)
   package { 'jetti-front-fiscal-spooler':
-    ensure => installed,
-    noop   => true,
+    ensure => "$version",
+    name => 'jetti-front-fiscal-spooler',
   }
+  #package { 'jetti-front-fiscal-spooler':
+  #  ensure => installed,
+  #  noop   => true,
+  #}
 
   # Скачивание файла конфигурации напрямую из приватного репозитория GitHub
   file { $config_path:
