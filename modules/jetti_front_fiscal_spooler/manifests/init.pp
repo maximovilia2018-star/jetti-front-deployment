@@ -55,7 +55,7 @@ class jetti_front_fiscal_spooler (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/fiscal_ua/jetti-front-fiscal-spooler.pref',
+    source => 'puppet:///modules/jetti_front_fiscal_spooler/jetti-front-fiscal-spooler.pref',
   }
 
   # ============================================================================
