@@ -108,7 +108,7 @@ node /(?i)^kz-sm-*/{
     version => "$kz_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
+  class {jetti_front_fiscal_spooler_old:
     version => "$kz_sm_sp",
     githubtoken => "$githubtoken",
   }
@@ -122,7 +122,7 @@ node /(?i)^hu-sm-*/{
     version => "$hu_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
+  class {jetti_front_fiscal_spooler_old:
     version => "$hu_sm_sp",
     githubtoken => "$githubtoken",
   }
@@ -139,7 +139,7 @@ node /(?i)^us-sm-*/{
     version => "$us_sm_fr",
     appinsightskey => "$applicationinsightskey",
   }
-  class {jetti_front_fiscal_spooler:
+  class {jetti_front_fiscal_spooler_old:
     version => "$us_sm_sp",
     githubtoken => "$githubtoken",
   }
