@@ -72,7 +72,7 @@ node 'ua-sm-poskharkiv-03' {
     versioncheckbox => "$checkbox",
   }
   class {jetti_front_fiscal_spooler::v2:
-    version => "$hu_sm_sp",
+    version => "$ua_sm_sp",
     githubtoken => "$githubtoken",
   }
   include profile::ua
