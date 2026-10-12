@@ -60,7 +60,7 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
-node 'ua-sm-poskiev-09', 'ua-sm-poskiev-14', 'ua-sm-poskiev-17', 'ua-sm-poskiev-27', 'ua-sm-poskiev-33', 'ua-sm-poslvov-03' {
+node 'ua-sm-posukrainka-01', 'ua-sm-posvinnitsa-01', 'ua-sm-posvishnevoe-01', 'ua-sm-poszaporozhe-02', 'ua-sm-poszaporozhe-05' {
   $tele_env = 'ua-sm'
   class {jetti_front:
     version => "$ua_sm_fr",
