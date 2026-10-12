@@ -60,6 +60,22 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
+node 'ua-mp-poszhitomir-01' {
+  $tele_env = 'ua-mp'
+  class {jetti_front:
+    version => "$ua_mp_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
+  class {jetti_front_fiscal_spooler:
+    version => "$ua_mp_sp",
+    githubtoken => "$githubtoken",
+  }
+  include profile::ua
+}
+
 node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
