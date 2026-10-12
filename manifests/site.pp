@@ -71,7 +71,6 @@ node 'ua-sm-poschernigov-01' {
   }
   class {jetti_front_fiscal_spooler:
     version => "$ua_sm_sp",
-    githubtoken => "$githubtoken",
   }
   include profile::ua
 }
