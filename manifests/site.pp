@@ -62,6 +62,22 @@ node /(?i)^ua-sm-*/{
   include profile::ua
 }
 
+node 'ua-sm-poskharkiv-03' {
+  $tele_env = 'ua-sm'
+  class {jetti_front:
+    version => "$ua_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "$checkbox",
+  }
+  class {jetti_front_fiscal_spooler::v2:
+    version => "$hu_sm_sp",
+    githubtoken => "$githubtoken",
+  }
+  include profile::ua
+}
+
 node /(?i)^ua-pos-test.*/ {
 #  $splunk_srv             = 'splunk.x100group.com'
   $splunk_var             = 'Jetti_VAR-site.pp'
