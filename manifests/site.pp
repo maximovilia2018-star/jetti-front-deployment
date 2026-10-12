@@ -26,18 +26,6 @@ $checkbox = '1.7.5'
 # ===================================
 # ОПИСАНИЕ НОД (NODE SCOPES)
 # ===================================
-node 'jf-tester-01' {
-  class {jetti_front:
-    version        => "2.0.0-hotfix.273",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {aypiservis_front:
-    version        => "2.0.0-hotfix.287",
-    appinsightskey => "$applicationinsightskey",
-  }
-  include profile::ua
-}
-
 node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
   class {jetti_front:
@@ -68,23 +56,19 @@ node /(?i)^ua-sm-*/{
   include profile::ua
 }
 
-node 'ua-sm-posbrovary-02' {
-  $tele_env = 'ua-sm'
+node 'jf-tester-01' {
   class {jetti_front:
-    version => "$ua_sm_fr",
+    version        => "2.0.0-hotfix.273",
     appinsightskey => "$applicationinsightskey",
   }
-  class {fiscal_ua:
-    versioncheckbox => "$checkbox",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ua_sm_sp",
+  class {aypiservis_front:
+    version        => "2.0.0-hotfix.287",
+    appinsightskey => "$applicationinsightskey",
   }
   include profile::ua
 }
 
 node /(?i)^ua-pos-test.*/ {
-#  $splunk_srv             = 'splunk.x100group.com'
   $splunk_var             = 'Jetti_VAR-site.pp'
   $tele_env               = 'ua-pos'
   $tele_grp               = 'tested'
