@@ -38,8 +38,7 @@ node 'jf-tester-01' {
   include profile::ua
 }
 
-#node /(?i)^ua-mp-*/{
-node /^ua-mp-.*$/i
+node /(?i)^ua-mp-*/{
   $tele_env = 'ua-mp'
   class {jetti_front:
     version => "$ua_mp_fr",
