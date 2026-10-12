@@ -5,7 +5,6 @@
 #
 class jetti_front_fiscal_spooler (
   $version,
-  $githubtoken,
 ) {
 
   require profile::nexus_repo
@@ -113,17 +112,6 @@ class jetti_front_fiscal_spooler (
     name => 'jetti-front-fiscal-spooler',
   }
 
-  # Скачивание файла конфигурации напрямую из приватного репозитория GitHub
-  #file { $config_path:
-  #  ensure => file,
-  #  owner  => 'root',
-  #  group  => 'root',
-  #  mode   => '0644',
-  #  #source => "https://${githubtoken}@raw.githubusercontent.com/x100group/pos-configuration/main/fiscal-spooler/${down_hostname}/config.production.yaml",
-  #  source => 'puppet:///modules/jetti_front_fiscal_spooler/config.production.yaml',
-  #  notify => Service['jetti-front-fiscal-spooler'],
-  #}
-
   # Контроль работы службы
   service { 'jetti-front-fiscal-spooler':
     ensure => 'running',
@@ -131,6 +119,5 @@ class jetti_front_fiscal_spooler (
   }
 
   # Строгая последовательность деплоя приложения
-  #Package['jetti-front-fiscal-spooler'] -> File[$config_path] -> Service['jetti-front-fiscal-spooler']
   Package['jetti-front-fiscal-spooler'] -> Service['jetti-front-fiscal-spooler']
 }
