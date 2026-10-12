@@ -60,7 +60,7 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
-node 'ua-mp-poszhitomir-01' {
+node 'ua-mp-poschernigov-01' {
   $tele_env = 'ua-mp'
   class {jetti_front:
     version => "$ua_mp_fr",
