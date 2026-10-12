@@ -1,0 +1,19 @@
+listen:
+  host: '127.0.0.1'
+  port: 3001
+  allowCrossOriginRequests: true
+databasePath: './var/storage.sqlite3'
+swagger: true
+fiscalPrinters: []
+paymentTerminals:
+  - type: 'ingenico'
+    id: 'IngenicoPT'
+    name: 'IngenicoPT'
+    options:
+      type: 'driver'
+      baudRate: 19200
+      driverName: 'libBPOSLib.so'
+      errorLang: 1
+      logging:
+        level: 1
+        filePath: 'ingenigo.log'
