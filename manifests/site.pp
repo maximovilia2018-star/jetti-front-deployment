@@ -48,6 +48,18 @@ node /(?i)^ua-sm-*/{
   include profile::ua
 }
 
+node 'ua-sm-poscherkasy-01' {
+  $tele_env = 'ua-sm'
+  class {jetti_front:
+    version => "$ua_sm_fr",
+    appinsightskey => "$applicationinsightskey",
+  }
+  class {fiscal_ua:
+    versioncheckbox => "1.7.14",
+  }
+  include profile::ua
+}
+
 node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
