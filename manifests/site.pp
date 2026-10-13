@@ -62,17 +62,17 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
-node 'ua-sm-poskiev-37' {
-  $tele_env = 'ua-sm'
+node 'ua-mp-poskrivoyrog-01' {
+  $tele_env = 'ua-mp'
   class {jetti_front:
-    version => "$ua_sm_fr",
+    version => "$ua_mp_fr",
     appinsightskey => "$applicationinsightskey",
   }
   class {fiscal_ua:
-    versioncheckbox => "$ua_sm_checkbox",
+    versioncheckbox => "$ua_mp_checkbox",
   }
   class {jetti_front_fiscal_spooler:
-    version => "$ua_sm_sp",
+    version => "$ua_mp_sp",
   }
   include profile::ua
 }
