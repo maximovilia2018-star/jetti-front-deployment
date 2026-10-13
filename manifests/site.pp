@@ -35,6 +35,9 @@ node /(?i)^ua-mp-*/{
   class {fiscal_ua:
     versioncheckbox => "$ua_mp_checkbox",
   }
+  class {jetti_front_fiscal_spooler:
+    version => "$ua_mp_sp",
+  }
   include profile::ua
 }
 
@@ -46,6 +49,9 @@ node /(?i)^ua-sm-*/{
   }
   class {fiscal_ua:
     versioncheckbox => "$ua_sm_checkbox",
+  }
+  class {jetti_front_fiscal_spooler:
+    version => "$ua_sm_sp",
   }
   include profile::ua
 }
