@@ -19,6 +19,8 @@ $hu_sm_sp = '0.1.14-alpha.31'
 $us_sm_sp = '0.1.14-alpha.31'
 
 # Чекбоксы по умолчанию
+$ua_mp_checkbox = '1.7.5'
+$ua_sm_checkbox = '1.7.5'
 $checkbox = '1.7.5'
 
 # ===================================
@@ -31,7 +33,7 @@ node /(?i)^ua-mp-*/{
     appinsightskey => "$applicationinsightskey",
   }
   class {fiscal_ua:
-    versioncheckbox => "$checkbox",
+    versioncheckbox => "$ua_mp_checkbox",
   }
   include profile::ua
 }
@@ -43,7 +45,7 @@ node /(?i)^ua-sm-*/{
     appinsightskey => "$applicationinsightskey",
   }
   class {fiscal_ua:
-    versioncheckbox => "$checkbox",
+    versioncheckbox => "$ua_sm_checkbox",
   }
   include profile::ua
 }
@@ -67,7 +69,7 @@ node 'ua-sm-poskiev-37' {
     appinsightskey => "$applicationinsightskey",
   }
   class {fiscal_ua:
-    versioncheckbox => "$checkbox",
+    versioncheckbox => "$ua_sm_checkbox",
   }
   class {jetti_front_fiscal_spooler:
     version => "$ua_sm_sp",
