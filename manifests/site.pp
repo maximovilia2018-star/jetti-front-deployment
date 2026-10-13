@@ -21,7 +21,7 @@ $hu_sm_sp = '0.1.14-alpha.31'
 $us_sm_sp = '0.1.14-alpha.31'
 
 # Чекбоксы по умолчанию (ПРРО)
-$ua_mp_checkbox = '1.7.5'
+$ua_mp_checkbox = '1.7.15'
 $ua_sm_checkbox = '1.7.5'
 $checkbox = '1.7.5'
 
