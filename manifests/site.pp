@@ -50,9 +50,9 @@ node /(?i)^ua-sm-*/{
   class {fiscal_ua:
     versioncheckbox => "$ua_sm_checkbox",
   }
-  class {jetti_front_fiscal_spooler:
-    version => "$ua_sm_sp",
-  }
+  #class {jetti_front_fiscal_spooler:
+  #  version => "$ua_sm_sp",
+  #}
   include profile::ua
 }
 
