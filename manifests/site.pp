@@ -68,21 +68,6 @@ node 'ua-sm-poscherkasy-01' {
   include profile::ua
 }
 
-node 'ua-sm-poskiev-16' {
-  $tele_env = 'ua-sm'
-  class {jetti_front:
-    version => "$ua_sm_fr",
-    appinsightskey => "$applicationinsightskey",
-  }
-  class {fiscal_ua:
-    versioncheckbox => "$ua_sm_checkbox",
-  }
-  class {jetti_front_fiscal_spooler:
-    version => "$ua_sm_sp",
-  }
-  include profile::ua
-}
-
 node /(?i)^ua-pos-test*/{
   $tele_env = 'ua-pos'
   $tele_group = 'tested'
