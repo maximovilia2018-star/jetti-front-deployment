@@ -56,19 +56,57 @@ if [ "$status" = "true" ]; then
         log "dpkg --configure -a failed"
         exit 0
     }
+    # Формируем список экземпляров кассы (максимум 4 шт)
+    SERVICES=()
+    for i in {1..4}; do
+        unit="checkbox-kasa@${i}.service"
+        if systemctl is-active --quiet "$unit"; then
+            SERVICES+=("$unit")
+        fi
+    done
+    # Останавливаем работающие экземпляры перед обновлением
+    for unit in "${SERVICES[@]}"; do
+        if systemctl stop "$unit"; then
+            log "Successfully stopped service $unit"
+        else
+            log "Failed to stop service $unit"
+        fi
+    done
+    # Устанавливаем новую версию
     if DEBIAN_FRONTEND=noninteractive \
         /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold \
-            --allow-downgrades install checkbox-kasa="$VERSION"
+            --allow-downgrades install "checkbox-kasa=$VERSION"
     then
         log "Successfully installed checkbox-kasa $VERSION"
-        # Перезапускаем все включенные сервисы checkbox-kasa
-        while read -r unit _
-        do
-            log "Restart service $unit"
-            systemctl restart "$unit"
-        done < <(systemctl list-unit-files --state=enabled --no-legend 'checkbox-kasa*')
+    else
+        log "Failed to install checkbox-kasa $VERSION"
     fi
+
+    # Обновляем конфигурацию systemd после установки пакета
+    if systemctl daemon-reload; then
+        log "systemctl daemon-reload completed"
+    else
+        log "systemctl daemon-reload failed"
+    fi
+
+#     Старый рариант перезапуска не работает? (оставлен для истории)
+#        # Перезапускаем все включенные сервисы checkbox-kasa
+#        while read -r unit _
+#        do
+#            log "Restart service $unit"
+#            systemctl restart "$unit"
+#        done < <(systemctl list-unit-files --state=enabled --no-legend 'checkbox-kasa*')
+
+    # Запускаем или перезапускаем экземпляры после обновления, работавшие до обновления
+    for unit in "${SERVICES[@]}"; do
+        log "(Re)Starting service $unit"
+        if systemctl restart "$unit"; then
+            log "Successfully (re)started service $unit"
+        else
+            log "Failed to (re)start service $unit"
+        fi
+    done
+
     exit 0
 fi
-
 exit 0
