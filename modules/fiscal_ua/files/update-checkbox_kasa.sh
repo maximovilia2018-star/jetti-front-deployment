@@ -56,6 +56,7 @@ if [ "$status" = "true" ]; then
         log "dpkg --configure -a failed"
         exit 0
     }
+
     # Формируем список экземпляров кассы (максимум 4 шт)
     SERVICES=()
     for i in {1..4}; do
@@ -64,6 +65,7 @@ if [ "$status" = "true" ]; then
             SERVICES+=("$unit")
         fi
     done
+
     # Останавливаем работающие экземпляры перед обновлением
     for unit in "${SERVICES[@]}"; do
         if systemctl stop "$unit"; then
@@ -72,6 +74,7 @@ if [ "$status" = "true" ]; then
             log "Failed to stop service $unit"
         fi
     done
+
     # Устанавливаем новую версию
     if DEBIAN_FRONTEND=noninteractive \
         /usr/bin/apt-get -q -y -o DPkg::Options::=--force-confold \
@@ -88,14 +91,6 @@ if [ "$status" = "true" ]; then
     else
         log "systemctl daemon-reload failed"
     fi
-
-#     Старый рариант перезапуска не работает? (оставлен для истории)
-#        # Перезапускаем все включенные сервисы checkbox-kasa
-#        while read -r unit _
-#        do
-#            log "Restart service $unit"
-#            systemctl restart "$unit"
-#        done < <(systemctl list-unit-files --state=enabled --no-legend 'checkbox-kasa*')
 
     # Запускаем или перезапускаем экземпляры после обновления, работавшие до обновления
     for unit in "${SERVICES[@]}"; do
